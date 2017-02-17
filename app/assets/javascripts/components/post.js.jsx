@@ -1,8 +1,6 @@
 var Post = React.createClass({
   getInitialState() {
-    return (
-      { clicked: false }
-    )
+    return ({ clicked: false })
   },
 
   _showMe(){
@@ -19,10 +17,6 @@ var Post = React.createClass({
         <span> {this.props.post.published} </span>
       </div>
     }
-    return (
-      <div>
-        {onOpen}
-      </div>
-    )
+    return (<div> {onOpen} </div>)
   }
 });
