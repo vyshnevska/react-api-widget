@@ -1,3 +1,12 @@
 <%= link_to 'New Post', new_post_path %>
 
 <%= react_component 'Posts', { posts: @posts.as_json(only: [:id, :body, :published]) }%>
+
+<%= react_component 'MessageFeed', {
+  owner_id: 11,
+  messages: [
+    { data: { id: 10001, sent_date: Time.now.in_time_zone.strftime('%a %d %b %R')}},
+    { data: { id: 10002, sent_date: (Time.now+1.day).in_time_zone.strftime('%a %d %b %R')}}
+  ],
+  data: { messages_count: 10 }
+}%>
