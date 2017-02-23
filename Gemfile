@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.7.1'
 gem 'sqlite3'
 
+gem 'responders'
+
 gem 'react-rails'
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'bootstrap-sass', '~>3.3.6'
