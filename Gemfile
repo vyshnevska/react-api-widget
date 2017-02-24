@@ -8,6 +8,9 @@ gem 'sqlite3'
 gem 'responders'
 
 gem 'react-rails'
+
+gem 'devise'
+
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'bootstrap-sass', '~>3.3.6'
 gem 'sass-rails', '~> 5.0'
