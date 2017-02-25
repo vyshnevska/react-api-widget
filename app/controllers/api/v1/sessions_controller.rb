@@ -2,14 +2,14 @@
 # # log-in and get valid token
 # curl -H "Content-Type: application/json" -X POST -d '{"user_login": {"email":"vyshnevska.n@gmail.com","password":"12345678"} }' http://localhost:3000/api/v1/sign-in.json
 # # get messages
-# curl -H "Authorization: Token token=**** valid token *****" http://localhost:3000/api/v1/messages.json
+# curl -H "Authorization: Token token=d957dc8860d18218a53b30a29d1e1c3d" http://localhost:3000/api/v1/messages.json
 # # fails to get messages
-# curl -H "Authorization: Token token=**** bad token here *****" http://localhost:3000/api/v1/messages.json
+# curl -H "Authorization: Token token=fake" http://localhost:3000/api/v1/messages.json
 # #sign out
-# curl -X DELETE -H "Authorization: Token token=**** valid token *****" http://localhost:3000/api/v1/sign-out.json
+# curl -X DELETE -H "Authorization: Token token=d957dc8860d18218a53b30a29d1e1c3d" http://localhost:3000/api/v1/sign-out.json
 
 class Api::V1::SessionsController < Api::V1::BaseController
-  skip_before_action :require_login!, only: [:create]
+  skip_before_action :authenticate!, only: [:create]
 
   def create
     resource = User.find_for_database_authentication(email: params[:user_login][:email])
