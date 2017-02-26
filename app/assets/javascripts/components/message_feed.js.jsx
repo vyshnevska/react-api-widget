@@ -4,7 +4,7 @@ var MessageFeed = React.createClass({
   },
 
   componentDidMount() {
-    $.getJSON('/api/v1/messages.json', (response) => {
+    $.getJSON('/api/v1/messages.json/?token=20a1621f19c20056bf0f3087ce9d6970', (response) => {
       this.setState({ messages: response })
     });
   },
