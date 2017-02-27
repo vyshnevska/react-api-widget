@@ -15,7 +15,7 @@ class Api::V1::BaseController < ApplicationController
   private
 
   def authenticate!
-    authenticate_token ||  authenticate_react || render_unauthorized
+    authenticate_token || render_unauthorized
   end
 
   def authenticate_token
@@ -24,12 +24,7 @@ class Api::V1::BaseController < ApplicationController
     end
   end
 
-  # TODO: fix this; troubles with auth via react
-  def authenticate_react
-    User.where(auth_token: params['token']).where("token_created_at >= ?", 1.month.ago).first
-  end
-
-  def render_unauthorizeds
+  def render_unauthorized
     self.headers['WWW-Authenticate'] = 'Token realm="Application"'
     render json: { errors: [ { detail: 'Access denied' } ] }, status: 401
   end

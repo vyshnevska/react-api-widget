@@ -1,8 +1,7 @@
 var Header = React.createClass({
-
   render: function() {
     return (
-      <header className="collapse-header">
+      <header className="collapse-header" id='messages_box_header' >
         <h2 className='title'>
           <a href='#' data-toggle='collapse' data-target='.collapse-one' target="_blank">
             Messanger
