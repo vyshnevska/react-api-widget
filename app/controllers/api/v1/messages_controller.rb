@@ -1,4 +1,6 @@
 class Api::V1::MessagesController < Api::V1::BaseController
+  skip_before_action :authenticate_user!
+
   def index
     respond_with Message.all.order(created_at: :desc)
   end

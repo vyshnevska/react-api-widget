@@ -2,15 +2,6 @@ class Api::V1::BaseController < ApplicationController
   respond_to :json
 
   before_action :authenticate!
-  helper_method :user_signed_in?, :current_user
-
-  def user_signed_in?
-    current_user.present?
-  end
-
-  def current_user
-    @_current_user ||= authenticate!
-  end
 
   private
 
