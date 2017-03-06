@@ -15,9 +15,9 @@ var Posts = React.createClass({
         <h2>All posts here</h2>
         {this.props.posts.map(function(post){
           return (
-            <div>
+            <div key={post.id.toString()}>
               {this._publishedLabel(post)}
-              <span key={post.id.toString()} >
+              <span>
                 <a href={'posts/' + post.id}>{post.body} </a>
               </span>
             </div>

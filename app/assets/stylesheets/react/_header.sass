@@ -1,0 +1,125 @@
+$avatar-height: 72px
+$avatar-width: 72px
+$header-top-section-height: 54px
+$header-bottom-section-height: 24px
+$user-details-width: 185px
+
+= section-background($border-color, $section-color)
+  background-size: 100%
+  border-bottom: 1px solid $border-color
+  background: $section-color
+  background-position: 0 50%
+  border-radius: 4px 4px 0 0
+
+= default-text($color: $dark-coral)
+  line-height: 17.5px
+  font-size: 14px
+  color: $color
+
+= default-text-small($color: $dark-coral)
+  font-size: 12px
+  color: $color
+
+= default-text-huge($color: $dark-coral)
+  font-size: 18px
+  font-weight: 500
+  transition: color .15s ease-in-out
+
+= default-link-style($color: $dark-coral, $bg-color: $white)
+  color: $color
+  background-color: $bg-color
+  text-decoration: none
+
+= uppercase-text($color: $dark-coral)
+  text-transform: uppercase
+  transition: color .15s ease-in-out
+  color: $color
+  font-size: 10px
+  letter-spacing: .02em
+  
+%m-avatar-image
+  height: $avatar-height
+  width: $avatar-width
+  border: 2px solid $white
+  border-radius: 7px
+  color: $white
+  -moz-box-sizing: border-box
+  box-sizing: border-box
+
+.messages_box  
+  .messages
+    +default-text
+    border: 1px solid $light-grey-blue
+    background: $white
+    border-radius: 6px
+    position: relative
+    margin-bottom: 10px
+
+  .header-top-section
+    +section-background($light-grey-blue, $dark-coral)
+    height: $header-top-section-height
+    width: 100%
+    padding: 0 1px
+    margin-left: -1px
+    margin-top: -1px
+    display: block
+
+  .header-content
+    a, a:hover, a:focus, a:active
+      +default-link-style
+      
+    a.avatar-outer-container
+      +default-link-style
+      border-radius: 6px
+      margin: -30px 0 0 8px
+      padding: 1px
+      vertical-align: bottom
+      display: inline-block
+      
+      img
+        @extend %m-avatar-image
+       
+    .user-details
+      position: absolute
+      top: 64px
+      left: 90px
+      width: $user-details-width
+
+      .more-details
+        +default-text-small($color: $dark-grey-blue)
+        padding-right: 5px
+
+  .user-statistics
+    margin-left: 11px
+    padding: 10px 0
+
+    ul.as-table
+      margin: 0
+      padding: 0
+
+      li
+        vertical-align: bottom
+        padding: 0
+
+        a
+          &:hover
+            .statistics-name
+              color: inherit
+
+          .statistics-name
+            +uppercase-text($color: $grey-blue)
+            overflow: hidden
+            
+          .statistics-value
+            display: block
+            +default-text-huge
+            padding-top: 3px
+
+  .header-bottom-section
+    +section-background($light-grey-blue, $dark-coral)
+    height: $header-bottom-section-height
+    width: 100%
+    padding: 0 1px
+    margin-left: -1px
+    margin-top: -1px
+    display: block
