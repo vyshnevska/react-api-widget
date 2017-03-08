@@ -5,7 +5,7 @@ var MessageFeed = React.createClass({
   },
 
   showMessages(data){
-    this.setState({ messages: data })
+    this.setState({ messages: data });
   },
 
   componentDidMount() {

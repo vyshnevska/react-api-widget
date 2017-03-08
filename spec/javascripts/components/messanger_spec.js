@@ -2,14 +2,17 @@ describe("Messanger", function() {
   var ReactTestUtils = React.addons.TestUtils;
 
   beforeEach(function() {
+    jasmine.Ajax.install(); // mock ajax call on componentDidMount
     var props = {
-        data: {
-          messages_count: 1
-        }
-      }
+      data: { messages_count: 1 }
+    }
     this.element      = React.createElement(Messanger, props);
     this.component    = ReactTestUtils.renderIntoDocument(this.element);
     this.$renderedDOM = window.ReactDOM.findDOMNode(this.component);
+  });
+
+  afterEach(function() {
+    jasmine.Ajax.uninstall();
   });
 
   describe("render", function() {
@@ -18,9 +21,9 @@ describe("Messanger", function() {
       let renderedBodys = this.$renderedDOM.getElementsByClassName('body');
 
       expect(this.$renderedDOM.classList.value).toEqual("messages_box collapse-container");
-      expect(renderedHeaders.length).toEqual(1);
-      expect(renderedHeaders[0].id).toEqual('messages_box_header');
-      expect(renderedBodys.length).toEqual(1);
+      expect(renderedHeaders).toHaveLength(1);
+      expect(renderedHeaders[0]).toHaveId('messages_box_header');
+      expect(renderedBodys).toHaveLength(1);
 
       // Convert an HTMLCollection to an Array
       var bodyChildren = Array.from(renderedBodys[0].children).map(function(i){ return i.tagName + i.className;});
