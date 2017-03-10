@@ -24,12 +24,13 @@ var MessageFeed = React.createClass({
   handleSubmit(message) {
     var newState = this.state.messages.concat(message);
     this.setState({ messages: newState })
+    console.log('message was sent succesfully!', message);
   },
 
   render: function() {
     return (
       <div className='body'>
-        <NewMessage handleSubmit={this.handleSubmit}/>
+        <NewMessage sendNewMessageHandler={this.handleSubmit}/>
         <AllMessages messages={this.state.messages}/>
       </div>
     )

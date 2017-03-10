@@ -1,7 +1,8 @@
 var NewMessage = React.createClass({
   sendNewMessage(){
     var content = this.refs.content.value,
-        sender_id = this.refs.sender_id.value;
+        sender_id = this.refs.sender_id.value,
+        currentProps = this.props;
 
     var ajaxOptions = {
           url: '/api/v1/messages',
@@ -16,10 +17,7 @@ var NewMessage = React.createClass({
 
     // Initiate the AJAX request to messages#create
     $.ajax(ajaxOptions)
-      .done(function(){
-        console.log('message was sent succesfully!', message);
-        this.props.handleSubmit(message);
-      })
+      .done(function(response){currentProps.sendNewMessageHandler(response);})
       .fail(AjaxCustomMethods.handleError);
   },
 

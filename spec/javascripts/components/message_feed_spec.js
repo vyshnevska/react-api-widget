@@ -89,4 +89,17 @@ describe("MessageFeed", function() {
       expect(this.component.state.messages).toEqual([]);
     });
   });
+
+  describe('handleSubmit', function(){
+    let data = ['msg3'];
+    beforeEach(function() {
+      this.component.state.messages = ['msg1', 'msg2'];
+    });
+
+    it('sends a new message', function(){
+      this.component.handleSubmit(data);
+
+      expect(this.component.state.messages).toEqual(['msg1', 'msg2', 'msg3']);
+    });
+  });
 });
