@@ -91,7 +91,7 @@ describe("MessageFeed", function() {
   });
 
   describe('handleSubmit', function(){
-    let data = ['msg3'];
+    let data = 'msg3';
     beforeEach(function() {
       this.component.state.messages = ['msg1', 'msg2'];
     });
@@ -99,7 +99,7 @@ describe("MessageFeed", function() {
     it('sends a new message', function(){
       this.component.handleSubmit(data);
 
-      expect(this.component.state.messages).toEqual(['msg1', 'msg2', 'msg3']);
+      expect(this.component.state.messages).toEqual([ 'msg3', 'msg1', 'msg2']);
     });
   });
 });

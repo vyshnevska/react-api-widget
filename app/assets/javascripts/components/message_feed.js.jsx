@@ -22,8 +22,8 @@ var MessageFeed = React.createClass({
   },
 
   handleSubmit(message) {
-    var newState = this.state.messages.concat(message);
-    this.setState({ messages: newState })
+    this.state.messages.unshift(message); // adds a new message at the biginning
+    this.setState({ messages: this.state.messages });
     console.log('message was sent succesfully!', message);
   },
 
