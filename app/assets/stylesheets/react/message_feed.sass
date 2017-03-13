@@ -1,3 +1,27 @@
+.box
+  position: relative
+  width: 220px
+  height: 35px
+.new_message
+  width: 200px
+  max-width: 0px
+  padding: 5px
+  transition: all .5s ease
+  position: absolute
+  right: 20px
+  box-sizing: border-box
+  opacity: 0
+.new_message.expanded
+  max-width: 200px
+  opacity: 1
+.icon
+  width: 20px
+  height: 20px
+  background: red
+  position: absolute
+  right: 0
+  top: 0
+
 .messages_box
   //opacity: 0.15 // default opacity
   position: absolute
@@ -6,7 +30,7 @@
   background: $white
   width: 300px
   margin: 0 auto
-  
+
 .messages_box
   .body
     position: relative

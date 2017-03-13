@@ -21,13 +21,21 @@ var NewMessage = React.createClass({
       .fail(AjaxCustomMethods.handleError);
   },
 
+  clickkki(){
+    $('.new_message').toggleClass('expanded');
+  },
+
   render: function() {
     return (
-      <div>
-        <input ref='content' placeholder='Enter the message' />
-        <input ref='sender_id' placeholder='Enter a sender' />
-        <button onClick={this.sendNewMessage}>Send</button>
+      <div className="box">
+        <input className="new_message" type="search" placeholder="Send" />
+        <div className="icon" onClick={this.clickkki}></div>
       </div>
+      // <div>
+      //   <input ref='content' placeholder='Enter the message' />
+      //   <input ref='sender_id' placeholder='Enter a sender' />
+      //   <button onClick={this.sendNewMessage}>Send</button>
+      // </div>
     )
   }
 });
