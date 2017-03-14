@@ -11,13 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170225201818) do
+ActiveRecord::Schema.define(version: 20170314192806) do
+
+  create_table "channels", force: :cascade do |t|
+    t.string   "name"
+    t.string   "type"
+    t.boolean  "active"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "messages", force: :cascade do |t|
     t.text     "content"
     t.integer  "recipient_id"
     t.string   "status"
-    t.integer  "sender_id"
+    t.integer  "channel_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
