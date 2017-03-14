@@ -3,7 +3,10 @@ describe("NewMessage", function() {
 
   beforeEach(function() {
     jasmine.Ajax.install(); // mock ajax call on componentDidMount
-    this.element      = React.createElement(NewMessage, { sendNewMessageHandler: function() {} });
+    this.element      = React.createElement(NewMessage, {
+      sendNewMessageHandler: function() {},
+      channelsSelectOptions: [{key: 99, label: 'opt1'}]
+    });
     this.component    = ReactTestUtils.renderIntoDocument(this.element);
     this.$renderedDOM = window.ReactDOM.findDOMNode(this.component);
   });
@@ -14,12 +17,15 @@ describe("NewMessage", function() {
 
   describe("render", function() {
     it("should work", function() {
-      expect(this.$renderedDOM.textContent).toEqual('Send')
-      expect(this.$renderedDOM.children).toHaveLength(3)
+      expect(this.$renderedDOM.getElementsByClassName('new_message_form')[0].children).toHaveLength(3)
 
-      inputs = this.$renderedDOM.getElementsByTagName('input');
-      expect(inputs[0]).toHaveAttr('placeholder', 'Enter the message');
-      expect(inputs[1]).toHaveAttr('placeholder', 'Enter a sender');
+      input = this.$renderedDOM.getElementsByTagName('input')[0];
+      expect(input).toHaveAttr('placeholder', 'Enter the message');
+
+      select = this.$renderedDOM.getElementsByTagName('select')[0];
+      expect(select.options).toHaveLength(1);
+      expect(select.options[0]).toHaveText('opt1');
+      expect(select.options[0]).toHaveValue('99');
     });
   });
 
@@ -29,7 +35,10 @@ describe("NewMessage", function() {
     it("sends a message ON success", function() {
       mockSendNewMessageHandler = jasmine.createSpy('mockSendNewMessageHandler');
 
-      newMessageElement   = React.createElement(NewMessage, { sendNewMessageHandler: mockSendNewMessageHandler });
+      newMessageElement   = React.createElement(NewMessage, {
+        sendNewMessageHandler: mockSendNewMessageHandler ,
+        channelsSelectOptions: [{key: 99, label: 'opt1'}]
+      });
       newMessageComponent = ReactTestUtils.renderIntoDocument(newMessageElement);
 
       spyOn(jQuery, 'ajax').and.callFake(function (req) {
@@ -37,6 +46,8 @@ describe("NewMessage", function() {
         d.resolve(response);
         return d.promise();
       });
+
+      spyOn(newMessageComponent, 'toggleSection');
 
       submitButton = ReactTestUtils.findRenderedDOMComponentWithTag(newMessageComponent, 'button');
       ReactTestUtils.Simulate.click(submitButton);

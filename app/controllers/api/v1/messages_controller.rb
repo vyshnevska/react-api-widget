@@ -2,7 +2,10 @@ class Api::V1::MessagesController < Api::V1::BaseController
   skip_before_action :authenticate_user!
 
   def index
-    respond_with Message.all.order(created_at: :desc)
+    respond_with({
+      messages: Message.all.order(created_at: :desc),
+      channels: Channel.all.map{|channel| { key: channel.id, label: channel.name } }
+    })
   end
 
   def create
@@ -12,6 +15,6 @@ class Api::V1::MessagesController < Api::V1::BaseController
   private
 
   def message_params
-    params.require(:message).permit(:id, :content, :recipient_id, :status, :sender_id)
+    params.require(:message).permit(:id, :content, :recipient_id, :status, :channel_id)
   end
 end

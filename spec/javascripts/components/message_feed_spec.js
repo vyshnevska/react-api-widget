@@ -1,6 +1,11 @@
 describe("MessageFeed", function() {
   var ReactTestUtils = React.addons.TestUtils;
 
+  let data = {
+    messages: ['msg1', 'msg2'],
+    channels: []
+  };
+
   beforeEach(function() {
     jasmine.Ajax.install(); // mock ajax call on componentDidMount
     this.element      = React.createElement(MessageFeed);
@@ -18,17 +23,15 @@ describe("MessageFeed", function() {
     });
   });
 
-  describe("showMessages", function() {
-    let data = ['msg1', 'msg2'];
-
+  describe("populateData", function() {
     it('should change state', function() {
-      this.component.showMessages(data);
+      this.component.populateData(data);
       expect(this.component.state.messages).toEqual(['msg1', 'msg2']);
     });
   });
 
   describe("componentDidMount", function() {
-    let data = ['msg1', 'msg2'];
+    // let data = ['msg1', 'msg2'];
 
     it("loads data from a url", function(){
       spyOn(jQuery, 'ajax').and.callThrough();
@@ -42,7 +45,7 @@ describe("MessageFeed", function() {
       expect(AjaxCustomMethods.getAuthToken).toHaveBeenCalled();
     });
 
-    it("should execute the showMessages function on success", function () {
+    it("should execute the populateData function on success", function () {
       // Mock success response
       spyOn(jQuery, 'ajax').and.callFake(function (req) {
         var d = $.Deferred();
@@ -50,12 +53,12 @@ describe("MessageFeed", function() {
         return d.promise();
       });
 
-      spyOn(this.component, 'showMessages').and.callThrough();
+      spyOn(this.component, 'populateData').and.callThrough();
 
       this.component.componentDidMount();
 
-      expect(this.component.showMessages).toHaveBeenCalled();
-      expect(this.component.state.messages).toEqual(data);
+      expect(this.component.populateData).toHaveBeenCalled();
+      expect(this.component.state.messages).toEqual(data.messages);
 
       // var doneFn = jasmine.createSpy("success");
       //  jasmine.Ajax.stubRequest('/api/v1/messages.json').andReturn({
@@ -91,7 +94,11 @@ describe("MessageFeed", function() {
   });
 
   describe('handleSubmit', function(){
-    let data = 'msg3';
+    let data = {
+      messages: ['msg3'],
+      channels: []
+    };
+
     beforeEach(function() {
       this.component.state.messages = ['msg1', 'msg2'];
     });

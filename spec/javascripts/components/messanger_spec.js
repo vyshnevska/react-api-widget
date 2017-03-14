@@ -17,17 +17,12 @@ describe("Messanger", function() {
 
   describe("render", function() {
     it("should work", function() {
-      let renderedHeaders = this.$renderedDOM.getElementsByTagName('header');
-      let renderedBodys = this.$renderedDOM.getElementsByClassName('body');
+      let renderedHeader = this.$renderedDOM.getElementsByTagName('header')[0];
+      let renderedBody   = this.$renderedDOM.getElementsByClassName('body')[0];
 
       expect(this.$renderedDOM.classList.value).toEqual("messages_box collapse-container");
-      expect(renderedHeaders).toHaveLength(1);
-      expect(renderedHeaders[0]).toHaveId('messages_box_header');
-      expect(renderedBodys).toHaveLength(1);
-
-      // Convert an HTMLCollection to an Array
-      var bodyChildren = Array.from(renderedBodys[0].children).map(function(i){ return i.tagName + i.className;});
-      expect(bodyChildren).toEqual(['DIV', 'ULcollapse-body']);
+      expect(renderedHeader).toHaveId('messages_box_header');
+      expect(renderedBody.innerHTML).toEqual("<div class=\"box\"><div class=\"new_message_form\"><input placeholder=\"Enter the message\"><button>Send</button></div><div class=\"icon\"></div></div>");
     });
   });
 });

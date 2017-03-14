@@ -1,11 +1,12 @@
 var MessageFeed = React.createClass({
   // ---- main methods
+
   getInitialState() {
-    return { messages: [] }
+    return { messages: [], channelsSelectOptions: [] }
   },
 
-  showMessages(data){
-    this.setState({ messages: data });
+  populateData(data){
+    this.setState({ messages: data.messages, channelsSelectOptions: data.channels });
   },
 
   componentDidMount() {
@@ -18,21 +19,26 @@ var MessageFeed = React.createClass({
     };
 
     // Initiate the AJAX request to messages#index
-    $.ajax(ajaxOptions).done(this.showMessages).fail(AjaxCustomMethods.handleError);
+    $.ajax(ajaxOptions).done(this.populateData).fail(AjaxCustomMethods.handleError);
   },
 
-  handleSubmit(message) {
+  handleSubmit(data) {
+    message = data.messages[0];
     this.state.messages.unshift(message); // adds a new message at the biginning
     this.setState({ messages: this.state.messages });
     console.log('message was sent succesfully!', message);
   },
 
   render: function() {
+    // <AllMessages messages={this.state.messages}/>
     return (
       <div className='body'>
-        <NewMessage sendNewMessageHandler={this.handleSubmit}/>
-        <AllMessages messages={this.state.messages}/>
+        <NewMessage sendNewMessageHandler={this.handleSubmit} channelsSelectOptions={this.state.channelsSelectOptions}/>
       </div>
     )
   }
 });
+MessageFeed.propTypes = {
+  messages: React.PropTypes.array,
+  channelsSelectOptions: React.PropTypes.array
+};

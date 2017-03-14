@@ -1,9 +1,10 @@
 .box
   position: relative
-  width: 220px
-  height: 35px
-.new_message
-  width: 200px
+  width: 290px
+  height: 90px
+
+.new_message_form
+  width: 260px
   max-width: 0px
   padding: 5px
   transition: all .5s ease
@@ -11,9 +12,13 @@
   right: 20px
   box-sizing: border-box
   opacity: 0
-.new_message.expanded
-  max-width: 200px
+  *
+    width: 100%
+
+.new_message_form.expanded
+  max-width: 260px
   opacity: 1
+
 .icon
   width: 20px
   height: 20px
