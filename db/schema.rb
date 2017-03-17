@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314192806) do
+ActiveRecord::Schema.define(version: 20170317192603) do
 
   create_table "channels", force: :cascade do |t|
     t.string   "name"
@@ -34,8 +34,9 @@ ActiveRecord::Schema.define(version: 20170314192806) do
   create_table "posts", force: :cascade do |t|
     t.text     "body"
     t.boolean  "published"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "parent_post_id"
   end
 
   create_table "users", force: :cascade do |t|
