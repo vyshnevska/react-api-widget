@@ -15,6 +15,7 @@ var Post = React.createClass({
       onOpen = <div>
         <h2> {this.props.post.body} </h2>
         <span> {this.props.post.published} </span>
+        <span> {this.props.post.slug} </span>
       </div>
     }
     return (<div> {onOpen} </div>)

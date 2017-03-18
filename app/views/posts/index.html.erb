@@ -1,6 +1,6 @@
 <%= link_to 'New Post', new_post_path %>
 
-<%= react_component 'Posts', { posts: @posts.as_json(only: [:id, :body, :published]) }%>
+<%= react_component 'Posts', { posts: @posts.as_json(only: [:slug, :body, :published]) }%>
 
 <%= react_component 'Messanger', {
   owner_id: 11,

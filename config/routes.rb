@@ -12,4 +12,7 @@ Rails.application.routes.draw do
     end
   end
   root to: 'posts#index'
+
+  slugs = %w|root|
+  resource :posts, only: [:show], constraints: {id: Regexp.new(slugs.join('|'))}
 end

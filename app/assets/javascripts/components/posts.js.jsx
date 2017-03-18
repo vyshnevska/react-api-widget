@@ -15,11 +15,12 @@ var Posts = React.createClass({
         <h2>All posts here</h2>
         {this.props.posts.map(function(post){
           return (
-            <div key={post.id.toString()}>
+            <div key={post.slug.toString()}>
               {this._publishedLabel(post)}
               <span>
-                <a href={'posts/' + post.id}>{post.body} </a>
+                | <a href={'posts/' + post.slug}>{post.body} </a>
               </span>
+              <span>|  {post.slug} </span>
             </div>
           )
         }, this)}
