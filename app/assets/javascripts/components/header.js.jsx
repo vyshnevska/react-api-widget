@@ -1,4 +1,8 @@
 var Header = React.createClass({
+  getInitialState() {
+    return { isAuthorized: this.props.isAuthorized }
+  },
+
   _renderUserDetails: function() {
     return (
       <div className='user-details'>
@@ -6,12 +10,12 @@ var Header = React.createClass({
           <a href='link/to/user'>User Name</a>
         </div>
         <span className='more-details'>since 2016</span>
-      </div>
-    )
+      </div>)
   },
 
   _renderUserStatistics: function() {
-    return(
+    if(this.state.isAuthorized){
+      return(
       <div className="user-statistics">
         <ul className='as-table'>
           <li>
@@ -27,8 +31,11 @@ var Header = React.createClass({
             </a>
           </li>
         </ul>
-      </div>
-    )
+      </div>)
+    } else {
+      return null;
+    }
+
   },
 
   render: function() {
@@ -38,7 +45,7 @@ var Header = React.createClass({
           <a className='header-top-section'> </a>
           <div className='header-content'>
             <a className='avatar-outer-container'>
-              <img src='assets/message_feed/messages_icon.svg' className='m-tool-icon'/>
+              <img src="/assets/message_feed/messages_icon.svg" className="m-tool-icon" />
             </a>
             {this._renderUserDetails()}
             {this._renderUserStatistics()}

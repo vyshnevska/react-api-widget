@@ -10,6 +10,14 @@ var AjaxCustomMethods = {
   getAuthToken: function() {
     var authToken = $("meta[name=auth-token]").attr("content");
     return authToken;
+  },
+
+  isAuthorized: function() {
+    if(this.getAuthToken().length > 0){
+      return true
+    } else {
+      return false
+    }
   }
 };
 

@@ -6,10 +6,16 @@ class User < ActiveRecord::Base
 
   has_many :posts
 
-  def generate_auth_token
-    token = SecureRandom.hex
+  before_create :set_auth_token!
+
+  def generate_auth_token_and_save!
+    token =  generate_auth_token
     self.update_columns(auth_token: token, token_created_at: Time.zone.now)
     token
+  end
+
+  def generate_auth_token
+    SecureRandom.hex
   end
 
   def invalidate_auth_token
@@ -19,4 +25,10 @@ class User < ActiveRecord::Base
   def name
     self.username || "user-000#{self.id}"
   end
+
+  private
+    def set_auth_token!
+      self.auth_token ||= generate_auth_token
+      self.token_created_at ||= Time.zone.now
+    end
 end
