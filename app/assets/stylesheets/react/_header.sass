@@ -1,15 +1,9 @@
 $avatar-height: 72px
 $avatar-width: 72px
 $header-top-section-height: 54px
-$header-bottom-section-height: 24px
-$user-details-width: 185px
 
-= section-background($border-color, $section-color)
-  background-size: 100%
-  border-bottom: 1px solid $border-color
-  background: $section-color
-  background-position: 0 50%
-  border-radius: 4px 4px 0 0
+$header-bottom-section-height: 10px
+$user-details-width: 185px
 
 = default-text($color: $dark-coral)
   line-height: 17.5px
@@ -36,7 +30,7 @@ $user-details-width: 185px
   color: $color
   font-size: 10px
   letter-spacing: .02em
-  
+
 %m-avatar-image
   height: $avatar-height
   width: $avatar-width
@@ -46,10 +40,9 @@ $user-details-width: 185px
   -moz-box-sizing: border-box
   box-sizing: border-box
 
-.messages_box  
+.messages_box
   .messages
     +default-text
-    border: 1px solid $light-grey-blue
     background: $white
     border-radius: 6px
     position: relative
@@ -65,9 +58,12 @@ $user-details-width: 185px
     display: block
 
   .header-content
+    border-left: 1px solid $light-grey-blue
+    border-right: 1px solid $light-grey-blue
+
     a, a:hover, a:focus, a:active
       +default-link-style
-      
+
     a.avatar-outer-container
       +default-link-style
       border-radius: 6px
@@ -75,10 +71,10 @@ $user-details-width: 185px
       padding: 1px
       vertical-align: bottom
       display: inline-block
-      
+
       img
         @extend %m-avatar-image
-       
+
     .user-details
       position: absolute
       top: 64px
@@ -109,17 +105,8 @@ $user-details-width: 185px
           .statistics-name
             +uppercase-text($color: $grey-blue)
             overflow: hidden
-            
+
           .statistics-value
             display: block
             +default-text-huge
             padding-top: 3px
-
-  .header-bottom-section
-    +section-background($light-grey-blue, $dark-coral)
-    height: $header-bottom-section-height
-    width: 100%
-    padding: 0 1px
-    margin-left: -1px
-    margin-top: -1px
-    display: block

@@ -1,0 +1,16 @@
+= section-background($border-color, $section-color)
+  background-size: 100%
+  border-bottom: 1px solid $border-color
+  background: $section-color
+  background-position: 0 50%
+  border-radius: 4px 4px 0 0
+
+.section-separator
+  +section-background($light-grey-blue, $dark-coral)
+  border-radius: 34px
+  height: 10px
+  width: 100%
+  padding: 0 1px
+  margin-left: -1px
+  margin-top: -1px
+  display: block

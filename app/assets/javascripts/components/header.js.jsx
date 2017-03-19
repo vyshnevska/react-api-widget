@@ -43,7 +43,7 @@ var Header = React.createClass({
             {this._renderUserDetails()}
             {this._renderUserStatistics()}
           </div>
-          <a className='header-bottom-section'> </a>
+          <a className='section-separator'> </a>
         </div>
       </header>
     )

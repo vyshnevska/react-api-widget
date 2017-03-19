@@ -30,10 +30,14 @@ var MessageFeed = React.createClass({
   },
 
   render: function() {
-    // <AllMessages messages={this.state.messages}/>
     return (
       <div className='body'>
-        <NewMessage sendNewMessageHandler={this.handleSubmit} channelsSelectOptions={this.state.channelsSelectOptions}/>
+        <NewMessage
+          sendNewMessageHandler={this.handleSubmit}
+          channelsSelectOptions={this.state.channelsSelectOptions}
+        />
+        <a className='section-separator'> </a>
+        <AllMessages messages={this.state.messages}/>
       </div>
     )
   }

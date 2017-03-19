@@ -1,0 +1,54 @@
+.thumbnail
+  display: inline-block
+  background: $middle-light-grey
+  color: $white
+  text-align: center
+  text-decoration: none
+  -webkit-transition: background 0.3s linear 0s
+  -moz-transition: background 0.3s linear 0s
+  -ms-transition: background 0.3s linear 0s
+  -o-transition: background 0.3s linear 0s
+  transition: background 0.3s linear 0s
+  img
+    width: 30px
+    height: 30px
+
+.content
+  display: inline-block
+  vertical-align: top
+  line-height: 1
+  padding: 4px
+  height: 80px
+
+  &.left-column
+    width: 25%
+
+  &.right-column
+    width: 75%
+  h5
+    display: block
+    width: 100%
+    color: $light-grey
+  .preview
+    display: block
+    width: 100%
+    max-width: 200px
+    color: $silver
+    font-size: 12px
+  .meta
+    color: $nobel-grey
+    font-size: 12px
+    a
+      color: $dusty-grey
+      text-decoration: none
+    a:hover
+      text-decoration: underline
+.message
+  position: absolute
+  top: 0
+  left: 0
+  overflow: hidden
+  height: 100%
+  width: 100%
+  padding: 10px
+  box-sizing: border-box

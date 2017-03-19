@@ -23,8 +23,8 @@ var NewMessage = React.createClass({
   },
 
   toggleSection(){
-    var section = document.querySelector('.new_message_form')
-    section.classList.toggle('expanded');
+    section = document.querySelector('.new-message-container')
+    section.classList.toggle('expanded')
   },
 
   _renderChannelsSelect(){
@@ -42,7 +42,7 @@ var NewMessage = React.createClass({
 
   render: function() {
     return (
-      <div className="box">
+      <div className="new-message-container">
         <div className="new_message_form">
           <input ref='content' placeholder='Enter the message' />
           {this._renderChannelsSelect()}
