@@ -22,7 +22,7 @@ describe("Messanger", function() {
 
       expect(this.$renderedDOM.classList.value).toEqual("messages_box collapse-container");
       expect(renderedHeader).toHaveId('messages_box_header');
-      expect(renderedBody.innerHTML).toEqual("<div class=\"box\"><div class=\"new_message_form\"><input placeholder=\"Enter the message\"><button>Send</button></div><div class=\"icon\"></div></div>");
+      expect(renderedBody.innerHTML).toEqual("<div class=\"new-message-container\"><div class=\"new_message_form\"><button>Send</button></div><div class=\"expand-trigger\"><input placeholder=\"Enter the message\"><img src=\"assets/message_feed/share_icon.png\" class=\"m-tool-icon\"></div></div><a class=\"section-separator\"> </a><ul class=\"collapse-body\"></ul>");
     });
   });
 });

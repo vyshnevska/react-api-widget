@@ -59,22 +59,6 @@ describe("MessageFeed", function() {
 
       expect(this.component.populateData).toHaveBeenCalled();
       expect(this.component.state.messages).toEqual(data.messages);
-
-      // var doneFn = jasmine.createSpy("success");
-      //  jasmine.Ajax.stubRequest('/api/v1/messages.json').andReturn({
-      //   "responseText": data
-      // });
-
-      // var xhr = new XMLHttpRequest();
-      // xhr.onreadystatechange = function(args) {
-      //   if (this.readyState == this.DONE) {
-      //     doneFn(this.responseText);
-      //   }
-      // };
-
-      // xhr.open("GET", '/api/v1/messages.json');
-      // xhr.send();
-      // expect(doneFn).toHaveBeenCalledWith(["msg1","msg2"]);
     });
 
     it("should execute the handleError function on error", function () {
@@ -94,19 +78,17 @@ describe("MessageFeed", function() {
   });
 
   describe('handleSubmit', function(){
-    let data = {
-      messages: ['msg3'],
-      channels: []
-    };
+    let data = { content: 'msg3', channel_id: 0 };
 
     beforeEach(function() {
-      this.component.state.messages = ['msg1', 'msg2'];
+      this.component.state.messages = [{content: 'msg1', channel_id:0 }, {content: 'msg2', channel_id:0 }];
     });
 
     it('sends a new message', function(){
       this.component.handleSubmit(data);
-
-      expect(this.component.state.messages).toEqual([ 'msg3', 'msg1', 'msg2']);
+      contents = []
+      this.component.state.messages.map(function(m){ contents.push(m.content) })
+      expect(contents).toEqual([ 'msg3', 'msg1', 'msg2']);
     });
   });
 });

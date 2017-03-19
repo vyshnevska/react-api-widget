@@ -14,7 +14,7 @@ describe("Header", function() {
       expect(rootElement).toHaveClass('messages')
       // Convert an HTMLCollection to an Array
       var messagesChildren = Array.from(rootElement.children).map(function(i){ return i.tagName + '.' + i.className;});
-      expect(messagesChildren).toEqual(["A.header-top-section", "DIV.header-content", "A.header-bottom-section"]);
+      expect(messagesChildren).toEqual(['A.header-top-section', 'DIV.header-content', 'A.section-separator']);
     });
   });
 
