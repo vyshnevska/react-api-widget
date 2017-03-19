@@ -26,7 +26,7 @@ var MessageEntry = React.createClass({
       <li id={this.props.id} className={this.state.status} onClick={this.markAsRead}>
         <div className='content left-column'>
           <a href='#' className='thumbnail'>
-            <img src='assets/message_feed/img_placeholder.png' className='m-tool-icon'/>
+            <img src='assets/placeholders/channel.png' className='m-tool-icon'/>
             {'CH 1'}
           </a>
         </div>

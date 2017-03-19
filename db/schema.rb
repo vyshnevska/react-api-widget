@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170319170256) do
+ActiveRecord::Schema.define(version: 20170319173627) do
 
   create_table "channels", force: :cascade do |t|
     t.string   "name"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20170319170256) do
     t.integer  "parent_post_id"
     t.string   "slug"
     t.integer  "author_id"
+    t.string   "title"
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id"

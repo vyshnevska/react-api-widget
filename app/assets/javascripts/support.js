@@ -1,8 +1,7 @@
 var AjaxCustomMethods = {
-
   // Relies on error response from API being JSON object like:
   // { errors: [ "Error message", "Another error message" ] }
-  handleError: function(error){
+  handleError: function(error) {
     console.log("There was an error: " + error.statusText);
   },
 
@@ -13,3 +12,10 @@ var AjaxCustomMethods = {
     return authToken;
   }
 };
+
+var CustomMethods = {
+  truncate: function(text, size) {
+    size = (typeof b !== 'undefined') ?  size : 20;
+    return text.substring(0, parseInt(size)) + '...';
+  }
+}

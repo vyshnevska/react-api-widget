@@ -18,7 +18,7 @@ var Posts = React.createClass({
             <div key={post.slug.toString()}>
               {this._publishedLabel(post)}
               <span>
-                | <a href={'posts/' + post.slug}>{post.body} </a>
+                | <a href={'posts/' + post.slug}>{CustomMethods.truncate(post.body)} </a>
               </span>
               <span>|  {post.slug} </span>
             </div>

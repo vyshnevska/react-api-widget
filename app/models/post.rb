@@ -4,11 +4,26 @@ class Post < ActiveRecord::Base
   belongs_to :parent_post, class_name: 'Post'
   has_many :replies, class_name: 'Post', through: :comments, source: :comments
 
+  REACT_ATTRIBUTES = %i(slug body published title author)
+
+  belongs_to :author, class_name: 'User', foreign_key: :author_id
+
   def to_param
     slug
   end
 
-   def self.find(input)
+  def for_react
+    REACT_ATTRIBUTES.inject({}) do |hash, attr|
+      if attr == :author
+        hash[:"#{attr}"] = self.send(attr).send(:name) # author name
+      else
+        hash[:"#{attr}"] = self.send attr
+      end
+      hash
+    end
+  end
+
+  def self.find(input)
     if input.is_a?(Integer)
       super
     else

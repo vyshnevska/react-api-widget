@@ -1,5 +1,5 @@
 <%= link_to 'New Post', new_post_path %>
 
-<%= react_component 'Posts', { posts: @posts.as_json(only: [:slug, :body, :published]) }%>
+<%= react_component 'Posts', { posts: @posts.map{|p| p.for_react.as_json } } %>
 
 <%= react_component 'Messanger', { data: { messages_count: 10 } }%>

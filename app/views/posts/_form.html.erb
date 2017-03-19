@@ -10,15 +10,21 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    <%= f.label :slug %><br>
+    <%= f.text_field :slug %>
+  </div>
 
   <div class="field">
     <%= f.label :body %><br>
     <%= f.text_area :body %>
   </div>
+
   <div class="field">
-    <%= f.label :slug %><br>
-    <%= f.text_field :slug %>
+    <%= f.label :author %><br>
+    <%= f.select :author_id, options_for_select(User.all.map{|u| [u.name, u.id]}) %>
   </div>
+
   <div class="field">
     <%= f.label :published %><br>
     <%= f.check_box :published %>
