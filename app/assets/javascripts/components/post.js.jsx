@@ -1,6 +1,10 @@
 var Post = React.createClass({
   getInitialState() {
-    return ({ clicked: false })
+    return ({
+      clicked: false,
+      has_channel: !!this.props.channel,
+      channel: this.props.channel
+    })
   },
 
   isRenderedForAuthor(){
@@ -8,15 +12,43 @@ var Post = React.createClass({
   },
 
   channelIsActive(){
-    return(!!this.props.channel && this.props.channel.active);
+    return(this.state.has_channel && this.state.channel.active);
   },
+
+  // Ajax calls
+  // followAuthor(){
+
+  // },
+
+  createChannel(){
+    var author_id   = this.props.author_id,
+        currentPost = this;
+
+    var ajaxOptions = {
+          url: '/api/v1/subscriptions/create_channel',
+          type: 'POST',
+          dataType: 'json',
+          headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() },
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify({ channel: { user_id: author_id, name: 'Random Name', active: true } })
+        };
+
+    $.ajax(ajaxOptions).done(function(response){
+      newState = {
+        has_channel: true,
+        channel: response.channel
+      }
+      currentPost.setState(newState);
+    });
+  },
+  ////
 
   _renderChannelBtn(){
     if (this.channelIsActive()){
       return(
         <span>
-          <button className='as-follow' onClick='this.followAuthor'>
-            <span>Follow</span>
+          <button className='as-follow' onClick={this.followAuthor}>
+            <span>{'Follow ' + this.state.channel.name}</span>
           </button>
         </span>
       )
@@ -24,10 +56,10 @@ var Post = React.createClass({
   },
 
   _renderCreateChannelBtn(){
-    if (this.isRenderedForAuthor() && !this.channelIsActive()){
+    if (this.isRenderedForAuthor() && !this.state.has_channel){
       return(
         <span>
-          <button className='as-follow' onClick='this.createChannel'>
+          <button className='as-follow' onClick={this.createChannel}>
             <span>Start Channel</span>
           </button>
         </span>
