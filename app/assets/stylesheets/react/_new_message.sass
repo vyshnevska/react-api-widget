@@ -8,25 +8,26 @@
     height: 90px
 
     .new_message_form
-      max-width: 260px
+      max-width: 100%
       opacity: 1
 
 .new_message_form
-  width: 260px
+  width: 90%
   max-width: 0px
-  padding: 5px
   transition: all .5s ease
   position: absolute
-  right: 20px
+  left: 5px
+  top: 20px
   box-sizing: border-box
   opacity: 0
   *
     width: 100%
+    margin-top: 10px
 
-.icon
-  width: 20px
-  height: 20px
-  background: red
-  position: absolute
-  right: 0
-  top: 0
+.expand-trigger
+  margin-left: 5px
+  input
+    width: 90%
+  img
+    height: 20px
+    width: 20px

@@ -17,10 +17,10 @@ describe("NewMessage", function() {
 
   describe("render", function() {
     it("should work", function() {
-      expect(this.$renderedDOM.getElementsByClassName('new_message_form')[0].children).toHaveLength(3)
+      expect(this.$renderedDOM.getElementsByClassName('new_message_form')[0].children).toHaveLength(2)
 
       input = this.$renderedDOM.getElementsByTagName('input')[0];
-      expect(input).toHaveAttr('placeholder', 'Enter the message');
+      expect(input).toHaveAttr('placeholder', 'Share your ideas!');
 
       select = this.$renderedDOM.getElementsByTagName('select')[0];
       expect(select.options).toHaveLength(1);

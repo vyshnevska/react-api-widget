@@ -44,11 +44,13 @@ var NewMessage = React.createClass({
     return (
       <div className="new-message-container">
         <div className="new_message_form">
-          <input ref='content' placeholder='Enter the message' />
           {this._renderChannelsSelect()}
           <button onClick={this.sendNewMessage}>Send</button>
         </div>
-        <div className="icon" onClick={this.toggleSection}></div>
+        <div className="expand-trigger" onClick={this.toggleSection}>
+          <input ref='content' placeholder='Share your ideas!' />
+          <img src='assets/message_feed/share_icon.png' className='m-tool-icon'/>
+        </div>
       </div>
     );
   }

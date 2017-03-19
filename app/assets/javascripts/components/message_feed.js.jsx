@@ -22,8 +22,7 @@ var MessageFeed = React.createClass({
     $.ajax(ajaxOptions).done(this.populateData).fail(AjaxCustomMethods.handleError);
   },
 
-  handleSubmit(data) {
-    message = data.messages[0];
+  handleSubmit(message) {
     this.state.messages.unshift(message); // adds a new message at the biginning
     this.setState({ messages: this.state.messages });
     console.log('message was sent succesfully!', message);
