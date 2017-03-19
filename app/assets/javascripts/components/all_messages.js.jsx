@@ -10,6 +10,7 @@ var AllMessages = React.createClass({
             channel_slug   = 'MK'
             publisher_name = 'publisher'
             sent_date      = {message.created_at}
+            status         = {message.status}
           />
         </div>
       )

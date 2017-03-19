@@ -12,6 +12,13 @@ class Api::V1::MessagesController < Api::V1::BaseController
     respond_with :api, :v1, Message.create(message_params)
   end
 
+  def update
+    message = Message.find params[:id]
+    message.assign_attributes message_params
+
+    respond_with :api, :v1, message.changed? ? message.save : message
+  end
+
   private
 
   def message_params

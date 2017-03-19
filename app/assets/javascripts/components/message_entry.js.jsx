@@ -1,8 +1,29 @@
 var MessageEntry = React.createClass({
+  getInitialState() {
+    return { status: this.props.status }
+  },
+
+  markAsRead(){
+    currentMessage = this;
+
+    var newMessageStatus = 'read',
+        ajaxOptions = {
+          url: '/api/v1/messages/' + this.props.id,
+          type: 'PATCH',
+          dataType: 'json',
+          headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() },
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify({ message: { status: newMessageStatus } })
+        };
+
+    if(currentMessage.state.status != newMessageStatus){
+      $.ajax(ajaxOptions).done(function(){ currentMessage.setState({ status: newMessageStatus })});
+    }
+  },
 
   render: function() {
     return(
-      <li id={this.props.id}>
+      <li id={this.props.id} className={this.state.status} onClick={this.markAsRead}>
         <div className='content left-column'>
           <a href='#' className='thumbnail'>
             <img src='assets/message_feed/img_placeholder.png' className='m-tool-icon'/>
