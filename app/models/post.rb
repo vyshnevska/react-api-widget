@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
   def for_react
     REACT_ATTRIBUTES.inject({}) do |hash, attr|
       if attr == :author
-        hash[:"#{attr}"] = self.send(attr).send(:name) # author name
+        hash[:"#{attr}"] = self.send(attr).try(:name) # author name
       else
         hash[:"#{attr}"] = self.send attr
       end

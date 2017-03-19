@@ -2,7 +2,7 @@ var MessageFeed = React.createClass({
   // ---- main methods
 
   getInitialState() {
-    return { messages: [], channelsSelectOptions: [] }
+    return { messages: [], channelsSelectOptions: [], authorized_token: AjaxCustomMethods.getAuthToken() }
   },
 
   populateData(data){
@@ -29,16 +29,21 @@ var MessageFeed = React.createClass({
   },
 
   render: function() {
-    return (
-      <div className='body'>
-        <NewMessage
-          sendNewMessageHandler={this.handleSubmit}
-          channelsSelectOptions={this.state.channelsSelectOptions}
-        />
-        <a className='section-separator'> </a>
-        <AllMessages messages={this.state.messages}/>
-      </div>
-    )
+    var content;
+
+    if(this.state.authorized_token.length > 0){
+      content = (<div className='body'>
+          <NewMessage
+            sendNewMessageHandler={this.handleSubmit}
+            channelsSelectOptions={this.state.channelsSelectOptions}
+          />
+          <a className='section-separator'> </a>
+          <AllMessages messages={this.state.messages}/>
+        </div>);
+    } else {
+      content = (<h5>You are not authorized </h5>);
+    }
+    return( <div> {content} </div>)
   }
 });
 MessageFeed.propTypes = {

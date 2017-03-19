@@ -7,7 +7,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%- home_link_label = current_user ? 'Welcome ' + current_user.username : 'Home' %>
+
+      <% home_link_label = current_user ? 'Welcome ' + current_user.name : 'Home' %>
       <%= link_to home_link_label, "#", class: "navbar-brand" %>
 
     </div>

@@ -49,7 +49,7 @@ var NewMessage = React.createClass({
         </div>
         <div className="expand-trigger" onClick={this.toggleSection}>
           <input ref='content' placeholder='Share your ideas!' />
-          <img src='assets/message_feed/share_icon.png' className='m-tool-icon'/>
+          <img src='/assets/icons/share.png' className='m-tool-icon'/>
         </div>
       </div>
     );
