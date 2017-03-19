@@ -3,6 +3,38 @@ var Post = React.createClass({
     return ({ clicked: false })
   },
 
+  isRenderedForAuthor(){
+    return(typeof this.props.is_rendered_for !== 'undefined' && this.props.author_id == this.props.is_rendered_for);
+  },
+
+  channelIsActive(){
+    return(!!this.props.channel && this.props.channel.active);
+  },
+
+  _renderChannelBtn(){
+    if (this.channelIsActive()){
+      return(
+        <span>
+          <button className='as-follow' onClick='this.followAuthor'>
+            <span>Follow</span>
+          </button>
+        </span>
+      )
+    }
+  },
+
+  _renderCreateChannelBtn(){
+    if (this.isRenderedForAuthor() && !this.channelIsActive()){
+      return(
+        <span>
+          <button className='as-follow' onClick='this.createChannel'>
+            <span>Start Channel</span>
+          </button>
+        </span>
+      )
+    }
+  },
+
   _renderAuthorLine(){
     return (
       <div>
@@ -11,12 +43,9 @@ var Post = React.createClass({
             <img src="/assets/placeholders/author.png" />
           </div>
           <div className='details'>
-            <a> {this.props.author}</a>
-            <span>
-              <button className='as-follow'>
-                <span>Follow</span>
-              </button>
-            </span>
+            <a> {this.props.author_name}</a>
+            {this._renderChannelBtn()}
+            {this._renderCreateChannelBtn()}
             <div>Founder, Amazing Journalist and Great Author</div>
             <div> Mar 15 - 5min
             </div>

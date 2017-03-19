@@ -1,6 +1,10 @@
 var Messanger = React.createClass({
   getInitialState() {
-    return { messages: [], channelsSelectOptions: [], isAuthorized: AjaxCustomMethods.isAuthorized() }
+    return {
+      messages: [],
+      channelsSelectOptions: [],
+      isAuthorized: AjaxCustomMethods.isAuthorized()
+    }
   },
 
   render: function() {

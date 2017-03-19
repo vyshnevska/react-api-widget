@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170319173627) do
+ActiveRecord::Schema.define(version: 20170319201407) do
 
   create_table "channels", force: :cascade do |t|
     t.string   "name"
@@ -20,7 +20,10 @@ ActiveRecord::Schema.define(version: 20170319173627) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
+
+  add_index "channels", ["user_id"], name: "index_channels_on_user_id"
 
   create_table "messages", force: :cascade do |t|
     t.text     "content"

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :posts
+  has_one :channel
+  has_many :messages, through: :channel
 
   before_create :set_auth_token!
 

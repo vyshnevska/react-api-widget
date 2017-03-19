@@ -13,14 +13,19 @@ class Post < ActiveRecord::Base
   end
 
   def for_react
-    REACT_ATTRIBUTES.inject({}) do |hash, attr|
-      if attr == :author
-        hash[:"#{attr}"] = self.send(attr).try(:name) # author name
-      else
-        hash[:"#{attr}"] = self.send attr
-      end
-      hash
+    result = %i(slug body published title author_id).inject({}){ |hash, attr|
+      hash[:"#{attr}"] = self.send(attr); hash
+    }
+    result[:author_name] = self.author.try(:name) || 'unknown'
+    if self.author && self.author.channel
+      result[:channel] = {
+        name:   self.author.channel.name,
+        active: self.author.channel.active
+      }
+    else
+      result[:channel] = nil
     end
+    result
   end
 
   def self.find(input)

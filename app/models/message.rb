@@ -1,4 +1,5 @@
 class Message < ActiveRecord::Base
+  belongs_to :channel
 
   before_create :set_status
 
