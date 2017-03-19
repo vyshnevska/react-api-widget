@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170317194317) do
+ActiveRecord::Schema.define(version: 20170319170256) do
 
   create_table "channels", force: :cascade do |t|
     t.string   "name"
@@ -38,7 +38,10 @@ ActiveRecord::Schema.define(version: 20170317194317) do
     t.datetime "updated_at",     null: false
     t.integer  "parent_post_id"
     t.string   "slug"
+    t.integer  "author_id"
   end
+
+  add_index "posts", ["author_id"], name: "index_posts_on_author_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -55,10 +58,12 @@ ActiveRecord::Schema.define(version: 20170317194317) do
     t.datetime "updated_at",                          null: false
     t.string   "auth_token"
     t.datetime "token_created_at"
+    t.string   "username"
   end
 
   add_index "users", ["auth_token", "token_created_at"], name: "index_users_on_auth_token_and_token_created_at"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end
