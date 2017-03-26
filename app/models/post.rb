@@ -1,14 +1,17 @@
 class Post < ActiveRecord::Base
   validates :slug, presence: true, uniqueness: true
+
   has_many :comments, class_name: 'Post', foreign_key: :parent_post_id
-  belongs_to :parent_post, class_name: 'Post'
   has_many :replies, class_name: 'Post', through: :comments, source: :comments
+
+  belongs_to :parent_post, class_name: 'Post'
 
   mount_uploader :top_image, ImageUploader
   mount_uploader :image_1, ImageUploader
   mount_uploader :image_2, ImageUploader
 
   scope :published, -> { where(published: true) }
+  scope :original,  -> { where(parent_post_id: nil) }
 
   REACT_ATTRIBUTES = %i(slug body published title author)
 

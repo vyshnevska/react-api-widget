@@ -70,11 +70,11 @@ var Post = React.createClass({
   _renderAuthorLine(){
     return (
       <div>
-        <div className='author-container'>
-          <div className='avatar'>
+        <div className='author-text'>
+          <div className='image-wrapper'>
             <img src="/assets/placeholders/author.png" />
           </div>
-          <div className='details'>
+          <div className='text-content'>
             <a> {this.props.author_name}</a>
             {this._renderChannelBtn()}
             {this._renderCreateChannelBtn()}

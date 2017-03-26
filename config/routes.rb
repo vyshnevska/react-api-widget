@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :posts
+  resources :posts do
+    member do
+      post :add_comment
+      post :update_comment
+    end
+  end
+
   devise_for :users
 
   namespace :api do
@@ -17,6 +23,7 @@ Rails.application.routes.draw do
     end
   end
   root to: 'posts#index'
+
 
   slugs = %w|root|
   resource :posts, only: [:show], constraints: {id: Regexp.new(slugs.join('|'))}

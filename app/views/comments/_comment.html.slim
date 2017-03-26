@@ -1,0 +1,9 @@
+.comment.clearfix
+  .author-text.content
+    .image-wrapper
+      = image_tag comment.author.avatar.url(:thumb)
+    .text-content
+      p.comment_content= comment.body.truncate(200)
+      p.comment_author= comment.author.email
+  .buttons
+    = link_to "Hide", update_comment_post_path(comment_id: comment), method: :post

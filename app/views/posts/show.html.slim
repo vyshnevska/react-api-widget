@@ -8,6 +8,15 @@
     button class="button arrow-left" data-slide_index='-1'&#10094;
     button class="button arrow-right"data-slide_index='1'&#10095;
 
+#comments
+  h2
+    = "#{@post.comments.published.count} Comments"
+
+  - @post.comments.published.each do |comment|
+    = render '/comments/comment', comment: comment
+  h3 Reply to thread
+  = render "comments/form"
+
 .btn-group role='group'
   = link_to 'Edit', edit_post_path(@post), class: "btn btn-default"
   = link_to "Delete", post_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"
