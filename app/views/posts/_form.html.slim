@@ -15,6 +15,33 @@
     = f.label :body
     br/
     = f.text_area :body
+
+  .field
+    = f.label :top_image
+    p
+      = image_tag(@post.top_image_url(:medium)) if @post.top_image?
+    br/
+    = f.file_field :top_image
+    = f.hidden_field :top_image_cache
+    .image-preview-wrapper
+      img/
+
+  .field
+    = f.label :image_1
+    br/
+    = f.file_field :image_1
+    = f.hidden_field :image1_cache
+    .image-preview-wrapper
+      img/
+
+  .field
+    = f.label :image_2
+    br/
+    = f.file_field :image_2
+    = f.hidden_field :image2_cache
+    .image-preview-wrapper
+      img/
+
   .field
     = f.label :author
     br/

@@ -15,6 +15,9 @@
 //= require turbolinks
 //= require react
 //= require react_ujs
+//= require namespace
+//= require_tree ./application/modules
+//= require application/main
 //= require components
 //= require bootstrap
 //= require_tree .
