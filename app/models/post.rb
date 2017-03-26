@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
   mount_uploader :image_1, ImageUploader
   mount_uploader :image_2, ImageUploader
 
+  scope :published, -> { where(published: true) }
+
   REACT_ATTRIBUTES = %i(slug body published title author)
 
   belongs_to :author, class_name: 'User', foreign_key: :author_id
@@ -20,6 +22,10 @@ class Post < ActiveRecord::Base
     result = %i(slug body published title author_id).inject({}){ |hash, attr|
       hash[:"#{attr}"] = self.send(attr); hash
     }
+
+    result[:createdAt] = self.created_at.strftime("Created on %d/%m/%y")
+    result[:topImageUrl] = self.top_image.url(:small)
+
     result[:author_name] = self.author.try(:name) || 'unknown'
     if self.author && self.author.channel
       result[:channel] = {

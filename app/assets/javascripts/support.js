@@ -26,4 +26,12 @@ var CustomMethods = {
     size = (typeof b !== 'undefined') ?  size : 20;
     return text.substring(0, parseInt(size)) + '...';
   }
-}
+};
+
+Array.prototype.eachSlice = function (size){
+  this.arr = []
+  for (var i = 0, l = this.length; i < l; i += size){
+    this.arr.push(this.slice(i, i + size))
+  }
+  return this.arr
+};

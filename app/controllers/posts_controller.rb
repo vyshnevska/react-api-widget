@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all
+    @posts_for_react = Post.published.map{|p| p.for_react.merge(showUrl: post_path(p)).as_json }
   end
 
   def show

@@ -79,8 +79,7 @@ var Post = React.createClass({
             {this._renderChannelBtn()}
             {this._renderCreateChannelBtn()}
             <div>Founder, Amazing Journalist and Great Author</div>
-            <div> Mar 15 - 5min
-            </div>
+            <div>{this.props.formatted_created_at}</div>
           </div>
         </div>
       </div>

@@ -11,16 +11,21 @@ var Posts = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <h2>All posts here</h2>
+      <div className='row'>
         {this.props.posts.map(function(post){
           return (
-            <div key={post.slug.toString()}>
-              {this._publishedLabel(post)}
-              <span>
-                | <a href={'posts/' + post.slug}>{CustomMethods.truncate(post.body)} </a>
-              </span>
-              <span>|  {post.slug} </span>
+            <div key={post.slug} className='col-md-3'>
+              <div className='post'>
+                <div className='image_wrapper'>
+                  <a href={post.showUrl}>
+                    <img src={post.topImageUrl}/>
+                  </a>
+                </div>
+                <h2>
+                  <a href={post.showUrl}>{post.slug}</a>
+                </h2>
+                <p className='published-date'> {post.createdAt} </p>
+              </div>
             </div>
           )
         }, this)}
