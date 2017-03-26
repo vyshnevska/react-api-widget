@@ -1,0 +1,27 @@
+= form_for(@post) do |f|
+  - if @post.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@post.errors.count, "error")
+        | prohibited this post from being saved:
+      ul
+        - @post.errors.full_messages.each do |message|
+          li= message
+  .field
+    = f.label :slug
+    br/
+    = f.text_field :slug
+  .field
+    = f.label :body
+    br/
+    = f.text_area :body
+  .field
+    = f.label :author
+    br/
+    = f.select :author_id, options_for_select(User.all.map{|u| [u.name, u.id]})
+  .field
+    = f.label :published
+    br/
+    = f.check_box :published
+  .actions
+    = f.submit

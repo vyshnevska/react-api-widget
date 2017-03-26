@@ -1,5 +1,0 @@
-
-<%= react_component 'Post', @post.for_react.merge(is_rendered_for: current_user.try(:id)).as_json %>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>

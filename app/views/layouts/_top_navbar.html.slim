@@ -1,0 +1,19 @@
+nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
+  .container
+    .navbar-header
+      button.navbar-toggle.collapsed aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button"
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      - home_link_label = current_user ? 'Welcome ' + current_user.name : 'Home'
+      = link_to home_link_label, "#", class: "navbar-brand"
+    #navbar.collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li.active= link_to 'Posts', posts_path
+        - if user_signed_in?
+          li= link_to "Account", edit_user_registration_path
+          li= link_to "Sign Out", destroy_user_session_path, method: :delete
+        - else
+          li= link_to "Sign Up", new_user_registration_path
+          li= link_to "Sign In", new_user_session_path
