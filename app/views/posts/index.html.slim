@@ -1,6 +1,6 @@
-.row
-  .col
-    = link_to 'New Post', new_post_path, class: "btn btn-default"
+= link_to 'New Post', new_post_path, class: "btn btn-default"
+.clearfix
+
 .row
   .col-sm-8
     = react_component 'Posts', { posts: @posts_for_react, is_rendered_for: current_user.try(:id) }
