@@ -2,7 +2,7 @@ describe("Header", function() {
   var ReactTestUtils = React.addons.TestUtils;
 
   beforeEach(function() {
-    this.element      = React.createElement(Header, { messages_count: 1 });
+    this.element      = React.createElement(Header, { messages_count: 1, isAuthorized: true });
     this.component    = ReactTestUtils.renderIntoDocument(this.element);
     this.$renderedDOM = window.ReactDOM.findDOMNode(this.component);
   });

@@ -8,7 +8,7 @@ describe("MessageFeed", function() {
 
   beforeEach(function() {
     jasmine.Ajax.install(); // mock ajax call on componentDidMount
-    this.element      = React.createElement(MessageFeed);
+    this.element      = React.createElement(MessageFeed, {isAuthorized: true});
     this.component    = ReactTestUtils.renderIntoDocument(this.element);
     this.$renderedDOM = window.ReactDOM.findDOMNode(this.component);
   });
