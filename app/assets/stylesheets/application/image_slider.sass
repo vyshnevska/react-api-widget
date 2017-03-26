@@ -1,0 +1,39 @@
+$slider-width: 400px
+$slider-height: 200px
+
+.slider-container
+  max-width: $slider-width
+  margin: auto
+  position: relative
+  height: $slider-height
+
+  img
+    margin-bottom: -5px
+    width: 100%
+    height: inherit
+
+  .button
+    color: #fff
+    background-color: #000
+    border: none
+    display: inline-block
+    outline: 0
+    padding: 8px 16px
+    vertical-align: middle
+    overflow: hidden
+    text-decoration: none
+    text-align: center
+    cursor: pointer
+    white-space: nowrap
+
+  .arrow-right
+    position: absolute
+    top: 50%
+    right: 0%
+    transform: translate(0%,-50%)
+
+  .arrow-left
+    position: absolute
+    top: 50%
+    left: 0%
+    transform: translate(0%,-50%)

@@ -19,7 +19,7 @@
   .field
     = f.label :top_image
     p
-      = image_tag(@post.top_image_url(:medium)) if @post.top_image?
+      = image_tag @post.top_image.url(:medium) if @post.top_image?
     br/
     = f.file_field :top_image
     = f.hidden_field :top_image_cache

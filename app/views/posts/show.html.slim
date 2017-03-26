@@ -1,5 +1,13 @@
 = react_component 'Post', @post.for_react.merge(is_rendered_for: current_user.try(:id)).as_json
 
+.slider-container
+  = image_tag @post.top_image.url(:medium), class: 'slide'
+  = image_tag @post.image_1.url(:medium), class: 'slide'
+  = image_tag @post.image_2.url(:medium), class: 'slide'
+  .navigation
+    button class="button arrow-left" data-slide_index='-1'&#10094;
+    button class="button arrow-right"data-slide_index='1'&#10095;
+
 .btn-group role='group'
   = link_to 'Edit', edit_post_path(@post), class: "btn btn-default"
   = link_to "Delete", post_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"

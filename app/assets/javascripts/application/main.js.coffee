@@ -6,3 +6,6 @@ $(document).ready ->
 
   if $(".edit_user").length
     new Main.ImagePreviewer($('form input[type="file"]')).init()
+
+  if $('.slider-container').length
+    new Main.ImageSlider().init()
