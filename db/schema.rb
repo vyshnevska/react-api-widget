@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170319201407) do
+ActiveRecord::Schema.define(version: 20170326094330) do
 
   create_table "channels", force: :cascade do |t|
     t.string   "name"
@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(version: 20170319201407) do
     t.string   "slug"
     t.integer  "author_id"
     t.string   "title"
+    t.string   "top_image"
+    t.string   "image_1"
+    t.string   "image_2"
   end
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id"
@@ -63,6 +66,7 @@ ActiveRecord::Schema.define(version: 20170319201407) do
     t.string   "auth_token"
     t.datetime "token_created_at"
     t.string   "username"
+    t.string   "avatar"
   end
 
   add_index "users", ["auth_token", "token_created_at"], name: "index_users_on_auth_token_and_token_created_at"

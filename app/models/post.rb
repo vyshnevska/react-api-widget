@@ -4,6 +4,10 @@ class Post < ActiveRecord::Base
   belongs_to :parent_post, class_name: 'Post'
   has_many :replies, class_name: 'Post', through: :comments, source: :comments
 
+  mount_uploader :top_image, ImageUploader
+  mount_uploader :image1, ImageUploader
+  mount_uploader :image2, ImageUploader
+
   REACT_ATTRIBUTES = %i(slug body published title author)
 
   belongs_to :author, class_name: 'User', foreign_key: :author_id
