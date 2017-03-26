@@ -5,8 +5,8 @@ class Post < ActiveRecord::Base
   has_many :replies, class_name: 'Post', through: :comments, source: :comments
 
   mount_uploader :top_image, ImageUploader
-  mount_uploader :image1, ImageUploader
-  mount_uploader :image2, ImageUploader
+  mount_uploader :image_1, ImageUploader
+  mount_uploader :image_2, ImageUploader
 
   REACT_ATTRIBUTES = %i(slug body published title author)
 
