@@ -17,20 +17,15 @@ var Header = React.createClass({
     if(this.state.isAuthorized){
       return(
       <div className="user-statistics">
-        <ul className='as-table'>
-          <li>
-            <a href='link/to/user'>
-              <span className='statistics-name'>Messages</span>
-              <span className='statistics-value'>{this.props.messages_count}</span>
-            </a>
-          </li>
-          <li>
-            <a href='link/to/user'>
-              <span className='statistics-name'>Channels</span>
-              <span className='statistics-value'>100</span>
-            </a>
-          </li>
-        </ul>
+        <div className='item'>
+          <div>Messages</div>
+          <div>{this.props.messages_count}</div>
+        </div>
+        <div className='item'>
+          <div>Channels</div>
+          <div>100</div>
+        </div>
+
       </div>)
     } else {
       return null;

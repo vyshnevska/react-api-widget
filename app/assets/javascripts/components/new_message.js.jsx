@@ -30,13 +30,16 @@ var NewMessage = React.createClass({
   _renderChannelsSelect(){
     if (this.props.channelsSelectOptions.length > 0) {
       return(
-        <select>
-          {
-            this.props.channelsSelectOptions.map(function (option) {
-              return <option value={option.key} ref='channel_id'> {option.label}</option>;
-            })
-          }
-        </select>);
+        <div className='form-group'>
+          <select className='form-control form-control-sm'>
+            {
+              this.props.channelsSelectOptions.map(function (option) {
+                return <option value={option.key} ref='channel_id'> {option.label}</option>;
+              })
+            }
+          </select>
+        </div>
+        );
     }
   },
 
@@ -45,11 +48,11 @@ var NewMessage = React.createClass({
       <div className="new-message-container">
         <div className="new_message_form">
           {this._renderChannelsSelect()}
-          <button onClick={this.sendNewMessage}>Send</button>
+          <button onClick={this.sendNewMessage} className='btn btn-secondary'>Send</button>
         </div>
-        <div className="expand-trigger" onClick={this.toggleSection}>
-          <input ref='content' placeholder='Share your ideas!' />
-          <img src='/assets/icons/share.png' className='m-tool-icon'/>
+        <div className="expand-trigger form-group" onClick={this.toggleSection}>
+          <textarea className='form-control' ref='content' placeholder='Share your ideas!' rows="1">
+          </textarea>
         </div>
       </div>
     );

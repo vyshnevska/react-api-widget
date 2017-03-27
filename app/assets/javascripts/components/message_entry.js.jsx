@@ -24,16 +24,17 @@ var MessageEntry = React.createClass({
   render: function() {
     return(
       <li id={this.props.id} className={this.state.status} onClick={this.markAsRead}>
-        <div className='content left-column'>
-          <a href='#' className='thumbnail'>
-            <img src='assets/placeholders/channel.png' className='m-tool-icon'/>
-            {'CH 1'}
-          </a>
-        </div>
-        <div className='content right-column'>
-          <h5>{'from ' + this.props.publisher_name}</h5>
-          <span className='preview'> {this.props.message} </span>
-          <span className='meta'> {this.props.sent_date} </span>
+        <div className='message-entry-wrapper'>
+          <div className='item'>
+            <div className='vertical-wrapper'>
+              <img src='assets/placeholders/channel.png' className='m-tool-icon'/>
+            </div>
+          </div>
+          <div className='item'>
+            <h5 className='sub-header'>{'from ' + this.props.publisher_name}</h5>
+            <span className='normal-text'> {this.props.message} </span>
+            <span className='normal-text'> {this.props.sent_date} </span>
+          </div>
         </div>
       </li>
     )

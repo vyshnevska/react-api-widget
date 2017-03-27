@@ -14,42 +14,21 @@
       width: 30px
       height: 30px
 
-  .content
-    display: inline-block
-    vertical-align: top
-    line-height: 1
-    padding: 4px
-    height: 80px
+  .message-entry-wrapper
+    display: flex
+    height: 70px
 
-    &.left-column
-      width: 25%
+    .item
+      flex-grow: 1
 
-    &.right-column
-      width: 75%
-    h5
-      display: block
-      width: 100%
-      color: $light-grey
-    .preview
-      display: block
-      width: 100%
-      max-width: 200px
-      color: $silver
-      font-size: 12px
-    .meta
-      color: $nobel-grey
-      font-size: 12px
-      a
-        color: $dusty-grey
-        text-decoration: none
-      a:hover
-        text-decoration: underline
-  .message
-    position: absolute
-    top: 0
-    left: 0
-    overflow: hidden
-    height: 100%
-    width: 100%
-    padding: 10px
-    box-sizing: border-box
+      .vertical-wrapper
+        height: 100%
+        display: flex
+        align-items: center
+        justify-content: center
+
+      h5
+        width: 100%
+
+    .item:nth-child(2)
+      flex-grow: 3

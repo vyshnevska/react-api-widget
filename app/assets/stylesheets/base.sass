@@ -44,3 +44,23 @@ ul.as-table
 
 .clearfix
   height: 15px
+
+
+= default-text-big
+  color: $light-grey
+  font-size: 14px
+
+.sub-header
+  +default-text-big
+
+= default-text-small
+  color: $nobel-grey
+  font-size: 12px
+  a
+    color: $dusty-grey
+    text-decoration: none
+  a:hover
+    text-decoration: underline
+
+.normal-text
+  +default-text-small

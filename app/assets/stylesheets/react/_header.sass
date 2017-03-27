@@ -86,27 +86,11 @@ $user-details-width: 185px
         padding-right: 5px
 
   .user-statistics
-    margin-left: 11px
-    padding: 10px 0
-
-    ul.as-table
-      margin: 0
-      padding: 0
-
-      li
-        vertical-align: bottom
-        padding: 0
-
-        a
-          &:hover
-            .statistics-name
-              color: inherit
-
-          .statistics-name
-            +uppercase-text($color: $grey-blue)
-            overflow: hidden
-
-          .statistics-value
-            display: block
-            +default-text-huge
-            padding-top: 3px
+    display: flex
+    justify-content: space-around
+    text-align: center
+    .item
+      margin: 15px 0
+      color: $grey-blue
+      &:hover
+        color: inherit
