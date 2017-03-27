@@ -1,0 +1,3 @@
+$('#comments').append("<%= j render '/comments/comment', comment: @comment %>");
+$('textarea').val(''); // clear comment text form
+$('#comments_counter').html("<%= @new_comments_count %> Comments"); // update comments counter

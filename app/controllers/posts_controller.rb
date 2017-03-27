@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:edit, :update, :destroy, :add_comment]
+  before_action :set_post, only: [:edit, :update, :destroy, :add_comment, :update_comment]
   before_filter :sanitize_comment_params, only: :add_comment
+
+  respond_to :js, only: [:add_comment, :update_comment]
 
   def index
     @posts_for_react = Post.original.published.map{|p| p.for_react.merge(showUrl: post_path(p)).as_json }
@@ -32,15 +34,15 @@ class PostsController < ApplicationController
   end
 
   def add_comment
-    @post.comments.build comment_params.merge(slug: "comment-#{Time.now.to_i}", published: true)
-    @post.save
-    redirect_to @post
+    @comment = @post.comments.build(comment_params.merge(slug: "comment-#{Time.now.to_i}", published: true))
+    @comment.save
+    @new_comments_count = @post.comments.published.count
   end
 
   def update_comment
-    comment = Post.find(params[:comment_id])
-    comment.update(published: false)
-    redirect_to comment.parent_post
+    @comment = Post.find(params[:comment_id])
+    @comment.update(published: false)
+    @new_comments_count = @post.comments.published.count
   end
 
   def update
@@ -77,7 +79,6 @@ class PostsController < ApplicationController
     end
 
     def sanitize_comment_params
-      params[:comment][:parent_post_id] = params[:comment][:parent_post_id].to_i
       params[:comment][:author_id] = params[:comment][:author_id].to_i
     end
 end

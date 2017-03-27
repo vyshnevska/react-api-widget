@@ -13,11 +13,12 @@
   = image_tag image_urls[0]
 
 #comments
-  h2
+  h2#comments_counter
     = "#{@post.comments.published.count} Comments"
 
   - @post.comments.published.each do |comment|
     = render '/comments/comment', comment: comment
+.new-comment
   h3 Reply to thread
   = render "comments/form"
 

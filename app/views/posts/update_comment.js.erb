@@ -1,0 +1,2 @@
+$("#<%= escape_javascript(@comment.slug) %>").html('Comment was removed!');
+$('#comments_counter').html("<%= @new_comments_count %> Comments"); // update comments counter
