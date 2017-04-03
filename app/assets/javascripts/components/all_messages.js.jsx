@@ -10,6 +10,7 @@ var AllMessages = React.createClass({
             publisherName  = 'publisher'
             sentAt         = {message.createdAt}
             status         = {message.status}
+            isLong         = {message.content.length > 64 ? true : false}
           />
         </div>
       )

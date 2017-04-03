@@ -3,8 +3,13 @@ var MessageEntry = React.createClass({
     return { status: this.props.status }
   },
 
-  markAsRead(){
-    currentMessage = this;
+  readFullMessage(event){
+    _current = this;
+
+    // expand message content
+    if(_current.props.isLong ){
+      event.target.offsetParent.classList.toggle('expanded')
+    }
 
     var newMessageStatus = 'read',
         ajaxOptions = {
@@ -16,14 +21,14 @@ var MessageEntry = React.createClass({
           data: JSON.stringify({ message: { status: newMessageStatus } })
         };
 
-    if(currentMessage.state.status != newMessageStatus){
-      $.ajax(ajaxOptions).done(function(){ currentMessage.setState({ status: newMessageStatus })});
+    if(_current.state.status != newMessageStatus){
+      $.ajax(ajaxOptions).done(function(){ _current.setState({ status: newMessageStatus })});
     }
   },
 
   render: function() {
     return(
-      <li id={this.props.id} className={this.state.status} onClick={this.markAsRead}>
+      <li id={this.props.id} className={this.state.status} onClick={this.readFullMessage}>
         <div className='message-entry-wrapper'>
           <div className='item'>
             <div className='vertical-wrapper'>
@@ -31,7 +36,7 @@ var MessageEntry = React.createClass({
             </div>
           </div>
           <div className='item'>
-            <div className='message-content'> {CustomMethods.truncate(this.props.message, 65)} </div>
+            <div className='message-content'> {this.props.message} </div>
             <div className='message-footer'>
               <div className='column'>{'from ' + this.props.publisherName}</div>
               <div className='column'>{LocalTime.relativeTimeAgo(new Date(this.props.sentAt))}</div>

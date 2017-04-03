@@ -4,6 +4,11 @@ var NewMessage = React.createClass({
         channel_id   = this.refs.channel_id.value,
         currentProps = this.props;
 
+    // Don't allow an empty messages
+    if (content.length <= 0){
+      return false;
+    }
+
     var ajaxOptions = {
           url: '/api/v1/messages',
           type: 'POST',
@@ -19,7 +24,7 @@ var NewMessage = React.createClass({
 
     // Initiate the AJAX request to messages#create
     $.ajax(ajaxOptions)
-      .done(function(response){ currentProps.sendNewMessageHandler(response); })
+      .done(function(response){ currentProps.sendNewMessageHandler(response);})
       .fail(AjaxCustomMethods.handleError);
 
     this.toggleSection(); // hide new message section

@@ -1,47 +1,41 @@
 .collapse-body
-  .thumbnail
-    display: inline-block
-    background: $middle-light-grey
-    color: $white
-    text-align: center
-    text-decoration: none
-    -webkit-transition: background 0.3s linear 0s
-    -moz-transition: background 0.3s linear 0s
-    -ms-transition: background 0.3s linear 0s
-    -o-transition: background 0.3s linear 0s
-    transition: background 0.3s linear 0s
-    img
-      width: 30px
-      height: 30px
 
-  .message-entry-wrapper
-    display: flex
-    height: 70px
+  li
+    &.expanded
+      .message-entry-wrapper
+        height: auto!important
 
-    .item
-      .vertical-wrapper
-        height: 100%
-        width: 50px
-        display: flex
-        align-items: center
-        justify-content: center
+      .message-content
+        height: auto!important
 
-      h5
-        width: 100%
-
-    .item:nth-child(2)
-      flex-grow: 3
-
-    .message-content
-      +default-text-small
-      padding: 8px
-      overflow: hidden
-      height: 45px
-
-    .message-footer
+    .message-entry-wrapper
       display: flex
-      text-align: center
-      +default-text-tiny
+      height: 70px
 
-      .column
-        flex-grow: 1
+      .item
+        .vertical-wrapper
+          height: 100%
+          width: 50px
+          display: flex
+          align-items: center
+          justify-content: center
+
+        h5
+          width: 100%
+
+      .item:nth-child(2)
+        flex-grow: 3
+
+      .message-content
+        +default-text-small
+        padding: 8px
+        overflow: hidden
+        height: 45px
+
+      .message-footer
+        display: flex
+        text-align: center
+        +default-text-tiny
+
+        .column
+          flex-grow: 1

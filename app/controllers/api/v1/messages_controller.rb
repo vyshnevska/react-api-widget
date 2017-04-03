@@ -3,13 +3,13 @@ class Api::V1::MessagesController < Api::V1::BaseController
 
   def index
     respond_with({
-      messages: Message.all.order(created_at: :desc).map(&:for_react),
+      messages: Message.all.order(status: :desc, created_at: :desc).map(&:for_react),
       channels: Channel.all.map{|channel| { key: channel.id, label: channel.name } }
     })
   end
 
   def create
-    respond_with :api, :v1, Message.create(message_params)
+    respond_with( Message.create(message_params).for_react, location: api_v1_messages_path)
   end
 
   def update
