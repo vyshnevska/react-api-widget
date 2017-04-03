@@ -19,10 +19,9 @@
     height: 70px
 
     .item
-      flex-grow: 1
-
       .vertical-wrapper
         height: 100%
+        width: 50px
         display: flex
         align-items: center
         justify-content: center
@@ -32,3 +31,17 @@
 
     .item:nth-child(2)
       flex-grow: 3
+
+    .message-content
+      +default-text-small
+      padding: 8px
+      overflow: hidden
+      height: 45px
+
+    .message-footer
+      display: flex
+      text-align: center
+      +default-text-tiny
+
+      .column
+        flex-grow: 1

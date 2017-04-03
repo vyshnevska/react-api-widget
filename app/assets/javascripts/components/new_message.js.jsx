@@ -14,9 +14,12 @@ var NewMessage = React.createClass({
         };
     console.log('The content value is ' + content + 'the channel_id value is ' + channel_id);
 
+    // reset textarea value
+    this.refs.content.value = '';
+
     // Initiate the AJAX request to messages#create
     $.ajax(ajaxOptions)
-      .done(function(response){currentProps.sendNewMessageHandler(response);})
+      .done(function(response){ currentProps.sendNewMessageHandler(response); })
       .fail(AjaxCustomMethods.handleError);
 
     this.toggleSection(); // hide new message section

@@ -3,7 +3,7 @@ class Api::V1::MessagesController < Api::V1::BaseController
 
   def index
     respond_with({
-      messages: Message.all.order(created_at: :desc),
+      messages: Message.all.order(created_at: :desc).map(&:for_react),
       channels: Channel.all.map{|channel| { key: channel.id, label: channel.name } }
     })
   end

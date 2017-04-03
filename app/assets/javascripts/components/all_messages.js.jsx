@@ -7,9 +7,8 @@ var AllMessages = React.createClass({
           <MessageEntry
             id             = {message.id}
             message        = {message.content}
-            channel_slug   = 'MK'
-            publisher_name = 'publisher'
-            sent_date      = {message.created_at}
+            publisherName  = 'publisher'
+            sentAt         = {message.createdAt}
             status         = {message.status}
           />
         </div>

@@ -31,9 +31,11 @@ var MessageEntry = React.createClass({
             </div>
           </div>
           <div className='item'>
-            <h5 className='sub-header'>{'from ' + this.props.publisher_name}</h5>
-            <span className='normal-text'> {this.props.message} </span>
-            <span className='normal-text'> {this.props.sent_date} </span>
+            <div className='message-content'> {CustomMethods.truncate(this.props.message, 65)} </div>
+            <div className='message-footer'>
+              <div className='column'>{'from ' + this.props.publisherName}</div>
+              <div className='column'>{LocalTime.relativeTimeAgo(new Date(this.props.sentAt))}</div>
+            </div>
           </div>
         </div>
       </li>

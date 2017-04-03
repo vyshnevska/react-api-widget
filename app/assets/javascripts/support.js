@@ -23,8 +23,12 @@ var AjaxCustomMethods = {
 
 var CustomMethods = {
   truncate: function(text, size) {
-    size = (typeof b !== 'undefined') ?  size : 20;
-    return text.substring(0, parseInt(size)) + '...';
+    size = (typeof size !== 'undefined') ?  size : 20;
+    if(text.length > size){
+      return text.substring(0, parseInt(size)) + '...';
+    } else {
+      return text;
+    }
   }
 };
 
