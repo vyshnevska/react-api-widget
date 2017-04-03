@@ -1,10 +1,10 @@
 .new-message-container
   display: flex
   flex-direction: column
-  height: 55px
+  height: 40px
 
   &.expanded
-    height: 135px
+    height: 117px
 
     .new_message_form
       max-width: 100%
@@ -15,20 +15,18 @@
   max-width: 0px
   transition: all .5s ease
   position: absolute
-  left: 5px
-  top: 20px
+  left: 0
+  top: 38px
   box-sizing: border-box
   opacity: 0
 
-  select
-    margin-top: 20px
-  textarea
-    width: 99%
-  select, button
-    width: 98%
+  button
+    width: 100%
+    margin-top: -10px
 
 .expand-trigger
-  margin-left: 5px
+  margin: 0
+  padding: 0
   input
     width: 90%
   img

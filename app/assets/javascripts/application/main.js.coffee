@@ -9,3 +9,9 @@ $(document).ready ->
 
   if $('.slider-container').length
     new Main.ImageSlider().init()
+
+  $(document).bind 'click', ->
+    if $('.new-message-container.expanded').length
+      # if don't click inside new message form
+      if event.target.offsetParent &&  event.target.offsetParent.className != 'new_message_form'
+        $('.new-message-container').removeClass('expanded')
