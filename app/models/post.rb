@@ -26,10 +26,10 @@ class Post < ActiveRecord::Base
       hash[:"#{attr}"] = self.send(attr); hash
     }
 
-    result[:createdAt] = self.created_at.strftime("Created on %d/%m/%y")
+    result[:publishedAt] = self.created_at.to_f * 1000
     result[:topImageUrl] = self.top_image.url(:small)
-
     result[:author_name] = self.author.try(:name) || 'unknown'
+
     if self.author && self.author.channel
       result[:channel] = {
         name:   self.author.channel.name,

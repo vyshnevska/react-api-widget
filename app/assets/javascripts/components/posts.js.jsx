@@ -24,7 +24,7 @@ var Posts = React.createClass({
                 <h2>
                   <a href={post.showUrl}>{post.slug}</a>
                 </h2>
-                <p className='published-date'> {post.createdAt} </p>
+                <p className='published-date'>{LocalTime.relativeTimeAgo(new Date(post.publishedAt))}</p>
               </div>
             </div>
           )

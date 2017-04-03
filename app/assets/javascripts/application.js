@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require react
 //= require react_ujs
+//= require local_time
 //= require namespace
 //= require_tree ./application/modules
 //= require application/main

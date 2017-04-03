@@ -79,7 +79,7 @@ var Post = React.createClass({
             {this._renderChannelBtn()}
             {this._renderCreateChannelBtn()}
             <div>Founder, Amazing Journalist and Great Author</div>
-            <div>{this.props.formatted_created_at}</div>
+            <div>{LocalTime.relativeTimeAgo(new Date(this.props.publishedAt))}</div>
           </div>
         </div>
       </div>
