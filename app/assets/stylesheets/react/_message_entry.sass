@@ -1,41 +1,60 @@
 .collapse-body
-
+  padding-right: 10px!important
   li
     &.expanded
       .message-entry-wrapper
         height: auto!important
 
-      .message-content
-        height: auto!important
+      .m-content-section
+        .content
+          height: auto!important
 
     .message-entry-wrapper
       display: flex
       height: 70px
 
       .item
-        .vertical-wrapper
-          height: 100%
-          width: 50px
-          display: flex
-          align-items: center
-          justify-content: center
+        flex-grow: 1
+        &.m-image-section
+          .vertical-wrapper
+            height: 100%
+            width: 50px
+            display: flex
+            align-items: center
+            justify-content: center
 
-        h5
-          width: 100%
+        &.m-content-section
+          .content
+            +default-text-small
+            padding: 8px
+            overflow: hidden
+            height: 45px
+          .footer
+            display: flex
+            text-align: center
+            +default-text-tiny
+
+            .as-column
+              flex-grow: 1
+
+        &.m-actions
+          width: 10px
+          background: $dark-grey
+          button
+            display: none
+            border: none
+
+            width: 50px!important
+            line-height: 12px
+            font-size: 12px
+            margin: 5px auto
+            &.as-coral
+              color: $white
+              background: $dark-coral
+
+          &.expanded
+            button
+              display: block
 
       .item:nth-child(2)
-        flex-grow: 3
-
-      .message-content
-        +default-text-small
-        padding: 8px
-        overflow: hidden
-        height: 45px
-
-      .message-footer
-        display: flex
-        text-align: center
-        +default-text-tiny
-
-        .column
-          flex-grow: 1
+        width: 240px

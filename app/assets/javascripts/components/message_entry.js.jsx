@@ -26,21 +26,44 @@ var MessageEntry = React.createClass({
     }
   },
 
+  hideMessage(event){
+  },
+
+  _renderActionOverlay(event){
+    if (!event.target.classList.contains('expanded')){
+      event.target.classList.add('expanded');
+      $(event.target).animate({duration: 350, width: '100px'}); //, opacity: 0.1
+      console.log('on hover')
+    }
+  },
+
+  _hideActionOverlay(event){
+    if (event.target.classList.contains('expanded')){
+      event.target.classList.remove('expanded');
+      $(event.target).animate({duration: 350, width: '10px', opacity: 1});
+      console.log('on leave')
+    }
+  },
+
   render: function() {
     return(
       <li id={this.props.id} className={this.state.status} onClick={this.readFullMessage}>
         <div className='message-entry-wrapper'>
-          <div className='item'>
+          <div className='item m-image-section'>
             <div className='vertical-wrapper'>
               <img src='assets/placeholders/channel.png' className='m-tool-icon'/>
             </div>
           </div>
-          <div className='item'>
-            <div className='message-content'> {this.props.message} </div>
-            <div className='message-footer'>
-              <div className='column'>{'from ' + this.props.publisherName}</div>
-              <div className='column'>{LocalTime.relativeTimeAgo(new Date(this.props.sentAt))}</div>
+          <div className='item m-content-section'>
+            <div className='content'> {this.props.message} </div>
+            <div className='footer'>
+              <div className='as-column'>{'from ' + this.props.publisherName}</div>
+              <div className='as-column'>{LocalTime.relativeTimeAgo(new Date(this.props.sentAt))}</div>
             </div>
+          </div>
+          <div className='item m-actions' onMouseOver={this._renderActionOverlay} onMouseLeave={this._hideActionOverlay}>
+            <button onClick={this.readFullMessage} className='btn as-coral'>Read</button>
+            <button onClick={this.hideMessage} className='btn btn-default'>Hide</button>
           </div>
         </div>
       </li>
