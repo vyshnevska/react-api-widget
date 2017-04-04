@@ -2,9 +2,10 @@ class Api::V1::MessagesController < Api::V1::BaseController
   skip_before_action :authenticate_user!
 
   def index
+    user_messages = current_user.messages_feed.not_hidden.order(status: :desc, created_at: :desc).map(&:for_react)
     respond_with({
-      messages: Message.not_hidden.order(status: :desc, created_at: :desc).map(&:for_react),
-      channels: Channel.all.map{|channel| { key: channel.id, label: channel.name } }
+      messages: user_messages,
+      channels: ( current_user.channel ? [{ key: current_user.channel.id, label: current_user.channel.name }] : []) #Channel.all.map{|channel| { key: channel.id, label: channel.name } }
     })
   end
 

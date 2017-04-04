@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326094330) do
+ActiveRecord::Schema.define(version: 20170404104733) do
 
   create_table "channels", force: :cascade do |t|
     t.string   "name"
     t.string   "type"
     t.boolean  "active"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "user_id"
+    t.integer  "subscriptions_count"
   end
 
   add_index "channels", ["user_id"], name: "index_channels_on_user_id"
@@ -50,6 +51,14 @@ ActiveRecord::Schema.define(version: 20170326094330) do
 
   add_index "posts", ["author_id"], name: "index_posts_on_author_id"
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "channel_id"
+    t.integer  "user_id"
+    t.integer  "messages_count"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -67,6 +76,7 @@ ActiveRecord::Schema.define(version: 20170326094330) do
     t.datetime "token_created_at"
     t.string   "username"
     t.string   "avatar"
+    t.integer  "subscriptions_count"
   end
 
   add_index "users", ["auth_token", "token_created_at"], name: "index_users_on_auth_token_and_token_created_at"

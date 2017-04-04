@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   has_many :posts
-  has_one :channel
-  has_many :messages, through: :channel
+  has_one  :channel
+  has_many :own_messages, through: :channel, source: :messages
+  has_many :subscriptions, dependent: :destroy
+  has_many :messages_feed, through: :subscriptions, source: :user, class_name: 'Message'
 
   before_create :set_auth_token!
 

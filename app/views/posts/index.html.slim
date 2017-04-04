@@ -8,4 +8,4 @@
 
   .col-sm-4
     - if current_user
-      = react_component 'Messanger', { data: { messages_count: current_user.messages.count }, is_rendered_for: current_user.id }
+      = react_component 'Messanger', { data: { messages_count: current_user.messages_feed.count }, is_rendered_for: current_user.id }
