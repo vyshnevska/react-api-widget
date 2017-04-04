@@ -1,12 +1,15 @@
 class Message < ActiveRecord::Base
   belongs_to :channel
 
-  before_create :set_status
+  ALLOWED_STATUSES = %w(read unread hidden)
 
-  def set_status
-    self.status = 'unread'
+  validates :status, presence: true , inclusion: ALLOWED_STATUSES
+
+  scope 'not_hidden', -> { where.not(status: 'hidden') }
+
+  after_initialize do
+    self.status ||= 'unread'
   end
-
 
   def for_react
     result = %i(id content status).inject({}){ |hash, attr|

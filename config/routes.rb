@@ -10,12 +10,13 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1, defaults: { format: :json } do
-      resources :messages
-      resources :subscriptions, only: :create do
-        collection do
-          post :create_channel
-        end
+
+      resources :messages, only: [:create, :update, :index]
+
+      resources :subscriptions, only: :index do
+        collection { post :create_channel }
       end
+
       as :user do
         post   "/sign-in"  => "sessions#create"
         delete "/sign-out" => "sessions#destroy"
