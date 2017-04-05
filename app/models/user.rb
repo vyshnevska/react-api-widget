@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   has_many :messages_feed, through: :subscriptions, source: :user, class_name: 'Message'
 
+  scope :sorted_messages_for, -> (user) { user.messages_feed.not_hidden.order(status: :desc, created_at: :desc) }
+  scope :sorted_messages_by,  -> (user) { user.own_messages.not_hidden.order(status: :desc, created_at: :desc) }
+
   before_create :set_auth_token!
 
   def generate_auth_token_and_save!

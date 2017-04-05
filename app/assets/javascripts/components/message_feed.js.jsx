@@ -2,11 +2,22 @@ var MessageFeed = React.createClass({
   // ---- main methods
 
   getInitialState() {
-    return { messages: [], channelsSelectOptions: [], isAuthorized: this.props.isAuthorized }
+    return {
+      own_messages: [],
+      my_feed: [],
+      channelsSelectOptions: [],
+      isAuthorized: this.props.isAuthorized,
+      has_channel: false
+    }
   },
 
   populateData(data){
-    this.setState({ messages: data.messages, channelsSelectOptions: data.channels });
+    this.setState({
+      own_messages: data.messages.from_me,
+      my_feed:      data.messages.to_me,
+      has_channel:  data.channels.length > 0,
+      channelsSelectOptions: data.channels
+    });
   },
 
   componentDidMount() {
@@ -23,22 +34,40 @@ var MessageFeed = React.createClass({
   },
 
   handleSubmit(message) {
-    this.state.messages.unshift(message); // adds a new message at the biginning
-    this.setState({ messages: this.state.messages });
+    this.state.own_messages.unshift(message); // adds a new message at the biginning
+    this.setState({ own_messages: this.state.own_messages });
     console.log('message was sent succesfully!', message);
   },
 
+  _renderMiddleSection(){
+    if (this.state.has_channel){
+      return(
+        <NewMessage
+          sendNewMessageHandler={this.handleSubmit}
+          channelsSelectOptions={this.state.channelsSelectOptions}
+        />
+      )
+    } else {
+      return(
+        <div className='channels'>
+          <div className='channel-item'><img src='assets/placeholders/channel.png' className='m-tool-icon'/></div>
+          <div className='channel-item'><img src='assets/placeholders/channel.png' className='m-tool-icon'/></div>
+          <div className='channel-item'><img src='assets/placeholders/channel.png' className='m-tool-icon'/></div>
+          <div className='channel-item'><img src='assets/placeholders/channel.png' className='m-tool-icon'/></div>
+        </div>
+      )
+    }
+  },
 
   render: function() {
     if(this.state.isAuthorized){
       return(
         <div className='body'>
-          <NewMessage
-            sendNewMessageHandler={this.handleSubmit}
-            channelsSelectOptions={this.state.channelsSelectOptions}
-          />
+          {this._renderMiddleSection()}
           <a className='section-separator'> </a>
-          <AllMessages messages={this.state.messages}/>
+          <AllMessages
+            own_messages={this.state.own_messages}
+            my_feed={this.state.my_feed} />
         </div>)
     } else {
       return(
@@ -49,6 +78,8 @@ var MessageFeed = React.createClass({
   }
 });
 MessageFeed.propTypes = {
-  messages: React.PropTypes.array,
-  channelsSelectOptions: React.PropTypes.array
+  own_messages: React.PropTypes.array,
+  my_feed: React.PropTypes.array,
+  channelsSelectOptions: React.PropTypes.array,
+  has_channel: React.PropTypes.bool
 };

@@ -16,22 +16,33 @@ var Post = React.createClass({
   },
 
   // Ajax calls
-  // followAuthor(){
-
-  // },
+  followAuthor(){
+    var ajaxOptions = {
+      url: '/api/v1/subscriptions',
+      type: 'POST',
+      dataType: 'json',
+      headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() },
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify({ user_id: this.props.is_rendered_for, channel_id: this.state.channel.id })
+    };
+    debugger
+    $.ajax(ajaxOptions).done(function(response){
+      debugger
+    });
+  },
 
   createChannel(){
     var author_id   = this.props.author_id,
         currentPost = this;
 
     var ajaxOptions = {
-          url: '/api/v1/subscriptions/create_channel',
-          type: 'POST',
-          dataType: 'json',
-          headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() },
-          contentType: "application/json; charset=utf-8",
-          data: JSON.stringify({ channel: { user_id: author_id, name: 'Random Name', active: true } })
-        };
+        url: '/api/v1/subscriptions/create_channel',
+        type: 'POST',
+        dataType: 'json',
+        headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() },
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ channel: { user_id: author_id, name: 'Random Name', active: true } })
+      };
 
     $.ajax(ajaxOptions).done(function(response){
       newState = {

@@ -32,6 +32,7 @@ class Post < ActiveRecord::Base
 
     if self.author && self.author.channel
       result[:channel] = {
+        id:     self.author.channel.id,
         name:   self.author.channel.name,
         active: self.author.channel.active
       }
