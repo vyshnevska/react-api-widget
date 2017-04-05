@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     self.username || "user-000#{self.id}"
   end
 
+  def owner_of? post
+    post.author_id == self.id
+  end
+
   private
     def set_auth_token!
       self.auth_token ||= generate_auth_token

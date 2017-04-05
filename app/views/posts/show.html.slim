@@ -18,13 +18,17 @@
 
   - @post.comments.published.each do |comment|
     = render '/comments/comment', comment: comment
-.new-comment
-  h3 Reply to thread
-  = render "comments/form"
+- if current_user
+  .new-comment
+    h3 Reply to thread
+    = render "comments/form"
+- else
+  h5 Please log in to leave a comment
+
 
 .clearfix
-
-.btn-group role='group'
-  = link_to 'Edit', edit_post_path(@post), class: "btn btn-default"
-  = link_to "Delete", post_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"
-  = link_to 'Back', posts_path, class: "btn btn-default"
+- if current_user && current_user.owner_of?(@post)
+  .btn-group role='group'
+    = link_to 'Edit', edit_post_path(@post), class: "btn btn-default"
+    = link_to "Delete", post_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"
+    = link_to 'Back', posts_path, class: "btn btn-default"
