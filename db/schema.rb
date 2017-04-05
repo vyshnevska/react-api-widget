@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20170404104733) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "channels", force: :cascade do |t|
     t.string   "name"
     t.string   "type"
@@ -24,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170404104733) do
     t.integer  "subscriptions_count"
   end
 
-  add_index "channels", ["user_id"], name: "index_channels_on_user_id"
+  add_index "channels", ["user_id"], name: "index_channels_on_user_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.text     "content"
@@ -49,7 +52,7 @@ ActiveRecord::Schema.define(version: 20170404104733) do
     t.string   "image_2"
   end
 
-  add_index "posts", ["author_id"], name: "index_posts_on_author_id"
+  add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "channel_id"
@@ -79,9 +82,9 @@ ActiveRecord::Schema.define(version: 20170404104733) do
     t.integer  "subscriptions_count"
   end
 
-  add_index "users", ["auth_token", "token_created_at"], name: "index_users_on_auth_token_and_token_created_at"
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["auth_token", "token_created_at"], name: "index_users_on_auth_token_and_token_created_at", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end
