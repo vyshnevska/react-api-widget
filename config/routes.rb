@@ -8,9 +8,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  namespace :api do
+  namespace :api, path: '/', constraints: { subdomain: 'api' } do
     namespace :v1, defaults: { format: :json } do
-
       resources :messages, only: [:create, :update, :index]
 
       resources :subscriptions, only: [:index, :create] do
@@ -23,8 +22,8 @@ Rails.application.routes.draw do
       end
     end
   end
-  root to: 'posts#index'
 
+  root to: 'posts#index'
 
   slugs = %w|root|
   resource :posts, only: [:show], constraints: {id: Regexp.new(slugs.join('|'))}
