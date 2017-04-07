@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     delete "/sign-out" => "sessions#destroy"
   end
 
-  namespace :api, path: '/', constraints: { subdomain: 'api' } do
+  namespace :api do #, path: '/', constraints: { subdomain: 'api' } do
     namespace :v1, defaults: { format: :json } do
       resources :messages, only: [:create, :update, :index]
 

@@ -22,10 +22,10 @@ var MessageFeed = React.createClass({
 
   componentDidMount() {
     var ajaxOptions = {
-      url: 'http://api.lvh.me:3000/v1/messages.json',
-      type: 'GET',
-      dataType: 'jsonp',
-      headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() },
+      url:         'api/v1/messages.json',
+      type:        'GET',
+      dataType:    'json',
+      headers:     {"Authorization": "Token token=" + AjaxCustomMethods.getAuthToken()},
       contentType: "application/json; charset=utf-8"
     };
 

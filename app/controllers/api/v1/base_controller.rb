@@ -15,6 +15,9 @@ class Api::V1::BaseController < ApplicationController
     authenticate_with_http_token do |token, options|
       User.where(auth_token: token).where("token_created_at >= ?", 1.month.ago).first
     end
+    # hotfix of jsonp headers issue
+    # token = params[:token]
+    # User.where(auth_token: token).where("token_created_at >= ?", 1.month.ago).first
   end
 
   def render_unauthorized
