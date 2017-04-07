@@ -1,19 +1,22 @@
 var Post = React.createClass({
   getInitialState() {
     return ({
-      clicked: false,
-      has_channel: !!this.props.channel,
+      hasChannel:   !!this.props.channel,
       isSubscribed: this.props.isSubscribed,
-      channel: this.props.channel
+      channel:      this.props.channel
     })
   },
 
+  loggedUserPresent(){
+    return this.props.loggedUser !== null;
+  },
+
   isRenderedForAuthor(){
-    return(typeof this.props.current_user.id !== 'undefined' && this.props.author_id == this.props.current_user.id);
+    return this.loggedUserPresent() && this.props.author.id == this.props.loggedUser.id;
   },
 
   channelIsActive(){
-    return(this.state.has_channel && this.state.channel.active);
+    return this.state.hasChannel && this.state.channel.active;
   },
 
   // Ajax calls
@@ -25,7 +28,7 @@ var Post = React.createClass({
           dataType: 'json',
           headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() },
           contentType: "application/json; charset=utf-8",
-          data: JSON.stringify({ user_id: this.props.current_user.id, channel_id: this.state.channel.id })
+          data: JSON.stringify({ user_id: this.props.loggedUser.id, channel_id: this.state.channel.id })
         };
 
     $.ajax(ajaxOptions).done(function(response){
@@ -35,7 +38,7 @@ var Post = React.createClass({
   },
 
   createChannel(){
-    var author_id   = this.props.author_id,
+    var author_id   = this.props.author.id,
         currentPost = this;
 
     var ajaxOptions = {
@@ -44,12 +47,12 @@ var Post = React.createClass({
         dataType: 'json',
         headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() },
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ channel: { user_id: author_id, name: 'Random Name', active: true } })
+        data: JSON.stringify({ channel: { user_id: author.id, name: 'Random Name', active: true } })
       };
 
     $.ajax(ajaxOptions).done(function(response){
       newState = {
-        has_channel: true,
+        hasChannel: true,
         channel: response.channel
       }
       currentPost.setState(newState);
@@ -60,7 +63,7 @@ var Post = React.createClass({
   _renderChannelBtn(){
     if (this.state.isSubscribed){
       return(<span>{'Subscribed to ' + this.state.channel.name}</span>)
-    } else if (this.channelIsActive()){
+    } else if (this.channelIsActive && this.loggedUserPresent()){
       return(
         <span>
           <button className='as-follow' onClick={this.followAuthor}>
@@ -72,7 +75,7 @@ var Post = React.createClass({
   },
 
   _renderCreateChannelBtn(){
-    if (this.isRenderedForAuthor() && !this.state.has_channel){
+    if (this.isRenderedForAuthor() && !this.state.hasChannel){
       return(
         <span>
           <button className='as-follow' onClick={this.createChannel}>
@@ -91,7 +94,7 @@ var Post = React.createClass({
             <img src="/assets/placeholders/author.png" />
           </div>
           <div className='text-content'>
-            <a> {this.props.author_name}</a>
+            <a> {this.props.author.name}</a>
             {this._renderChannelBtn()}
             {this._renderCreateChannelBtn()}
             <div>Founder, Amazing Journalist and Great Author</div>
@@ -102,26 +105,12 @@ var Post = React.createClass({
     )
   },
 
-  _showMe(){
-    var newState = {};
-    newState['clicked'] = true;
-    this.setState(newState);
-  },
-
   render: function() {
-    commentsSection = <a onClick={this._showMe}>Show</a>;
-    if(this.state.clicked){
-      commentsSection = <div>
-        <span> {this.props.published} </span>
-        <span> {this.props.slug} </span>
-      </div>
-    }
     return (
       <div>
         {this._renderAuthorLine()}
         <h3>{this.props.title}</h3>
         <p>{this.props.body}</p>
-        {commentsSection}
       </div>
     )
   }

@@ -25,13 +25,15 @@ class Post < ActiveRecord::Base
   end
 
   def for_react(current_user = nil)
-    result = %i(slug body published title author_id).inject({}){ |hash, attr|
+    result = %i(slug body published title).inject({}){ |hash, attr|
       hash[:"#{attr}"] = self.send(attr); hash
     }
-
     result[:publishedAt]  = self.created_at.to_f * 1000
     result[:topImageUrl]  = self.top_image.url(:small)
-    result[:author_name]  = self.author.try(:name) || 'unknown'
+    result[:author]       = {
+                              name: self.author&.name || 'unknown',
+                              id: self.author_id
+                            }
     result[:isSubscribed] = current_user ? self.subscriptions.map(&:user_id).include?(current_user.id) : false
 
     if self.author && self.author.channel
@@ -43,6 +45,7 @@ class Post < ActiveRecord::Base
     else
       result[:channel] = nil
     end
+
     result
   end
 
