@@ -1,4 +1,6 @@
 class Api::V1::BaseController < ApplicationController
+  include Authenticable
+
   respond_to :json
 
   before_action :authenticate!

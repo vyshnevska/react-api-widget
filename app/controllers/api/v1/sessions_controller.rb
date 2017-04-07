@@ -1,13 +1,15 @@
 #### Example of usage:
-# # log-in and get valid token
-# curl -H "Content-Type: application/json" -X POST -d '{"user_login": {"email":"vyshnevska.n@gmail.com","password":"12345678"} }' http://api.lvh.me:3000/v1/sign-in.json
-# {"auth_token":"ce39f096213278f03127fb350fca9d48"}
-# # get messages
-# curl -H "Authorization: Token token=4d9834d79d8fd98eac89bb7a772601ad" http://api.lvh.me:3000/v1/messages.json
-# # fails to get messages
-# curl -H "Authorization: Token token=fake" http://api.lvh.me:3000/v1/messages.json
-# #sign out
-# curl -X DELETE -H "Authorization: Token token=20a1621f19c20056bf0f3087ce9d6970" http://api.lvh.me:3000/v1/sign-out.json
+## (1) nano /etc/hosts
+# 127.0.0.1 sub.virtual.local
+
+## (2) Log in and get valid token
+# curl -H "Content-Type: application/json" -X POST -d '{"user_login": {"email":"vyshnevska.n@gmail.com","password":"12345678"} }' api.virtual.local/v1/sign-in.json
+
+## (3) All Messages
+# curl -H "Authorization: Token token=4d9834d79d8fd98eac89bb7a772601ad" api.virtual.local/v1/messages.json
+
+## (4) Sign out
+# curl -X DELETE -H "Authorization: Token token=4d9834d79d8fd98eac89bb7a772601ad" api.virtual.local/v1/sign-out.json
 
 class Api::V1::SessionsController < Api::V1::BaseController
   skip_before_action :authenticate!, only: [:create]      # use token based auth
