@@ -1,20 +1,16 @@
 var Header = React.createClass({
-  getInitialState() {
-    return { isAuthorized: this.props.isAuthorized }
-  },
-
   _renderUserDetails: function() {
     return (
       <div className='user-details'>
         <div>
-          <a href='link/to/user'>User Name</a>
+          <a href='link/to/user'>{this.props.current_user.name}</a>
         </div>
         <span className='more-details'>since 2016</span>
       </div>)
   },
 
   _renderUserStatistics: function() {
-    if(this.state.isAuthorized){
+    if(this.props.isAuthorized){
       return(
       <div className="user-statistics">
         <div className='item'>
@@ -23,14 +19,13 @@ var Header = React.createClass({
         </div>
         <div className='item'>
           <div>Channels</div>
-          <div>100</div>
+          <div>{this.props.current_user.subscriptions}</div>
         </div>
 
       </div>)
     } else {
       return null;
     }
-
   },
 
   render: function() {

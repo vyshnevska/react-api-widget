@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
     post.author_id == self.id
   end
 
+  def for_react
+    { id: self.id, name: self.name, subscriptions: self.subscriptions.count }
+  end
+
   private
     def set_auth_token!
       self.auth_token ||= generate_auth_token

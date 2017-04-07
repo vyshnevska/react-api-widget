@@ -1,4 +1,4 @@
-= react_component 'Post', @post.for_react.merge(is_rendered_for: current_user.try(:id)).as_json
+= react_component 'Post', @post.for_react.merge(current_user: current_user&.for_react).as_json
 
 - image_urls = %w(top_image image_1 image_2).inject([]){ |arr, image_type| arr << @post.send(image_type).url(:medium); arr.compact; }
 
