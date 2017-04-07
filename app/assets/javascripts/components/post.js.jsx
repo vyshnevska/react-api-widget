@@ -3,6 +3,7 @@ var Post = React.createClass({
     return ({
       clicked: false,
       has_channel: !!this.props.channel,
+      isSubscribed: this.props.isSubscribed,
       channel: this.props.channel
     })
   },
@@ -17,18 +18,19 @@ var Post = React.createClass({
 
   // Ajax calls
   followAuthor(){
-    var ajaxOptions = {
-      url: '/api.virtual.local:3000/v1/subscriptions',
-      type: 'POST',
-      subdomain: 'api',
-      dataType: 'json',
-      headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() },
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify({ user_id: this.props.current_user.id, channel_id: this.state.channel.id })
-    };
+    var currentPost = this,
+        ajaxOptions = {
+          url: '/api/v1/subscriptions.json',
+          type: 'POST',
+          dataType: 'json',
+          headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() },
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify({ user_id: this.props.current_user.id, channel_id: this.state.channel.id })
+        };
 
     $.ajax(ajaxOptions).done(function(response){
-      // TODO
+      newState = { isSubscribed: true }
+      currentPost.setState(newState);
     });
   },
 
@@ -37,7 +39,7 @@ var Post = React.createClass({
         currentPost = this;
 
     var ajaxOptions = {
-        url: '/api.virtual.local:3000/api/v1/subscriptions/create_channel',
+        url: '/api/v1/subscriptions/create_channel.json',
         type: 'POST',
         dataType: 'json',
         headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() },
@@ -56,7 +58,9 @@ var Post = React.createClass({
   ////
 
   _renderChannelBtn(){
-    if (this.channelIsActive()){
+    if (this.state.isSubscribed){
+      return(<span>{'Subscribed to ' + this.state.channel.name}</span>)
+    } else if (this.channelIsActive()){
       return(
         <span>
           <button className='as-follow' onClick={this.followAuthor}>

@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   has_many :comments, class_name: 'Post', foreign_key: :parent_post_id
   has_many :replies, class_name: 'Post', through: :comments, source: :comments
 
+
   belongs_to :parent_post, class_name: 'Post'
 
   mount_uploader :top_image, ImageUploader
@@ -17,18 +18,21 @@ class Post < ActiveRecord::Base
 
   belongs_to :author, class_name: 'User', foreign_key: :author_id
 
+  has_many :subscriptions, through: :author, inverse_of: :user
+
   def to_param
     slug
   end
 
-  def for_react
+  def for_react(current_user = nil)
     result = %i(slug body published title author_id).inject({}){ |hash, attr|
       hash[:"#{attr}"] = self.send(attr); hash
     }
 
-    result[:publishedAt] = self.created_at.to_f * 1000
-    result[:topImageUrl] = self.top_image.url(:small)
-    result[:author_name] = self.author.try(:name) || 'unknown'
+    result[:publishedAt]  = self.created_at.to_f * 1000
+    result[:topImageUrl]  = self.top_image.url(:small)
+    result[:author_name]  = self.author.try(:name) || 'unknown'
+    result[:isSubscribed] = current_user ? self.subscriptions.map(&:user_id).include?(current_user.id) : false
 
     if self.author && self.author.channel
       result[:channel] = {
