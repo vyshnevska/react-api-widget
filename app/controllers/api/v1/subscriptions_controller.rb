@@ -10,14 +10,12 @@ class Api::V1::SubscriptionsController < Api::V1::BaseController
     )
   end
 
-
-
   def create
     respond_with(Subscription.create(subscription_params), location: api_v1_subscriptions_path)
   end
 
   def channels
-    respond_with :api, :v1, Channel.active.by_popularity
+    respond_with :api, :v1, Channel.active.by_popularity.map(&:for_react)
   end
 
    private

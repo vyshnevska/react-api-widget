@@ -39,28 +39,21 @@ var MessageFeed = React.createClass({
     console.log('message was sent succesfully!', message);
   },
 
-  _renderMiddleSection(){
-    if (this.state.has_channel){
-      return(
-        <NewMessage
-          sendNewMessageHandler={this.handleSubmit}
-          channelsSelectOptions={this.state.channelsSelectOptions}
-        />
-      )
-    } else {
-      return( <AvailableChannels />)
-    }
-  },
-
   render: function() {
     if(this.state.isAuthorized){
       return(
         <div className='body'>
-          {this._renderMiddleSection()}
+          {this.state.has_channel &&
+            <NewMessage
+              sendNewMessageHandler={this.handleSubmit}
+              channelsSelectOptions={this.state.channelsSelectOptions}
+            />}
+          <a className='section-separator'> </a>
+          { <AvailableChannels />}
           <a className='section-separator'> </a>
           <AllMessages
-            own_messages={this.state.own_messages}
-            my_feed={this.state.my_feed} />
+            own_messages = {this.state.own_messages}
+            my_feed      = {this.state.my_feed} />
         </div>)
     } else {
       return(

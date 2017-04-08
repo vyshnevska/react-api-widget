@@ -45,7 +45,7 @@
   .field
     = f.label :author
     br/
-    = f.select :author_id, options_for_select(User.all.map{|u| [u.name, u.id]})
+    = f.select :author_id, options_for_select(author_select_options)
   .field
     = f.label :published
     br/

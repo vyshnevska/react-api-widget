@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   respond_to :js, only: [:add_comment, :update_comment]
 
   def index
-    @posts_for_react = Post.original.published.map{|p| p.for_react.merge(showUrl: post_path(p)).as_json }
+    @posts_for_react = Post.original.published.sort_by_recent.map{|p| p.for_react.merge(showUrl: post_path(p)).as_json }
   end
 
   def show

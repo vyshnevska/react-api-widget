@@ -11,8 +11,9 @@ class Post < ActiveRecord::Base
   mount_uploader :image_1, ImageUploader
   mount_uploader :image_2, ImageUploader
 
-  scope :published, -> { where(published: true) }
-  scope :original,  -> { where(parent_post_id: nil) }
+  scope :published,      -> { where(published: true) }
+  scope :original,       -> { where(parent_post_id: nil) }
+  scope :sort_by_recent, -> { order('updated_at desc') }
 
   REACT_ATTRIBUTES = %i(slug body published title author)
 
@@ -34,6 +35,7 @@ class Post < ActiveRecord::Base
                               name: self.author&.name || 'unknown',
                               id: self.author_id
                             }
+
     result[:isSubscribed] = current_user ? self.subscriptions.map(&:user_id).include?(current_user.id) : false
 
     if self.author && self.author.channel

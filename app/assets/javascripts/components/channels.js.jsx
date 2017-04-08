@@ -21,8 +21,9 @@ var AvailableChannels = React.createClass({
   render: function(){
     var channels = this.state.channels.map((channel) => {
       return(
-        <div key={channel.id} className='channel-item'><img src='assets/placeholders/channel.png' className='m-tool-icon'/>
-          {channel.name} by {channel.user_id}
+        <div key={channel.id} className='channel-item'>
+          <img src={channel.image_url} className='m-tool-icon'/>
+          <div>{channel.name}</div>
         </div>
       )
     });

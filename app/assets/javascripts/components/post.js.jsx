@@ -39,6 +39,7 @@ var Post = React.createClass({
 
   createChannel(){
     var author_id   = this.props.author.id,
+        author_name   = this.props.author.name,
         currentPost = this;
 
     var ajaxOptions = {
@@ -47,7 +48,7 @@ var Post = React.createClass({
         dataType: 'json',
         headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() },
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ channel: { user_id: author.id, name: 'Random Name', active: true } })
+        data: JSON.stringify({ channel: { user_id: author_id, name: 'By '+author_name, active: true } })
       };
 
     $.ajax(ajaxOptions).done(function(response){
@@ -63,7 +64,7 @@ var Post = React.createClass({
   _renderChannelBtn(){
     if (this.state.isSubscribed){
       return(<span>{'Subscribed to ' + this.state.channel.name}</span>)
-    } else if (this.channelIsActive && this.loggedUserPresent()){
+    } else if (this.channelIsActive() && this.loggedUserPresent()){
       return(
         <span>
           <button className='as-follow' onClick={this.followAuthor}>
