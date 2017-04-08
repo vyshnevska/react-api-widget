@@ -8,6 +8,9 @@
 ## (3) All Messages
 # curl -H "Authorization: Token token=a4cd90986337ece181960596d2b97421" localhost:3000/api/v1/messages.json
 
+## All Channels
+# curl -H "Authorization: Token token=a4cd90986337ece181960596d2b97421" localhost:3000/api/v1/subscriptions/channels.json
+
 ## (4) Sign out
 # curl -X DELETE -H "Authorization: Token token=4d9834d79d8fd98eac89bb7a772601ad" localhost:3000/api/v1/sign-out.json
 

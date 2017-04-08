@@ -48,14 +48,7 @@ var MessageFeed = React.createClass({
         />
       )
     } else {
-      return(
-        <div className='channels'>
-          <div className='channel-item'><img src='assets/placeholders/channel.png' className='m-tool-icon'/></div>
-          <div className='channel-item'><img src='assets/placeholders/channel.png' className='m-tool-icon'/></div>
-          <div className='channel-item'><img src='assets/placeholders/channel.png' className='m-tool-icon'/></div>
-          <div className='channel-item'><img src='assets/placeholders/channel.png' className='m-tool-icon'/></div>
-        </div>
-      )
+      return( <AvailableChannels />)
     }
   },
 

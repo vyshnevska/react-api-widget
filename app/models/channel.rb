@@ -5,4 +5,7 @@ class Channel < ActiveRecord::Base
 
   has_many :messages
   has_many :subscriptions, dependent: :destroy
+
+  scope :active, -> { where(active: true) }
+  scope :by_popularity, -> { order('subscriptions_count desc') }
 end

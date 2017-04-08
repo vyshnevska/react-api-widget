@@ -18,7 +18,10 @@ Rails.application.routes.draw do
       resources :messages, only: [:create, :update, :index]
 
       resources :subscriptions, only: [:index, :create] do
-        collection { post :create_channel }
+        collection do
+          post :create_channel
+          get :channels
+        end
       end
 
       as :user do
