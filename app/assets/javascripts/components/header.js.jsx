@@ -3,7 +3,7 @@ var Header = React.createClass({
     return (
       <div className='user-details'>
         <div>
-          <a href='link/to/user'>{this.props.current_user.name}</a>
+          <a href='link/to/user'>{this.props.loggedUser.name}</a>
         </div>
         <span className='more-details'>since 2016</span>
       </div>)
@@ -19,7 +19,7 @@ var Header = React.createClass({
         </div>
         <div className='item'>
           <div>Channels</div>
-          <div>{this.props.current_user.subscriptions}</div>
+          <div>{this.props.loggedUser.subscriptions}</div>
         </div>
 
       </div>)

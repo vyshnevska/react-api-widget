@@ -4,7 +4,6 @@ var Messanger = React.createClass({
       messages: [],
       channelsSelectOptions: [],
       isAuthorized: AjaxCustomMethods.isAuthorized(),
-      current_user: {}
     }
   },
 
@@ -13,9 +12,9 @@ var Messanger = React.createClass({
       <div className="messages_box collapse-container" id="messages_container">
         <div className="collapse-group">
           <Header
-            messages_count  = {this.props.data.messages_count}
-            isAuthorized    = {this.state.isAuthorized}
-            current_user    = {this.props.current_user} />
+            messages_count = {this.props.data.messages_count}
+            isAuthorized   = {this.state.isAuthorized}
+            loggedUser     = {this.props.loggedUser} />
           <MessageFeed isAuthorized = {this.state.isAuthorized} />
         </div>
       </div>

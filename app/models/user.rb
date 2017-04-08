@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   end
 
   def name
-    self.username || "user-000#{self.id}"
+    self.username.presence || "user-000#{self.id}"
   end
 
   def owner_of? post

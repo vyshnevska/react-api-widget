@@ -4,9 +4,9 @@
 
 .row
   .col-sm-8
-    = react_component 'Posts', { posts: @posts_for_react, current_user: current_user&.for_react }
+    = react_component 'Posts', { posts: @posts_for_react }
 
   .col-sm-4
     - if current_user
       = react_component 'Messanger', { data: { messages_count: current_user.messages_feed.count },
-          current_user: current_user.for_react }
+          loggedUser: current_user.for_react }
