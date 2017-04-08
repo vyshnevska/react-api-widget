@@ -1,4 +1,6 @@
 $(document).ready ->
+  # $('.search-input').autocomplete
+  #   source: ['opt1', "opt2", 'opt3']
 
   if $(".edit_post").length
     $('form input[type="file"]').each ->

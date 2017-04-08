@@ -3,9 +3,10 @@ class Post < ActiveRecord::Base
 
   has_many :comments, class_name: 'Post', foreign_key: :parent_post_id
   has_many :replies, class_name: 'Post', through: :comments, source: :comments
-
-
   belongs_to :parent_post, class_name: 'Post'
+
+  include  Concerns::Taggable
+  # acts_as_taggable
 
   mount_uploader :top_image, ImageUploader
   mount_uploader :image_1, ImageUploader
