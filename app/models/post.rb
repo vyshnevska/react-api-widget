@@ -32,8 +32,9 @@ class Post < ActiveRecord::Base
     result[:publishedAt]  = self.created_at.to_f * 1000
     result[:topImageUrl]  = self.top_image.url(:small)
     result[:author]       = {
-                              name: self.author&.name || 'unknown',
-                              id: self.author_id
+                              id:        self.author_id,
+                              name:       self.author.name || 'unknown',
+                              avatar_url: self.author.avatar.url(:thumb)
                             }
 
     result[:isSubscribed] = current_user ? self.subscriptions.map(&:user_id).include?(current_user.id) : false

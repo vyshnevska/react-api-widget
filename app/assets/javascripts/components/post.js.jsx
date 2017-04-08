@@ -87,12 +87,20 @@ var Post = React.createClass({
     }
   },
 
+  _renderAuthorAvatar(){
+    if (this.props.author.avatar_url){
+       return(<img src={this.props.author.avatar_url} />)
+    } else {
+      return(<img src="/assets/placeholders/author.png" />)
+    }
+  },
+
   _renderAuthorLine(){
     return (
       <div>
         <div className='author-text'>
           <div className='image-wrapper'>
-            <img src="/assets/placeholders/author.png" />
+            {this._renderAuthorAvatar()}
           </div>
           <div className='text-content'>
             <a> {this.props.author.name}</a>
