@@ -18,8 +18,8 @@ class Post < ActiveRecord::Base
   REACT_ATTRIBUTES = %i(slug body published title author)
 
   belongs_to :author, class_name: 'User', foreign_key: :author_id
-
-  has_many :subscriptions, through: :author, inverse_of: :user
+  has_one :channel, through: :author
+  has_many :subscriptions, through: :channel
 
   def to_param
     slug
