@@ -35,4 +35,9 @@ Rails.application.routes.draw do
 
   slugs = %w|root|
   resource :posts, only: [:show], constraints: {id: Regexp.new(slugs.join('|'))}
+
+  post '/graphql', to: 'graphql#query'
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
 end

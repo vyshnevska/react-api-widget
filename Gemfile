@@ -12,6 +12,10 @@ gem 'devise'
 # Help serialize models to JSON
 gem 'active_model_serializers', '0.10'
 
+# GraphQL
+gem 'graphql'
+gem "graphiql-rails"
+
 gem 'slim'
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'bootstrap-sass', '~>3.3.6'
