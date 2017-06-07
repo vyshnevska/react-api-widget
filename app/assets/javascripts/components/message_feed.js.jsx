@@ -13,10 +13,10 @@ var MessageFeed = React.createClass({
 
   populateData(data){
     this.setState({
-      own_messages: data.messages.from_me,
-      my_feed:      data.messages.to_me,
-      has_channel:  data.channels.length > 0,
-      channelsSelectOptions: data.channels
+      own_messages: data.my_messages,
+      my_feed:      data.messages_to_me,
+      has_channel:  data.channel != undefined,
+      channelsSelectOptions: data.channel
     });
   },
 
@@ -46,7 +46,7 @@ var MessageFeed = React.createClass({
           {this.state.has_channel &&
             <NewMessage
               sendNewMessageHandler={this.handleSubmit}
-              channelsSelectOptions={this.state.channelsSelectOptions}
+              channelsSelectOptions={[this.state.channelsSelectOptions]}
             />}
           <a className='section-separator'> </a>
           { <AvailableChannels />}

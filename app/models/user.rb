@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  has_many :posts
+  has_many :posts, foreign_key: :author_id
   has_one  :channel
   has_many :own_messages, through: :channel, source: :messages
   has_many :subscriptions, dependent: :destroy

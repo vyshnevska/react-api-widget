@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   namespace :api do #, path: '/', constraints: { subdomain: 'api' } do
     namespace :v1, defaults: { format: :json } do
-      resources :messages, only: [:create, :update, :index]
+      resources :messages, only: [:create, :update, :index, :show]
 
       resources :subscriptions, only: [:index, :create] do
         collection do

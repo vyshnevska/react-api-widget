@@ -42,7 +42,7 @@ var NewMessage = React.createClass({
           <select className='form-control form-control-sm'>
             {
               this.props.channelsSelectOptions.map(function (option) {
-                return <option value={option.key} ref='channel_id'> {option.label}</option>;
+                return <option value={option.id} ref='channel_id'> {option.name}</option>;
               })
             }
           </select>
