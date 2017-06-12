@@ -16,15 +16,13 @@ class User < ActiveRecord::Base
   scope :sorted_messages_by,  -> (user) { user.own_messages.not_hidden.order(status: :desc, created_at: :desc) }
 
   before_create :set_auth_token!
+  before_save :update_auth_token!, if: :current_sign_in_at_changed?
 
-  def generate_auth_token_and_save!
+  def generate_and_save_auth_token
+!
     token =  generate_auth_token
     self.update_columns(auth_token: token, token_created_at: Time.zone.now)
     token
-  end
-
-  def generate_auth_token
-    SecureRandom.hex
   end
 
   def invalidate_auth_token
@@ -44,6 +42,14 @@ class User < ActiveRecord::Base
   end
 
   private
+    def generate_auth_token
+      SecureRandom.hex
+    end
+
+    def update_auth_token!
+      self.token_created_at = Time.zone.now
+    end
+
     def set_auth_token!
       self.auth_token ||= generate_auth_token
       self.token_created_at ||= Time.zone.now
