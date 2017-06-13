@@ -18,8 +18,7 @@ class User < ActiveRecord::Base
   before_create :set_auth_token!
   before_save :update_auth_token!, if: :current_sign_in_at_changed?
 
-  def generate_and_save_auth_token
-!
+  def generate_and_save_auth_token!
     token =  generate_auth_token
     self.update_columns(auth_token: token, token_created_at: Time.zone.now)
     token
@@ -37,6 +36,7 @@ class User < ActiveRecord::Base
     post.author_id == self.id
   end
 
+  # TODO: remove
   def for_react
     { id: self.id, name: self.name, subscriptions: self.subscriptions.count }
   end

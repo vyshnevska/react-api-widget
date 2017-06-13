@@ -1,10 +1,10 @@
 class UserSerializer < ActiveModel::Serializer
 
-  attributes :id, :msg
+  attributes :currentUser, :myMessagesCount, :subscriptionsCount
 
   has_one   :channel
-  has_many  :my_messages
-  has_many  :messages_to_me
+  has_many  :myMessages
+  has_many  :messagesToMe
 
   has_many :posts, only: [:id, :body, :slug]
 
@@ -14,15 +14,24 @@ class UserSerializer < ActiveModel::Serializer
     object.id.to_s
   end
 
-  def my_messages
+  def myMessages
     User.sorted_messages_by(object)
   end
 
-  def messages_to_me
+  def messagesToMe
     User.sorted_messages_for(object)
   end
 
-  def msg
-    'helllo world'
+  def currentUser
+    { id: object.id.to_s, name: object.name }
   end
+
+  def subscriptionsCount
+    object.subscriptions.count.to_s
+  end
+
+  def myMessagesCount
+    myMessages.count.to_s
+  end
+
 end

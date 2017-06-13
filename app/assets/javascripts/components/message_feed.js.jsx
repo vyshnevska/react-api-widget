@@ -5,33 +5,33 @@ var MessageFeed = React.createClass({
     return {
       own_messages: [],
       my_feed: [],
-      channelsSelectOptions: [],
+      // channelsSelectOptions: [],
       isAuthorized: this.props.isAuthorized,
       has_channel: false
     }
   },
 
-  populateData(data){
-    this.setState({
-      own_messages: data.my_messages,
-      my_feed:      data.messages_to_me,
-      has_channel:  data.channel != undefined,
-      channelsSelectOptions: data.channel
-    });
-  },
+  // populateData(data){
+  //   this.setState({
+  //     own_messages: data.my_messages,
+  //     my_feed:      data.messages_to_me,
+  //     has_channel:  data.channel != undefined,
+  //     channelsSelectOptions: data.channel
+  //   });
+  // },
 
-  componentDidMount() {
-    var ajaxOptions = {
-      url:         'api/v1/messages.json',
-      type:        'GET',
-      dataType:    'json',
-      headers:     {"Authorization": "Token token=" + AjaxCustomMethods.getAuthToken()},
-      contentType: "application/json; charset=utf-8"
-    };
+  // componentDidMount() {
+  //   var ajaxOptions = {
+  //     url:         'api/v1/messages.json',
+  //     type:        'GET',
+  //     dataType:    'json',
+  //     headers:     {"Authorization": "Token token=" + AjaxCustomMethods.getAuthToken()},
+  //     contentType: "application/json; charset=utf-8"
+  //   };
 
-    // Initiate the AJAX request to messages#index
-    $.ajax(ajaxOptions).done(this.populateData).fail(AjaxCustomMethods.handleError);
-  },
+  //   // Initiate the AJAX request to messages#index
+  //   $.ajax(ajaxOptions).done(this.populateData).fail(AjaxCustomMethods.handleError);
+  // },
 
   handleSubmit(message) {
     this.state.own_messages.unshift(message); // adds a new message at the biginning

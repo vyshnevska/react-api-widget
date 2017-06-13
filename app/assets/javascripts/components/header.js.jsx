@@ -1,12 +1,21 @@
 var Header = React.createClass({
+  getDefaultProps() {
+    return {
+      subscriptionsCount: 0,
+      myMessagesCount: 0
+    }
+  },
+
   _renderUserDetails: function() {
-    return (
-      <div className='user-details'>
-        <div>
-          <a href='link/to/user'>{this.props.loggedUser.name}</a>
-        </div>
-        <span className='more-details'>since 2016</span>
-      </div>)
+    if (this.props.currentUser != undefined){
+      return (
+        <div className='user-details'>
+          <div>
+            <a href='link/to/user'>{this.props.currentUser.name}</a>
+          </div>
+          <span className='more-details'>since 2016</span>
+        </div>)
+      }
   },
 
   _renderUserStatistics: function() {
@@ -15,11 +24,11 @@ var Header = React.createClass({
       <div className="user-statistics">
         <div className='item'>
           <div>Messages</div>
-          <div>{this.props.messages_count}</div>
+          <div>{this.props.myMessagesCount}</div>
         </div>
         <div className='item'>
           <div>Channels</div>
-          <div>{this.props.loggedUser.subscriptions}</div>
+          <div>{this.props.subscriptionsCount}</div>
         </div>
 
       </div>)
