@@ -1,6 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
 
-  attributes :currentUser, :myMessagesCount, :subscriptionsCount
+  attributes :currentUser, :myMessagesCount, :subscriptionsCount, :username, :email
 
   has_one   :channel
   has_many  :myMessages

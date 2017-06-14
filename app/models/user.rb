@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :posts, foreign_key: :author_id
   has_one  :channel
-  has_many :own_messages, through: :channel, source: :messages
+  has_many :own_messages,  through: :channel, source: :messages
   has_many :subscriptions, dependent: :destroy
   has_many :messages_feed, through: :subscriptions, source: :user, class_name: 'Message'
 
