@@ -1,6 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
 
-  attributes :currentUser, :myMessagesCount, :subscriptionsCount, :username, :email
+  attributes :currentUser, :myMessagesCount, :subscriptionsCount, :username, :email,
+             :friends, :full_name
 
   has_one   :channel
   has_many  :myMessages
@@ -33,5 +34,12 @@ class UserSerializer < ActiveModel::Serializer
   def myMessagesCount
     myMessages.count.to_s
   end
+
+  def friends
+    object.friend_ids.map do |id|
+      Rails.application.routes.url_helpers.user_path(id)
+    end
+  end
+
 
 end

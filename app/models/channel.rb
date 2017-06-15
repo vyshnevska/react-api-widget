@@ -13,7 +13,7 @@ class Channel < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   after_initialize do
-    self.image = self.user.avatar
+    self.image = self.user&.avatar
   end
 
   def for_react

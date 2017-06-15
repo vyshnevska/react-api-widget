@@ -12,6 +12,11 @@ class User < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   has_many :messages_feed, through: :subscriptions, source: :user, class_name: 'Message'
 
+  has_and_belongs_to_many :friends,
+    class_name: 'User',
+    join_table: :friendships,
+    association_foreign_key: :friend_id
+
   scope :sorted_messages_for, -> (user) { user.messages_feed.not_hidden.order(status: :desc, created_at: :desc) }
   scope :sorted_messages_by,  -> (user) { user.own_messages.not_hidden.order(status: :desc, created_at: :desc) }
 
