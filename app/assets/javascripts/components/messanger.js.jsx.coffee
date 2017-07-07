@@ -15,19 +15,22 @@
 
 
     # Initiate the AJAX request to messages#index
+    that = @
     $.ajax(ajaxOptions)
-      .done(@.assignAttrs())
+      .complete (response) ->
+        that.assignAttrs(response.responseJSON)
       .fail(AjaxCustomMethods.handleError)
 
   assignAttrs: (response) ->
-    @setState
-      currentUser:           response.currentUser
-      myMessages:            response.myMessages
-      messagesToMe:          response.messagesToMe
-      has_channel:           response.channel != undefined
-      myMessagesCount:       response.myMessagesCount
-      subscriptionsCount:    response.subscriptionsCount
-      channelsSelectOptions: response.channel
+    if response
+      @setState
+        currentUser:           response.currentUser
+        myMessages:            response.myMessages
+        messagesToMe:          response.messagesToMe
+        has_channel:           response.channel != undefined
+        myMessagesCount:       response.myMessagesCount
+        subscriptionsCount:    response.subscriptionsCount
+        channelsSelectOptions: response.channel
 
   render: ->
     `<div className="messages_box collapse-container" id="messages_container">

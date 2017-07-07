@@ -1,10 +1,9 @@
 class Api::V1::MessagesController < Api::V1::BaseController
   skip_before_action :authenticate_user!
 
-  # skip_before_action :authenticate!
+  skip_before_action :authenticate!
 
   def index
-    # current_user ||= User.find 7
     render json: current_user, include: [:myMessages, :messagesToMe, :channel]
   end
 
