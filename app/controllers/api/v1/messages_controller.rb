@@ -1,7 +1,10 @@
 class Api::V1::MessagesController < Api::V1::BaseController
-  skip_before_action :authenticate_user!
 
+  skip_before_action :authenticate_user!
   skip_before_action :authenticate!
+
+  before_action :check_current_user, only: :index
+
 
   def index
     render json: current_user, include: [:myMessages, :messagesToMe, :channel]
@@ -27,4 +30,15 @@ class Api::V1::MessagesController < Api::V1::BaseController
   def message_params
     params.require(:message).permit(:id, :content, :recipient_id, :status, :channel_id)
   end
+
+  def check_current_user
+    unless current_user
+      render json: { errors: [ { detail: 'No current user' } ] }, status: 411
+      return
+    end
+  end
+
+  # def current_user
+  #   @memorized_current_user ||= User.find 7
+  # end
 end
