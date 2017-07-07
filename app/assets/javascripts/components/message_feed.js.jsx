@@ -62,6 +62,6 @@ var MessageFeed = React.createClass({
 MessageFeed.propTypes = {
   own_messages: React.PropTypes.array,
   my_feed: React.PropTypes.array,
-  channelsSelectOptions: React.PropTypes.array,
+  channelsSelectOptions: React.PropTypes.object,
   hasChannel: React.PropTypes.bool
 };
