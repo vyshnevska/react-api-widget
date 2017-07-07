@@ -1,13 +1,9 @@
 var MessageFeed = React.createClass({
   // ---- main methods
-
   getInitialState() {
     return {
       own_messages: [],
-      my_feed: [],
-      // channelsSelectOptions: [],
-      isAuthorized: this.props.isAuthorized,
-      has_channel: false
+      my_feed: []
     }
   },
 
@@ -15,7 +11,7 @@ var MessageFeed = React.createClass({
   //   this.setState({
   //     own_messages: data.my_messages,
   //     my_feed:      data.messages_to_me,
-  //     has_channel:  data.channel != undefined,
+  //     hasChannel:  data.channel != undefined,
   //     channelsSelectOptions: data.channel
   //   });
   // },
@@ -40,13 +36,13 @@ var MessageFeed = React.createClass({
   },
 
   render: function() {
-    if(this.state.isAuthorized){
+    if(this.props.isAuthorized){
       return(
         <div className='body'>
-          {this.state.has_channel &&
+          {this.props.hasChannel &&
             <NewMessage
               sendNewMessageHandler={this.handleSubmit}
-              channelsSelectOptions={[this.state.channelsSelectOptions]}
+              channelsSelectOptions={[this.props.channelsSelectOptions]}
             />}
           <a className='section-separator'> </a>
           { <AvailableChannels />}
@@ -67,5 +63,5 @@ MessageFeed.propTypes = {
   own_messages: React.PropTypes.array,
   my_feed: React.PropTypes.array,
   channelsSelectOptions: React.PropTypes.array,
-  has_channel: React.PropTypes.bool
+  hasChannel: React.PropTypes.bool
 };

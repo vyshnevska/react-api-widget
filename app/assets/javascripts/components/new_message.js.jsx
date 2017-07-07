@@ -40,9 +40,8 @@ var NewMessage = React.createClass({
       return(
         <div className='form-group'>
           <select className='form-control form-control-sm'>
-            {
-              this.props.channelsSelectOptions.map(function (option) {
-                return <option value={option.id} ref='channel_id'> {option.name}</option>;
+            { this.props.channelsSelectOptions.map(function (channel) {
+                return <option value={channel.id} ref='channel_id'> {channel.name}</option>;
               })
             }
           </select>
