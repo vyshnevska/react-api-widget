@@ -18,7 +18,7 @@
 
   render: ->
     if @props.isAuthorized
-      `<div className='body'>
+      `<div className='feed-body'>
         {this.props.hasChannel &&
           <NewMessage
             sendNewMessageHandler={this.handleSubmit}

@@ -28,7 +28,7 @@ class Api::V1::MessagesController < Api::V1::BaseController
   private
 
   def message_params
-    params.require(:message).permit(:id, :content, :recipient_id, :status, :channel_id)
+    params.require(:message).permit(:content, :recipient_id, :status, :channel_id)
   end
 
   def check_current_user

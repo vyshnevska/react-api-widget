@@ -18,8 +18,7 @@
       dataType: 'json'
       headers: { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() }
       contentType: "application/json; charset=utf-8"
-      data: JSON.stringify ->
-        { message: { content: content, channel_id: channel_id } }
+      data: JSON.stringify({ message: { content: content, channel_id: channel_id } })
 
     console.log('The content value is ' + content + 'the channel_id value is ' + channel_id);
 
@@ -33,6 +32,7 @@
       .fail(AjaxCustomMethods.handleError)
 
     @toggleSection() #// hide new message section
+
 
   toggleSection: ->
     section = document.querySelector('.new-message-container')
