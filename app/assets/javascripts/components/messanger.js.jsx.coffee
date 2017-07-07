@@ -5,6 +5,9 @@
     currentUser: null
     isAuthorized: AjaxCustomMethods.isAuthorized()
     hasChannel: false
+    myMessages: []
+    messagesToMe: []
+
 
   componentDidMount: ->
     ajaxOptions =
@@ -45,6 +48,9 @@
         <MessageFeed
           isAuthorized = {this.state.isAuthorized}
           hasChannel   = {this.state.hasChannel}
-          channelsSelectOptions = {this.state.channelsSelectOptions} />
+          channelsSelectOptions = {this.state.channelsSelectOptions}
+          myMessages   = {this.state.myMessages}
+          messagesToMe = {this.state.messagesToMe}
+        />
       </div>
     </div>`

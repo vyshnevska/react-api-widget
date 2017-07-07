@@ -1,14 +1,14 @@
 var AllMessages = React.createClass({
 
   render: function() {
-    var own_messages = this.props.own_messages.map((message) => {
+    var myMessages = this.props.myMessages.map((message) => {
       return (
         <div key={message.id}>
           <MessageEntry
             id             = {message.id}
             message        = {message.content}
             publisherName  = 'publisher'
-            sentAt         = {message.createdAt}
+            sentAt         = {message.created_at}
             status         = {message.status}
             isLong         = {message.content.length > 64 ? true : false}
           />
@@ -16,14 +16,14 @@ var AllMessages = React.createClass({
       )
     });
 
-    var my_feed = this.props.my_feed.map((message) => {
+    var messagesToMe = this.props.messagesToMe.map((message) => {
       return (
         <div key={message.id}>
           <MessageEntry
             id             = {message.id}
             message        = {message.content}
             publisherName  = 'publisher'
-            sentAt         = {message.createdAt}
+            sentAt         = {message.created_at}
             status         = {message.status}
             isLong         = {message.content.length > 64 ? true : false}
           />
@@ -32,12 +32,13 @@ var AllMessages = React.createClass({
     });
 
 
-    if (this.props.own_messages.length > 0){
+    if (this.props.myMessages.length > 0){
       return(
         <ul className='collapse-body'>
-          {own_messages}
+          {myMessages}
           <a className='section-separator'> </a>
-          {my_feed}
+          {this.props.messagesToMe.length > 0 &&
+            messagesToMe}
         </ul>
       )
     } else {

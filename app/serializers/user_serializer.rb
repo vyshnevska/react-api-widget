@@ -40,6 +40,4 @@ class UserSerializer < ActiveModel::Serializer
       Rails.application.routes.url_helpers.user_path(id)
     end
   end
-
-
 end

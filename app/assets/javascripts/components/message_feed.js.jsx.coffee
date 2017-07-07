@@ -1,19 +1,19 @@
 @MessageFeed = React.createClass
   propTypes:
-    own_messages: React.PropTypes.array
-    my_feed:      React.PropTypes.array
+    myMessages:   React.PropTypes.array
+    messagesToMe: React.PropTypes.array
     channelsSelectOptions: React.PropTypes.object
     hasChannel:   React.PropTypes.bool
 
   #// ---- main methods
   getInitialState: ->
-    own_messages: []
-    my_feed: []
+    myMessages: @props.myMessages
+    messagesToMe: @props.messagesToMe
 
   handleSubmit: (message) ->
-    @state.own_messages.unshift(message) #// adds a new message at the biginning
+    @state.myMessages.unshift(message) #// adds a new message at the biginning
     @setState
-      own_messages: @state.own_messages
+      myMessages: @state.myMessages
     console.log('message was sent succesfully!', message)
 
   render: ->
@@ -28,8 +28,8 @@
         { <AvailableChannels />}
         <a className='section-separator'> </a>
         <AllMessages
-          own_messages = {this.state.own_messages}
-          my_feed      = {this.state.my_feed} />
+          myMessages   = {this.props.myMessages}
+          messagesToMe = {this.props.messagesToMe} />
       </div>`
     else
       `<div className='unauthorized'>
