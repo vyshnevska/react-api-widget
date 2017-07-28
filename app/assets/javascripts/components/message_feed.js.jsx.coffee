@@ -28,8 +28,8 @@
         { <AvailableChannels />}
         <a className='section-separator'> </a>
         <AllMessages
-          myMessages   = {this.props.myMessages}
-          messagesToMe = {this.props.messagesToMe} />
+          myMessages   = {this.state.myMessages}
+          messagesToMe = {this.state.messagesToMe} />
       </div>`
     else
       `<div className='unauthorized'>
