@@ -3,6 +3,6 @@ class CustomSessionsController < Devise::SessionsController
 
   def before_login
     user = User.find_by email: params[:user][:email]
-    user.generate_auth_token_and_save!
+    user.generate_and_save_auth_token!
   end
 end

@@ -3,11 +3,11 @@
 .clearfix
 
 .row
-  .col-sm-8
+  div class=(current_user ? 'col-sm-8' : 'col-sm-12')
     = react_component 'Posts', { posts: @posts_for_react }
 
-  .col-sm-4
-    - if current_user
+  - if current_user
+    .col-sm-4
       = react_component 'Messanger'
       / , { data: { messages_count: current_user.messages_feed.count },
-          loggedUser: current_user.for_react }
+            loggedUser: current_user.for_react }
