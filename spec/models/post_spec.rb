@@ -42,4 +42,29 @@ RSpec.describe Post, type: :model do
       expect(post.to_h[:channel]).to eq nil
     end
   end
+
+  describe '#subscription_hash' do
+    let(:post) { build :post }
+
+    specify 'for no logged in user' do
+      expect(post.subscription_hash).to eq({ isSubscribed: false,  currentUser: nil })
+    end
+
+    context 'for a logged in user' do
+      let(:user) { build_stubbed :user }
+      specify {
+        expect(post.subscription_hash(user)).to eq({ isSubscribed: false,  currentUser: { id: user.id } })
+      }
+    end
+
+    context 'for a subscribed user' do
+      let(:post) { create :post, :full }
+      let(:user) { create :user }
+
+      specify do
+        post.channel.subscriptions << build(:subscription, user: user)
+        expect(post.subscription_hash(user)).to eq({ isSubscribed: true,  currentUser: { id: user.id } })
+      end
+    end
+  end
 end

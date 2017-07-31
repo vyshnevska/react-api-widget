@@ -12,8 +12,6 @@ class Post < ActiveRecord::Base
   scope :original,  -> { where(parent_post_id: nil) }
   scope :recent,    -> { order('updated_at desc') }
 
-  REACT_ATTRIBUTES = %i(slug body published title author)
-
   has_one :channel, through: :author
 
   has_many :subscriptions, through: :channel
@@ -29,9 +27,14 @@ class Post < ActiveRecord::Base
   end
 
   def subscription_hash(current_user = nil)
-    {
-      isSubscribed: (current_user ? self.subscriptions.map(&:user_id).include?(current_user.id) : false)
-    }
+    if current_user
+      {
+        isSubscribed: self.subscriptions.map(&:user_id).include?(current_user.id),
+        currentUser:  { id: current_user.id }
+      }
+    else
+      { isSubscribed: false,  currentUser: nil }
+    end
   end
 
   def to_h

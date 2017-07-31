@@ -11,7 +11,7 @@ FactoryGirl.define do
 
     factory :user_with_channel do
       after(:build) do |u|
-        u.channel = build(:channel)
+        u.channel = build(:channel, :full)
       end
     end
   end

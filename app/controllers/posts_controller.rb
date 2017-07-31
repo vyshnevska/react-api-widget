@@ -12,6 +12,7 @@ class PostsController < ApplicationController
 
   def show
     params[:id] == 'root' ? @post = Post.first : set_post
+    @post_for_react = @post.to_h.merge(@post.subscription_hash(current_user))
   end
 
   def new
