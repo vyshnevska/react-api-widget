@@ -22,4 +22,16 @@ RSpec.describe Channel, type: :model do
       expect(Channel.by_popularity.to_sql)
         .to eq  "SELECT \"channels\".* FROM \"channels\"  ORDER BY subscriptions_count desc" }
   end
+
+  describe 'serialization, #to_h' do
+    let(:channel) { create :channel, :full }
+
+    specify do
+      expect(channel.to_h).to eq( { id: channel.id,
+                                    name: channel.name,
+                                    image_url: "/uploads/channel/image/#{channel.id}/thumb_image.jpg",
+                                    active: true
+                                  })
+    end
+  end
 end

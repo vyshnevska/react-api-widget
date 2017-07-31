@@ -17,11 +17,7 @@ class Channel < ActiveRecord::Base
     self.image = self.user&.avatar
   end
 
-  # def for_react
-  #   ({}).tap do |data|
-  #     data[:id]        = self.id
-  #     data[:name]      = self.name
-  #     data[:image_url] = self.image.url(:thumb)
-  #   end
-  # end
+  def to_h
+    ChannelSerializer.new(self).attributes
+  end
 end

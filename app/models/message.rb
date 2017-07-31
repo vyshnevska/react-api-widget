@@ -10,4 +10,8 @@ class Message < ActiveRecord::Base
   after_initialize do
     self.status ||= 'unread'
   end
+
+  def to_h
+    MessageSerializer.new(self).attributes
+  end
 end

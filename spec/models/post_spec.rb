@@ -27,7 +27,7 @@ RSpec.describe Post, type: :model do
       expect(Post.recent.to_sql).to eq  "SELECT \"posts\".* FROM \"posts\"  ORDER BY updated_at desc" }
   end
 
-  describe '#to_h' do
+  describe 'serialization, #to_h' do
     let(:post) { build_stubbed :post, :full }
 
     specify 'builds all hash keys' do

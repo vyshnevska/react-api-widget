@@ -10,10 +10,6 @@ class UserSerializer < ActiveModel::Serializer
   has_many :posts, only: [:id, :body, :slug]
   has_many :subscriptions
 
-  def id
-    object.id.to_s
-  end
-
   def myMessages
     User.sorted_messages_by(object)
   end

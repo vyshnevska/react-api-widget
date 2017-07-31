@@ -5,4 +5,9 @@ class Subscription < ActiveRecord::Base
 
   validates :channel_id, presence: true, uniqueness: { scope: :user_id }
   validates :user_id, presence: true
+
+
+  def to_h
+    SubscriptionSerializer.new(self).attributes
+  end
 end
