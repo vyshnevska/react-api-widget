@@ -2,20 +2,17 @@ class Api::V1::SubscriptionsController < Api::V1::BaseController
   skip_before_action :authenticate_user!
 
   def create_channel
-    channel = Channel.create(channel_params)
-
-    respond_with(
-      { channel: { id: channel.id, name: channel.name, active: channel.active } },
-      location: api_v1_subscriptions_path
-    )
+    channel = Channel.find_or_create_by(channel_params)
+    render json: channel
   end
 
   def create
-    respond_with(Subscription.create(subscription_params), location: api_v1_subscriptions_path)
+    subscription = Subscription.find_or_create_by(subscription_params)
+    render json: subscription
   end
 
   def channels
-    respond_with :api, :v1, Channel.active.by_popularity.limit(5).map(&:for_react)
+    render json: Channel.active.by_popularity.limit(5)
   end
 
    private

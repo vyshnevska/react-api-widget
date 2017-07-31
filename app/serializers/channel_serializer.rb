@@ -1,12 +1,8 @@
 class ChannelSerializer < ActiveModel::Serializer
 
-  attributes :id, :name
+  attributes %i(id name image_url active)
 
-  def id
-    object.id.to_s
-  end
-
-  def name
-    object.name
+  def image_url
+    object.image.url(:thumb)
   end
 end

@@ -5,7 +5,6 @@
     messagesToMe: []
 
   render: ->
-    debugger
     myMessages = @props.myMessages.map (message) ->
       `<div key={message.id}>
         <MessageEntry message= {message}/>
