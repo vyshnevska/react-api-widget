@@ -9,5 +9,10 @@ FactoryGirl.define do
       token_created_at { Time.zone.now + 2.minutes }
     end
 
+    factory :user_with_channel do
+      after(:build) do |u|
+        u.channel = build(:channel)
+      end
+    end
   end
 end

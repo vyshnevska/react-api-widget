@@ -44,11 +44,11 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'quiet_assets'
-
 end
 
 group :test do
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'database_cleaner'
 end
 gem 'graphiql-rails', group: :development

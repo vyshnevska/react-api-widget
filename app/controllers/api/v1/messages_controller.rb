@@ -1,7 +1,7 @@
 class Api::V1::MessagesController < Api::V1::BaseController
 
-  skip_before_action :authenticate_user!
-  skip_before_action :authenticate!
+  # skip_before_action :authenticate_user!
+  # skip_before_action :authenticate!
 
   before_action :check_current_user, only: :index
 
