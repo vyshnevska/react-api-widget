@@ -8,7 +8,6 @@ FactoryGirl.define do
 
     trait :full do
       association :author, factory: :user_with_channel
-      # association :channel, factory: :channel
     end
   end
 end

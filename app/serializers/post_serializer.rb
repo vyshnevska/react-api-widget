@@ -1,6 +1,6 @@
 class PostSerializer < ActiveModel::Serializer
 
-  attributes  %i(id slug body published title publishedAt topImageUrl
+  attributes  %i(slug body published title publishedAt topImageUrl
                 author channel)
 
   def publishedAt

@@ -31,7 +31,7 @@ RSpec.describe Post, type: :model do
     let(:post) { build_stubbed :post, :full }
 
     specify 'builds all hash keys' do
-      expect(post.to_h.keys).to match_array %i(id slug body published title publishedAt author channel topImageUrl)
+      expect(post.to_h.keys).to match_array %i(slug body published title publishedAt author channel topImageUrl)
     end
 
     specify 'builds author k,v' do
