@@ -5,11 +5,11 @@
     isSubscribed: @props.isSubscribed
     channel:      @props.channel
 
-  loggedUserPresent: ->
-    @props.loggedUser != null
+  currentUserPresent: ->
+    @props.currentUser != null
 
   isRenderedForAuthor: ->
-    @loggedUserPresent() && @props.author.id == @props.loggedUser.id
+    @currentUserPresent() && @props.author.id == @props.currentUser.id
 
   channelIsActive: ->
     @state.hasChannel && @state.channel.active
@@ -21,7 +21,7 @@
       dataType:    'json'
       headers:     { "Authorization": "Token token=" + AjaxCustomMethods.getAuthToken() }
       contentType: "application/json; charset=utf-8"
-      data:        JSON.stringify({ user_id: @props.loggedUser.id, channel_id: @state.channel.id })
+      data:        JSON.stringify({ user_id: @props.currentUser.id, channel_id: @state.channel.id })
 
     $.ajax(ajaxOptions).done (response) =>
       @setState
@@ -45,7 +45,7 @@
   _renderChannelBtn: ->
     if @state.isSubscribed
       `<span>{'Subscribed to ' + this.state.channel.name}</span>`
-    else if @channelIsActive() && @loggedUserPresent()
+    else if @channelIsActive() && @currentUserPresent()
       `<span>
         <button className='as-follow' onClick={this.followAuthor}>
           <span>{'Follow ' + this.state.channel.name}</span>

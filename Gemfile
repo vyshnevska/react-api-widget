@@ -30,7 +30,6 @@ gem 'local_time'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick' # uploaded images (e.g. avatar) processing
 
-gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -45,11 +44,11 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'quiet_assets'
-
 end
 
 group :test do
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'database_cleaner'
 end
 gem 'graphiql-rails', group: :development

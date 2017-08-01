@@ -1,22 +1,20 @@
 class Api::V1::MessagesController < Api::V1::BaseController
 
-  skip_before_action :authenticate_user!
-  skip_before_action :authenticate!
-
   before_action :check_current_user, only: :index
-
 
   def index
     render json: current_user, include: [:myMessages, :messagesToMe, :channel]
   end
 
   def create
-    respond_with(Message.create(message_params).for_react, location: api_v1_messages_path)
-  end
+    channel = Channel.find message_params[:channel_id]
+    channel.subscribers.each do |subscriber|
+      Message.create(message_params.merge(recipient_id: subscriber.id))
+    end
+    owner_message_copy = create_message_copy!
 
-  # def show
-  #   render json: Message.find(params[:id])
-  # end
+    respond_with(owner_message_copy, location: api_v1_messages_path)
+  end
 
   def update
     message = Message.find params[:id]
@@ -28,7 +26,7 @@ class Api::V1::MessagesController < Api::V1::BaseController
   private
 
   def message_params
-    params.require(:message).permit(:content, :recipient_id, :status, :channel_id)
+    params.require(:message).permit(:content, :status, :channel_id)
   end
 
   def check_current_user
@@ -38,7 +36,8 @@ class Api::V1::MessagesController < Api::V1::BaseController
     end
   end
 
-  # def current_user
-  #   @memorized_current_user ||= User.find 7
-  # end
+  def create_message_copy!
+    Message.create(message_params.merge(recipient_id: current_user.id))
+  end
+
 end

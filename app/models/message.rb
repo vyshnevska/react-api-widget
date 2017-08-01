@@ -11,11 +11,7 @@ class Message < ActiveRecord::Base
     self.status ||= 'unread'
   end
 
-  # def for_react
-  #   result = %i(id content status).inject({}){ |hash, attr|
-  #     hash[:"#{attr}"] = self.send(attr); hash
-  #   }
-  #   result[:createdAt] = self.created_at.to_f * 1000
-  #   result
-  # end
+  def to_h
+    MessageSerializer.new(self).attributes
+  end
 end

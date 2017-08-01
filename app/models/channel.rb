@@ -4,6 +4,7 @@ class Channel < ActiveRecord::Base
   belongs_to :user
   has_many :messages
   has_many :subscriptions, dependent: :destroy
+  has_many :subscribers, through: :subscriptions, source: :user
 
   mount_uploader :image, ImageUploader
 
@@ -16,11 +17,7 @@ class Channel < ActiveRecord::Base
     self.image = self.user&.avatar
   end
 
-  def for_react
-    ({}).tap do |data|
-      data[:id]        = self.id
-      data[:name]      = self.name
-      data[:image_url] = self.image.url(:thumb)
-    end
+  def to_h
+    ChannelSerializer.new(self).attributes
   end
 end

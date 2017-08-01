@@ -1,19 +1,14 @@
 class UserSerializer < ActiveModel::Serializer
 
-  attributes :currentUser, :myMessagesCount, :subscriptionsCount, :username, :email,
-             :friends, :full_name
+  attributes :myMessagesCount, :subscriptionsCount, :username, :email,
+             :friends, :full_name, :currentUser
 
   has_one   :channel
   has_many  :myMessages
   has_many  :messagesToMe
 
   has_many :posts, only: [:id, :body, :slug]
-
   has_many :subscriptions
-
-  def id
-    object.id.to_s
-  end
 
   def myMessages
     User.sorted_messages_by(object)

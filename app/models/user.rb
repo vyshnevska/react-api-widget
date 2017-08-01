@@ -41,9 +41,8 @@ class User < ActiveRecord::Base
     post.author_id == self.id
   end
 
-  # TODO: remove
-  def for_react
-    { id: self.id, name: self.name, subscriptions: self.subscriptions.count }
+  def to_h
+    UserSerializer.new(self).attributes
   end
 
   private
