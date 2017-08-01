@@ -1,3 +1,15 @@
+.page-header.clearfix
+  .pull-left
+    h1= @post.body.truncate(15)
+  .pull-right
+    .btn-group
+      - if current_user #&& current_user.owner_of?(@post)
+        .btn-group
+          = link_to 'Edit', edit_post_path(@post), class: 'btn btn-default'
+          = link_to "Delete", post_path, method: :delete, data: {confirm: "Are you sure?" }, class: 'btn btn-default'
+          = link_to 'Back', posts_path, class: 'btn btn-default'
+
+
 = react_component 'Post', @post_for_react
 
 - image_urls = %w(top_image image_1 image_2).inject([]){ |arr, image_type| arr << @post.send(image_type).url(:medium); arr.compact; }
@@ -29,11 +41,3 @@
     = render "comments/form"
 - else
   h5 Please log in to leave a comment
-
-
-.clearfix
-- if current_user && current_user.owner_of?(@post)
-  .btn-group role='group'
-    = link_to 'Edit', edit_post_path(@post), class: "btn btn-default"
-    = link_to "Delete", post_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"
-    = link_to 'Back', posts_path, class: "btn btn-default"

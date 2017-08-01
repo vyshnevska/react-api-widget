@@ -1,60 +1,43 @@
-= form_for(@post) do |f|
-  - if @post.errors.any?
-    #error_explanation
-      h2
-        = pluralize(@post.errors.count, "error")
-        | prohibited this post from being saved:
-      ul
-        - @post.errors.full_messages.each do |message|
-          li= message
-  .field
-    = f.label :slug
-    br/
-    = f.text_field :slug
-  .field
-    = f.label :body
-    br/
-    = f.text_area :body
+= simple_form_for(@post, html: { class: 'form-horizontal' },
+  wrapper: :horizontal_input_group) do |f|
 
-  .field
-    = f.label :top_image
-    p
-      = image_tag @post.top_image.url(:medium) if @post.top_image?
-    br/
-    = f.file_field :top_image
-    = f.hidden_field :top_image_cache
-    .image-preview-wrapper
-      img/
+  = f.error_notification
 
-  .field
-    = f.label :image_1
-    br/
-    = f.file_field :image_1
-    = f.hidden_field :image_1_cache
-    .image-preview-wrapper
-      img/
+  .form-inputs
+    = f.input :slug
+    = f.input :body, as: :text
+    - if @post.top_image?
+      .form-group
+        .col-sm-3
+          Image Preview
+        .col-sm-9
+          p
+            = image_tag @post.top_image.url(:medium)
+    = f.input :top_image, as: :file
+    = f.input :top_image_cache, as: :hidden
 
-  .field
-    = f.label :image_2
-    br/
-    = f.file_field :image_2
-    = f.hidden_field :image_2_cache
-    .image-preview-wrapper
-      img/
+    - if @post.image_1?
+      .form-group
+        .col-sm-3
+          Image Preview
+        .col-sm-9
+          p
+            = image_tag @post.image_1.url(:medium)
+    = f.input :image_1, as: :file
+    = f.input :image_1_cache, as: :hidden
 
-  .field
-    = f.label :author
-    br/
-    = f.select :author_id, options_for_select(author_select_options)
-  .field
-    = f.label :published
-    br/
-    = f.check_box :published
-
-  .field
-    = f.label :tag_names,  "Tags (space separated)"
-    br/
-    = f.text_field :tag_names
-
-  .actions
-    = f.submit
+    - if @post.image_2?
+      .form-group
+        .col-sm-3
+          Image Preview
+        .col-sm-9
+          p
+            = image_tag @post.image_2.url(:medium)
+    = f.input :image_2, as: :file
+    = f.input :image_2_cache, as: :hidden
+    = f.association :author, collection: User.all.map{ |u| [u.name, u.id] }
+    = f.input :published, as: :boolean
+    = f.input :tag_names, as: :text
+    hr
+  .form-actions.col-sm-offset-3
+    = f.button :submit

@@ -3,30 +3,37 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.7.1'
 gem 'pg'
 
-gem 'responders'
-
-gem 'react-rails'
-
+# authentication, authorization, admin
 gem 'devise'
 
-# Help serialize models to JSON
+# serialization
 gem 'active_model_serializers', '0.10'
 
 # GraphQL
 gem 'graphql'
 gem "graphiql-rails"
 
+gem 'responders'
+
+# frontend/markup
 gem 'slim'
+gem 'simple_form'
+
+# fontend/assets
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.1.0'
+gem 'local_time'
+
+# frontend/stylesheets
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'bootstrap-sass', '~>3.3.6'
 gem 'sass-rails', '~> 5.0'
 
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+# frontend/javascript
 gem 'jquery-rails'
+gem 'react-rails'
 
-gem 'local_time'
-
+# image uploads
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick' # uploaded images (e.g. avatar) processing
 
