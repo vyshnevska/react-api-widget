@@ -23,7 +23,7 @@ class Api::V1::SessionsController < Api::V1::BaseController
     return invalid_login_attempt unless resource
 
     if resource.valid_password?(params[:user_login][:password])
-      auth_token = resource.generate_auth_token_and_save!
+      auth_token = resource.generate_and_save_auth_token!
       render json: { auth_token: auth_token }
     else
       invalid_login_attempt

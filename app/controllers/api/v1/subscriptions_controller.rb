@@ -15,7 +15,7 @@ class Api::V1::SubscriptionsController < Api::V1::BaseController
   end
 
   def channels
-    respond_with :api, :v1, Channel.active.by_popularity.map(&:for_react)
+    respond_with :api, :v1, Channel.active.by_popularity.limit(5).map(&:for_react)
   end
 
    private

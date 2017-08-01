@@ -1,19 +1,22 @@
 class Api::V1::MessagesController < Api::V1::BaseController
+
   skip_before_action :authenticate_user!
+  skip_before_action :authenticate!
+
+  before_action :check_current_user, only: :index
+
 
   def index
-    respond_with({
-      messages: {
-        to_me:   User.sorted_messages_for(current_user).map(&:for_react),
-        from_me: User.sorted_messages_by(current_user).map(&:for_react)
-      },
-      channels: ( current_user.channel ? [{ key: current_user.channel.id, label: current_user.channel.name }] : []) #Channel.all.map{|channel| { key: channel.id, label: channel.name } }
-    })
+    render json: current_user, include: [:myMessages, :messagesToMe, :channel]
   end
 
   def create
     respond_with(Message.create(message_params).for_react, location: api_v1_messages_path)
   end
+
+  # def show
+  #   render json: Message.find(params[:id])
+  # end
 
   def update
     message = Message.find params[:id]
@@ -25,6 +28,17 @@ class Api::V1::MessagesController < Api::V1::BaseController
   private
 
   def message_params
-    params.require(:message).permit(:id, :content, :recipient_id, :status, :channel_id)
+    params.require(:message).permit(:content, :recipient_id, :status, :channel_id)
   end
+
+  def check_current_user
+    unless current_user
+      render json: { errors: [ { detail: 'No current user' } ] }, status: 411
+      return
+    end
+  end
+
+  # def current_user
+  #   @memorized_current_user ||= User.find 7
+  # end
 end

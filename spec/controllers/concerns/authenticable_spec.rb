@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 class ApplicationController < ActionController::Base
   include Authenticable

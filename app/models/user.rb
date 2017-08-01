@@ -6,25 +6,27 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  has_many :posts
+  has_many :posts, foreign_key: :author_id
   has_one  :channel
-  has_many :own_messages, through: :channel, source: :messages
+  has_many :own_messages,  through: :channel, source: :messages
   has_many :subscriptions, dependent: :destroy
   has_many :messages_feed, through: :subscriptions, source: :user, class_name: 'Message'
+
+  has_and_belongs_to_many :friends,
+    class_name: 'User',
+    join_table: :friendships,
+    association_foreign_key: :friend_id
 
   scope :sorted_messages_for, -> (user) { user.messages_feed.not_hidden.order(status: :desc, created_at: :desc) }
   scope :sorted_messages_by,  -> (user) { user.own_messages.not_hidden.order(status: :desc, created_at: :desc) }
 
   before_create :set_auth_token!
+  before_save :update_auth_token!, if: :current_sign_in_at_changed?
 
-  def generate_auth_token_and_save!
+  def generate_and_save_auth_token!
     token =  generate_auth_token
     self.update_columns(auth_token: token, token_created_at: Time.zone.now)
     token
-  end
-
-  def generate_auth_token
-    SecureRandom.hex
   end
 
   def invalidate_auth_token
@@ -39,11 +41,20 @@ class User < ActiveRecord::Base
     post.author_id == self.id
   end
 
+  # TODO: remove
   def for_react
     { id: self.id, name: self.name, subscriptions: self.subscriptions.count }
   end
 
   private
+    def generate_auth_token
+      SecureRandom.hex
+    end
+
+    def update_auth_token!
+      self.token_created_at = Time.zone.now
+    end
+
     def set_auth_token!
       self.auth_token ||= generate_auth_token
       self.token_created_at ||= Time.zone.now

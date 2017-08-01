@@ -10,3 +10,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
 end
+
+ActionController::Renderers.add :json do |json, options|
+  unless json.kind_of?(String)
+    json = json.as_json(options) if json.respond_to?(:as_json)
+    json = JSON.pretty_generate(json, options)
+  end
+  self.content_type ||= Mime::JSON
+  json
+end

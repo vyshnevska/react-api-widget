@@ -9,6 +9,13 @@ gem 'react-rails'
 
 gem 'devise'
 
+# Help serialize models to JSON
+gem 'active_model_serializers', '0.10'
+
+# GraphQL
+gem 'graphql'
+gem "graphiql-rails"
+
 gem 'slim'
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'bootstrap-sass', '~>3.3.6'
@@ -26,7 +33,6 @@ gem 'mini_magick' # uploaded images (e.g. avatar) processing
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-
 
 group :development, :test do
   gem 'pry'
@@ -46,3 +52,4 @@ group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
 end
+gem 'graphiql-rails', group: :development

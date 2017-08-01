@@ -1,36 +1,35 @@
-var Header = React.createClass({
-  _renderUserDetails: function() {
-    return (
-      <div className='user-details'>
+@Header = React.createClass
+
+  getDefaultProps: ->
+    subscriptionsCount: 0
+    myMessagesCount: 0
+
+  _renderUserDetails: ->
+    if @props.currentUser != null
+      `<div className='user-details'>
         <div>
-          <a href='link/to/user'>{this.props.loggedUser.name}</a>
+          <a href='link/to/user'>{this.props.currentUser.name}</a>
         </div>
         <span className='more-details'>since 2016</span>
-      </div>)
-  },
+      </div>`
 
-  _renderUserStatistics: function() {
-    if(this.props.isAuthorized){
-      return(
-      <div className="user-statistics">
+  _renderUserStatistics: ->
+    if @props.isAuthorized
+      `<div className="user-statistics">
         <div className='item'>
           <div>Messages</div>
-          <div>{this.props.messages_count}</div>
+          <div>{this.props.myMessagesCount}</div>
         </div>
         <div className='item'>
           <div>Channels</div>
-          <div>{this.props.loggedUser.subscriptions}</div>
+          <div>{this.props.subscriptionsCount}</div>
         </div>
+      </div>`
+    else
+      null
 
-      </div>)
-    } else {
-      return null;
-    }
-  },
-
-  render: function() {
-    return (
-      <header className='collapse-header' id='messages_box_header'>
+  render: ->
+    `<header className='collapse-header' id='messages_box_header'>
         <div className='messages'>
           <a className='header-top-section'> </a>
           <div className='header-content'>
@@ -42,7 +41,4 @@ var Header = React.createClass({
           </div>
           <a className='section-separator'> </a>
         </div>
-      </header>
-    )
-  }
-});
+      </header>`
