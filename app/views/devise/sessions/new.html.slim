@@ -1,0 +1,22 @@
+.row
+  .col-sm-12
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name),
+      html: { class: 'form-horizontal' }, wrapper: :horizontal_input_group) do |f|
+
+      .form-inputs
+        - # email
+        = f.input :email,  autofocus: true
+        - # password
+        = f.input :password, as: :password, autocomplete: 'off'
+        - if devise_mapping.rememberable?
+          = f.input :remember_me, as: :boolean
+
+      .form-actions.col-sm-offset-3.links
+        = f.button :submit, 'Log in'
+        .l-extra
+          = render 'devise/shared/links'
+sass:
+  .links
+    text-align: center
+    .l-extra a
+      display: inline-block
