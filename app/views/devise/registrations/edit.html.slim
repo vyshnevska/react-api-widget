@@ -1,57 +1,48 @@
-h2
-  | Edit
-  = resource_name.to_s.humanize
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = devise_error_messages!
+.row
+  h2 Edit Your Profile
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, wrapper: :vertical_input_group) do |f|
+    = devise_error_messages!
+    = f.error_notification
 
-  .field
-    = f.label :avatar
-    p
-      = image_tag(@user.avatar_url(:medium)) if @user.avatar?
-    br/
-    = f.file_field :avatar
-    = f.hidden_field :avatar_cache
-    .image-preview-wrapper
-      img/
+    .col-sm-3
+      .form-inputs
+        - # avatar image
+        - if @user.avatar?
+          .form-group
+            .col-sm-12
+              p
+                = image_tag @user.avatar_url(:medium)
+        = f.input :avatar, as: :file
+        = f.input :avatar_cache, as: :hidden
+        .image-preview-wrapper
+          img/
+    .col-sm-9
+      .form-inputs
+        - # username
+        = f.input :username, autofocus: true
 
-  .field
-    = f.label :username
-    br
-    = f.text_field :username, autofocus: true
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    div
-      | Currently waiting confirmation for:
-      = resource.unconfirmed_email
-  .field
-    = f.label :password
-    i
-      | (leave blank if you don't want to change it)
-    br
-    = f.password_field :password, autocomplete: "off"
-    - if @minimum_password_length
-      br
-      em
-        = @minimum_password_length
-        |  characters minimum
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .field
-    = f.label :current_password
-    i
-      | (we need your current password to confirm your changes)
-    br
-    = f.password_field :current_password, autocomplete: "off"
-  .actions
-    = f.submit "Update"
-h3
-  | Cancel my account
-p
-  | Unhappy?
-  = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
-= link_to "Back", :back
+        - # email
+        = f.input :email, as: :email, autofocus: true
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          div
+            | Currently waiting confirmation for:
+            = resource.unconfirmed_email
+
+        - # password
+        = f.input :password, as: :password, autocomplete: 'off', hint: "(leave blank if you don't want to change it)"
+        - if @minimum_password_length
+          br
+          em
+            = @minimum_password_length
+            | characters minimum
+        = f.input :password_confirmation, as: :password, autocomplete: 'off'
+
+        = f.input :current_password, as: :password, autocomplete: 'off', hint: "(we need your current password to confirm your changes)"
+
+    .form-actions.col-sm-offset-3
+      = f.button :submit, 'Update'
+
+    .pull-right
+      .btn-group
+        = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
+        = link_to 'Back', :back, class: 'btn btn-default'

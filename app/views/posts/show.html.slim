@@ -30,14 +30,17 @@
   = render 'shared/tags', taggable: @post
 
 #comments
-  h2#comments_counter
-    = "#{@post.comments.published.count} Comments"
+  h3#comments_counter
+    - if @post.comments.published.count > 0
+      = "#{@post.comments.published.count} Comments"
+      - @post.comments.published.each do |comment|
+        = render '/comments/comment', comment: comment
+    - else
+      | Be the first to leave a comment!
 
-  - @post.comments.published.each do |comment|
-    = render '/comments/comment', comment: comment
 - if current_user
   .new-comment
-    h3 Reply to thread
+    h5 Reply to thread
     = render "comments/form"
 - else
   h5 Please log in to leave a comment
