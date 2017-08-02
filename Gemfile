@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.7.1'
+# gem 'rails', '4.2.7.1'
+gem 'rails', '5.0.0'
+
 gem 'pg'
 
 # authentication, authorization, admin
@@ -50,7 +52,7 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'quiet_assets'
+  # gem 'quiet_assets'
 end
 
 group :test do
@@ -58,4 +60,3 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'database_cleaner'
 end
-gem 'graphiql-rails', group: :development
