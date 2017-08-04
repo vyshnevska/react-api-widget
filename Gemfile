@@ -61,6 +61,10 @@ end
 
 group :test do
   gem 'factory_girl_rails'
+
+  # issue: https://github.com/thoughtbot/factory_girl/pull/982
+  gem 'factory_girl', git: 'https://github.com/thoughtbot/factory_girl.git', branch: 'master'
+
   gem 'shoulda-matchers', '~> 3.1'
   gem 'database_cleaner'
 end
