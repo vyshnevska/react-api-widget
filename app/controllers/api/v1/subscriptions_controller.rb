@@ -1,5 +1,4 @@
 class Api::V1::SubscriptionsController < Api::V1::BaseController
-  skip_before_action :authenticate_user!
 
   def create_channel
     channel = Channel.find_or_create_by(channel_params)
