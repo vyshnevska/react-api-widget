@@ -6,7 +6,6 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.original.published.recent
-
     @posts_for_react = posts.map{ |p| p.to_h.merge(p.subscription_hash(current_user)) }
   end
 

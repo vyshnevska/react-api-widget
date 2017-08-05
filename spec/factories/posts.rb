@@ -5,6 +5,7 @@ FactoryGirl.define do
     sequence(:body)  { |n| "post-body-#{n}" }
     published true
     created_at Time.current
+    association :author, factory: :user
 
     trait :full do
       association :author, factory: :user_with_channel

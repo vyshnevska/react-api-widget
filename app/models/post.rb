@@ -1,5 +1,4 @@
 class Post < ActiveRecord::Base
-  validates :slug, presence: true, uniqueness: true
 
   include  Concerns::Taggable
   # acts_as_taggable
@@ -7,6 +6,9 @@ class Post < ActiveRecord::Base
   mount_uploader :top_image, ImageUploader
   mount_uploader :image_1, ImageUploader
   mount_uploader :image_2, ImageUploader
+
+  validates :slug, presence: true, uniqueness: true
+  validates :author, presence: true
 
   scope :published, -> { where(published: true) }
   scope :original,  -> { where(parent_post_id: nil) }

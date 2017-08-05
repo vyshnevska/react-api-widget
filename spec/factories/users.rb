@@ -2,12 +2,9 @@ FactoryGirl.define do
   factory :user do
     sequence(:username) { |n| "Test user#{n}" }
     sequence(:password) { |n| "T1010#{n}" }
-    sequence(:email)    { |m| "john.doe#{m-1}@example.com" }
-    subscriptions_count 1
+    sequence(:email)    { |m| "john.doe#{rand(m+100)}@example.com" }
 
-    # ignore do
-    #   subscriptions_count 1
-    # end
+    transient { subscriptions_count 1 }
 
     trait :authorized do
       auth_token { SecureRandom.hex }
