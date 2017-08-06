@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy, :add_comment, :update_comment]
-  before_filter :sanitize_comment_params, only: :add_comment
+  before_action :sanitize_comment_params, only: :add_comment
 
   respond_to :js, only: [:add_comment, :update_comment]
 

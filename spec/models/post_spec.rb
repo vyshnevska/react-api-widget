@@ -62,6 +62,7 @@ RSpec.describe Post, type: :model do
       let(:user) { create :user }
 
       specify do
+        binding.pry
         post.channel.subscriptions << build(:subscription, user: user)
         expect(post.subscription_hash(user)).to eq({ isSubscribed: true,  currentUser: { id: user.id } })
       end

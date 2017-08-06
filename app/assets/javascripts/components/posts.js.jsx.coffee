@@ -17,7 +17,7 @@
             </a>
           </div>
           <h2>
-            <a href={'/posts/' + post.slug}>{post.slug}</a>
+            <a href={'/posts/' + post.slug}>{post.title}</a>
           </h2>
           <p className='published-date'>{LocalTime.relativeTimeAgo(new Date(post.publishedAt))}</p>
         </div>

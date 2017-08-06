@@ -2,7 +2,7 @@
 .clearfix
 
 .row
-  div class=(current_user ? 'col-sm-8' : 'col-sm-12')
+  div class=(current_user ? 'col-sm-8' : 'col-sm-12') id='posts_component'
     = react_component 'Posts', { posts: @posts_for_react }
 
   - if current_user
