@@ -5,7 +5,7 @@ RSpec.describe 'homepage: user logged in' do
 
   before { capybara_login_user(user) }
 
-  describe 'as a logged in user i want to see in navigation bar' do
+  describe 'as a logged in user i want to see in navigation bar', js: true do
     specify 'a nav links' do
       within '.navbar-nav' do
         expect(find('li.active').text).to  eql 'Posts'

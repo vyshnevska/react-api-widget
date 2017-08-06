@@ -29,10 +29,6 @@ RSpec.describe 'homepage: user logged out' do
   describe 'as a logged out user i want to see posts', js: true  do
     let!(:post)  { create :post, title: 'A Tech post' }
 
-    before {
-      expect(Post).to receive_message_chain(:original, :published, :recent).and_return [post]
-    }
-
     specify 'rendered as a react component' do
       visit root_path
       expect(page).to have_css("div[data-react-class='Posts']")
