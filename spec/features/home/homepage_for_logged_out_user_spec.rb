@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe 'homepage' do
+RSpec.describe 'homepage: user logged out' do
 
   describe 'as a logged out user i want to see in navigation bar' do
     before { visit root_path }

@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user do
     sequence(:username) { |n| "Test user#{n}" }
-    sequence(:password) { |n| "T1010#{n}" }
     sequence(:email)    { |m| "john.doe#{rand(m+100)}@example.com" }
+    password 'password'
 
     transient { subscriptions_count 1 }
 
