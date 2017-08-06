@@ -77,7 +77,7 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:body, :published, :slug, :author_id, :top_image, :image_1, :image_2, :tag_names)
+      params.require(:post).permit(:body, :published, :slug, :title, :author_id, :top_image, :image_1, :image_2, :tag_names)
     end
 
     def sanitize_comment_params

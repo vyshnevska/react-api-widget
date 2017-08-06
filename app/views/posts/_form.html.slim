@@ -4,6 +4,7 @@
   = f.error_notification
 
   .form-inputs
+    = f.input :title
     = f.input :slug
     = f.input :body, as: :text
     - if @post.top_image?

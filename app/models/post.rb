@@ -7,7 +7,8 @@ class Post < ActiveRecord::Base
   mount_uploader :image_1, ImageUploader
   mount_uploader :image_2, ImageUploader
 
-  validates :slug, presence: true, uniqueness: true
+  validates :title,  presence: true
+  validates :slug,   presence: true, uniqueness: true
   validates :author, presence: true
 
   scope :published, -> { where(published: true) }

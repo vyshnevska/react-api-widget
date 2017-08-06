@@ -21,10 +21,13 @@ RSpec.describe 'homepage: user logged in' do
     end
   end
 
-  describe 'as a logged in user i want to see' do
-    specify 'a link to create a new post' do
+  describe 'as a logged in user i want to', js: true do
+    specify 'create a new post' do
       expect(current_path).to                 eql root_path
-      expect(find_link('New Post')[:href]).to end_with(new_post_path)
+      click_on 'New Post'
+
+      capybara_fill_in_post_form
+      expect(current_path).to eql post_path(Post.last)
     end
   end
 end
