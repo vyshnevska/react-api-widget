@@ -20,4 +20,5 @@
 //= require application/main
 //= require components
 //= require bootstrap
+//= require cable
 //= require_tree .

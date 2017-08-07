@@ -9,6 +9,8 @@ gem 'rails', '5.0.0'
 # more: https://github.com/rails/rails/issues/29521
 gem 'pg', '0.20'
 
+gem 'redis', '~> 3.3', '>=3.3.3'
+
 # authentication, authorization, admin
 gem 'devise'
 
