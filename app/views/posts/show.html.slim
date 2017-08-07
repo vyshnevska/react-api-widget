@@ -24,26 +24,9 @@
 
 .row
   = render 'shared/tags', taggable: @post
-- # Start of comments form
-= render 'comments/comment_form'
-- # End of comments form
 
--# Start of comments
--# End of comments
+= render 'comments/comment_form'
+
+
 #comments data-post-id=@post.id
   = render @post.comments
-
-/   h3#comments_counter
-/     - if @post.comments.published.count > 0
-/       = "#{@post.comments.published.count} Comments"
-/       - @post.comments.published.each do |comment|
-/         = render '/comments/comment', comment: comment
-/     - else
-/       | Be the first to leave a comment!
-
-/ - if current_user
-/   .new-comment
-/     h5 Reply to thread
-/     = render "comments/form"
-/ - else
-/   h5 Please log in to leave a comment

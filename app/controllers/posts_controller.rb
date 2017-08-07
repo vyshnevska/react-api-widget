@@ -1,8 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:edit, :update, :destroy] #, :add_comment, :update_comment]
-  # before_action :sanitize_comment_params, only: :add_comment
-
-  # respond_to :js, only: [:add_comment, :update_comment]
+  before_action :set_post, only: [:edit, :update, :destroy]
 
   def index
     posts = Post.original.published.recent
@@ -36,18 +33,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def add_comment
-    # @comment = @post.comments.build(comment_params.merge(slug: "comment-#{Time.now.to_i}", published: true))
-    # @comment.save
-    # @new_comments_count = @post.comments.published.count
-  end
-
-  def update_comment
-    # @comment = Post.find(params[:comment_id])
-    # @comment.update(published: false)
-    # @new_comments_count = @post.comments.published.count
-  end
-
   def update
     respond_to do |format|
       if @post.update(post_params)
@@ -73,15 +58,7 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
-    def comment_params
-      params.require(:comment).permit(:body, :author_id)
-    end
-
     def post_params
       params.require(:post).permit(:body, :published, :slug, :title, :author_id, :top_image, :image_1, :image_2, :tag_names)
     end
-
-    # def sanitize_comment_params
-    #   params[:comment][:author_id] = params[:comment][:author_id].to_i
-    # end
 end

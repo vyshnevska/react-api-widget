@@ -8,12 +8,7 @@ Rails.application.routes.draw do
   post "/graphql", to: "graphql#execute"
 
 
-  resources :posts do
-    member do
-      post :add_comment
-      post :update_comment
-    end
-  end
+  resources :posts
 
   devise_for :users, controllers: { sessions: 'custom_sessions' }
 
