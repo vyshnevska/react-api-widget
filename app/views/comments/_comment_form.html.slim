@@ -1,12 +1,10 @@
 - if current_user
-  = simple_form_for(@comment, as: :comment,
-    url: add_comment_post_path(@post), method: :post, remote: true,
-    html: { class: 'form-horizontal' }, wrapper: :vertical_input_group) do |f|
+  = simple_form_for(@comment, as: :comment, url: '#', html: { class: 'form-horizontal' },
+    wrapper: :vertical_input_group) do |f|
 
     = f.error_notification
     .form-inputs
       = f.input :content, as: :text, label: false
-      = hidden_field_tag 'comment[author_id]', current_user.id
 
     .form-actions.col-sm-4
       = f.button :submit, 'Add Comment'

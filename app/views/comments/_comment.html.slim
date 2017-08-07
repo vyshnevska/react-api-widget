@@ -1,12 +1,3 @@
-/ .comment.clearfix id=comment.slug
-/   .author-text.content
-/     .image-wrapper
-/       = image_tag comment.author.avatar.url(:thumb)
-/     .text-content
-/       p.comment_content= comment.body.truncate(200)
-/       p.comment_author= comment.author.email
-/   .buttons
-/     = link_to "Hide", update_comment_post_path(comment_id: comment), method: :post, remote: true
 .comment-card
   .card
     .card-block
@@ -21,16 +12,6 @@
           .comment-attribution
             Comment posted by
             span.comment-name
-              = comment.user.first_name
+              = comment.user.username
             = distance_of_time_in_words(comment.created_at, Time.now)
             | ago
-sass:
-  .comment-card > .card
-    margin-top: 15px
-
-  .comment-attribution
-    font-size: .8em
-    font-style: italic
-
-  .comment-name
-    font-weight: 700

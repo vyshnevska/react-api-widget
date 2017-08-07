@@ -24,9 +24,9 @@
 
 .row
   = render 'shared/tags', taggable: @post
-
-= render 'comments/comment_form'
-
-
-#comments data-post-id=@post.id
-  = render @post.comments
+.row
+  = render 'comments/comment_form'
+hr
+.row
+  #comments data-post-id= @post.id
+    = render @post.comments
