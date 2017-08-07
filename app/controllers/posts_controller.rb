@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:edit, :update, :destroy, :add_comment, :update_comment]
-  before_action :sanitize_comment_params, only: :add_comment
+  before_action :set_post, only: [:edit, :update, :destroy] #, :add_comment, :update_comment]
+  # before_action :sanitize_comment_params, only: :add_comment
 
-  respond_to :js, only: [:add_comment, :update_comment]
+  # respond_to :js, only: [:add_comment, :update_comment]
 
   def index
     posts = Post.original.published.recent
@@ -10,7 +10,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    params[:id] == 'root' ? @post = Post.first : set_post
+    @post           = Post.includes(:comments).find_by_slug(params[:id])
+    @comment        = Comment.new
     @post_for_react = @post.to_h.merge(@post.subscription_hash(current_user))
   end
 
@@ -36,15 +37,15 @@ class PostsController < ApplicationController
   end
 
   def add_comment
-    @comment = @post.comments.build(comment_params.merge(slug: "comment-#{Time.now.to_i}", published: true))
-    @comment.save
-    @new_comments_count = @post.comments.published.count
+    # @comment = @post.comments.build(comment_params.merge(slug: "comment-#{Time.now.to_i}", published: true))
+    # @comment.save
+    # @new_comments_count = @post.comments.published.count
   end
 
   def update_comment
-    @comment = Post.find(params[:comment_id])
-    @comment.update(published: false)
-    @new_comments_count = @post.comments.published.count
+    # @comment = Post.find(params[:comment_id])
+    # @comment.update(published: false)
+    # @new_comments_count = @post.comments.published.count
   end
 
   def update
@@ -80,7 +81,7 @@ class PostsController < ApplicationController
       params.require(:post).permit(:body, :published, :slug, :title, :author_id, :top_image, :image_1, :image_2, :tag_names)
     end
 
-    def sanitize_comment_params
-      params[:comment][:author_id] = params[:comment][:author_id].to_i
-    end
+    # def sanitize_comment_params
+    #   params[:comment][:author_id] = params[:comment][:author_id].to_i
+    # end
 end

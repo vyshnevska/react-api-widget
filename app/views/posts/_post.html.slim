@@ -1,0 +1,25 @@
+.blog-post.blog-body
+  h2.blog-post-title
+    = link_to post.title, post
+  p.blog-post-meta
+    | Published
+    = distance_of_time_in_words(post.created_at, Time.now)
+    |ago
+
+  = render 'posts/admin_actions', post: post
+
+  p
+    | Lorem ipsum...
+    = truncate(markdown(post.body), length: 600, escape: false)
+    = link_to "Continue reading", post
+sass:
+  .blog-post
+    margin-bottom: 4rem
+
+  .blog-post-title
+    margin-bottom: .25rem;
+    font-size: 2.5rem
+
+  .blog-post-meta
+    margin-bottom: 1.25rem;
+    color: #999

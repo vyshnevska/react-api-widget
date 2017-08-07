@@ -18,8 +18,9 @@ class Post < ActiveRecord::Base
   has_one :channel, through: :author
 
   has_many :subscriptions, through: :channel
-  has_many :comments, class_name: 'Post', foreign_key: :parent_post_id
-  has_many :replies, class_name: 'Post', through: :comments, source: :comments
+  # has_many :comments, class_name: 'Post', foreign_key: :parent_post_id, dependent: :destroy
+  # has_many :replies, class_name: 'Post', through: :comments, source: :comments, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   belongs_to :parent_post, class_name: 'Post'
   belongs_to :author, class_name: 'User', foreign_key: :author_id

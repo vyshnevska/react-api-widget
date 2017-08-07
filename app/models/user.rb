@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :own_messages,  through: :channel, source: :messages
   has_many :subscriptions, dependent: :destroy
   has_many :messages_feed, through: :subscriptions, source: :user, class_name: 'Message'
+  has_many :comments, dependent: :destroy
 
   has_and_belongs_to_many :friends,
     class_name: 'User',
