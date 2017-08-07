@@ -4,11 +4,15 @@ FactoryGirl.define do
     type 'public'
     active true
 
+    transient { subscriptions_count 1 }
+
     trait :full do
       image { File.new('db/fixtures/images/simple_image.jpg', 'r') }
 
-      after(:build) do |ch|
-        ch.subscriptions << build(:subscription)
+      after(:stub) do |channel, evaluator|
+        channel.stub(:subscriptions).and_return(FactoryGirl.build_stubbed_list(:subscription,
+          evaluator.subscriptions_count, channel: channel)
+        )
       end
     end
   end

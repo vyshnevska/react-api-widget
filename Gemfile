@@ -1,7 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.7.1'
-gem 'pg'
+# gem 'rails', '4.2.7.1'
+gem 'rails', '5.0.0'
+
+# Don't upgrade to 0.21 yet because of:
+# The PGconn, PGresult, and PGError constants are deprecated, and will be removed as of version 1.0.
+# You should use PG::Connection, PG::Result, and PG::Error instead, respectively.
+# more: https://github.com/rails/rails/issues/29521
+gem 'pg', '0.20'
 
 # authentication, authorization, admin
 gem 'devise'
@@ -48,14 +54,20 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.0'
   gem 'spring'
-  gem 'quiet_assets'
+  # gem 'quiet_assets'
 end
 
 group :test do
   gem 'factory_girl_rails'
+
+  # issue: https://github.com/thoughtbot/factory_girl/pull/982
+  gem 'factory_girl', git: 'https://github.com/thoughtbot/factory_girl.git', branch: 'master'
+
   gem 'shoulda-matchers', '~> 3.1'
   gem 'database_cleaner'
+
+  gem "capybara"
+  gem 'selenium-webdriver'
 end
-gem 'graphiql-rails', group: :development

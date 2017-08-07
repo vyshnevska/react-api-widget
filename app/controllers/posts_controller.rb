@@ -1,12 +1,11 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy, :add_comment, :update_comment]
-  before_filter :sanitize_comment_params, only: :add_comment
+  before_action :sanitize_comment_params, only: :add_comment
 
   respond_to :js, only: [:add_comment, :update_comment]
 
   def index
     posts = Post.original.published.recent
-
     @posts_for_react = posts.map{ |p| p.to_h.merge(p.subscription_hash(current_user)) }
   end
 
@@ -78,7 +77,7 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:body, :published, :slug, :author_id, :top_image, :image_1, :image_2, :tag_names)
+      params.require(:post).permit(:body, :published, :slug, :title, :author_id, :top_image, :image_1, :image_2, :tag_names)
     end
 
     def sanitize_comment_params

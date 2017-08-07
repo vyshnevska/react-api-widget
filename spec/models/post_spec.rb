@@ -24,7 +24,7 @@ RSpec.describe Post, type: :model do
         .to eq "SELECT \"posts\".* FROM \"posts\" WHERE \"posts\".\"parent_post_id\" IS NULL" }
 
     specify('recent') {
-      expect(Post.recent.to_sql).to eq  "SELECT \"posts\".* FROM \"posts\"  ORDER BY updated_at desc" }
+      expect(Post.recent.to_sql).to eq  "SELECT \"posts\".* FROM \"posts\" ORDER BY updated_at desc" }
   end
 
   describe 'serialization, #to_h' do

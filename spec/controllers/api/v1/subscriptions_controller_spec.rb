@@ -38,12 +38,13 @@ RSpec.describe Api::V1::SubscriptionsController, type: :controller do
     describe '#create' do
       context 'with wrong params' do
         specify 'raises error' do
-          expect{ post(:create, channel: {user_id: 1 }) }.to raise_error(ActionController::ParameterMissing)
+          expect{ post(:create, params: { channel: {user_id: 1 } }) }.to raise_error(ActionController::ParameterMissing)
         end
       end
 
       context 'with params' do
-        let(:send_request) { post :create, subscription: { user_id: 1, channel_id: 1 }, format: :json }
+        let(:send_request) { post :create, params: { subscription: { user_id: 1, channel_id: 1 } },
+                                  format: :json }
 
         specify { expect{ send_request }.to change{ Subscription.count }.by(1) }
 
@@ -60,12 +61,14 @@ RSpec.describe Api::V1::SubscriptionsController, type: :controller do
     describe '#create_channel' do
        context 'with wrong params' do
         specify 'raises error' do
-          expect{ post(:create_channel, subscription: {user_id: 1 }) }.to raise_error(ActionController::ParameterMissing)
+          expect{ post(:create_channel, params: { subscription: {user_id: 1 } }) }
+            .to raise_error(ActionController::ParameterMissing)
         end
       end
 
       context 'with params' do
-        let(:send_request) { post :create_channel, channel: { user_id: 1, name: 'name', active: true }, format: :json }
+        let(:send_request) { post :create_channel, params: { channel: { user_id: 1, name: 'name', active: true }},
+                                   format: :json }
         specify { expect{ send_request }.to change{ Channel.count }.by(1) }
 
         specify do

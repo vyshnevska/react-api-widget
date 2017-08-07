@@ -39,7 +39,7 @@
     $.ajax(ajaxOptions).done (response) =>
       @setState
         hasChannel: true,
-        channel: response.channel
+        channel: { active: response.active, name: response.name }
 
 
   _renderChannelBtn: ->

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -26,9 +25,8 @@ ActiveRecord::Schema.define(version: 20170615084805) do
     t.integer  "user_id"
     t.integer  "subscriptions_count"
     t.string   "image"
+    t.index ["user_id"], name: "index_channels_on_user_id", using: :btree
   end
-
-  add_index "channels", ["user_id"], name: "index_channels_on_user_id", using: :btree
 
   create_table "friendships", id: false, force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -58,9 +56,8 @@ ActiveRecord::Schema.define(version: 20170615084805) do
     t.string   "top_image"
     t.string   "image_1"
     t.string   "image_2"
+    t.index ["author_id"], name: "index_posts_on_author_id", using: :btree
   end
-
-  add_index "posts", ["author_id"], name: "index_posts_on_author_id", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "channel_id"
@@ -76,10 +73,9 @@ ActiveRecord::Schema.define(version: 20170615084805) do
     t.string   "taggable_type"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+    t.index ["taggable_id", "taggable_type"], name: "index_taggings_on_taggable_id_and_taggable_type", using: :btree
   end
-
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type"], name: "index_taggings_on_taggable_id_and_taggable_type", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
@@ -107,12 +103,11 @@ ActiveRecord::Schema.define(version: 20170615084805) do
     t.string   "avatar"
     t.integer  "subscriptions_count"
     t.string   "full_name"
+    t.index ["auth_token", "token_created_at"], name: "index_users_on_auth_token_and_token_created_at", using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end
-
-  add_index "users", ["auth_token", "token_created_at"], name: "index_users_on_auth_token_and_token_created_at", using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   add_foreign_key "friendships", "users"
 end
