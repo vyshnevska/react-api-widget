@@ -16,14 +16,19 @@
       myMessages: @state.myMessages
     console.log('message was sent succesfully!', message)
 
-  render: ->
-    if @props.isAuthorized
-      `<div className='feed-body'>
-        {this.props.hasChannel &&
+  _renderNewMessage: ->
+    if @props.hasChannel == 'true'
+      `<div>
           <NewMessage
             sendNewMessageHandler={this.handleSubmit}
             channelsSelectOptions={[this.props.channelsSelectOptions]}
-          />}
+          />
+      </div>`
+
+  render: ->
+    if @props.isAuthorized
+      `<div className='feed-body'>
+        {this._renderNewMessage()}
         <a className='section-separator'> </a>
         { <AvailableChannels />}
         <a className='section-separator'> </a>

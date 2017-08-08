@@ -40,7 +40,8 @@
 
   _renderSelectOptions: ->
     this.props.channelsSelectOptions.map (channel) ->
-      `<option key={channel.id} value={channel.id} ref='channel_id'> {channel.name}</option>`
+      if channel
+        `<option key={channel.id} value={channel.id} ref='channel_id'> {channel.name}</option>`
 
   _renderChannelsSelect: ->
     if this.props.channelsSelectOptions.length > 0
