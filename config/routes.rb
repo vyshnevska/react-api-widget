@@ -41,4 +41,6 @@ Rails.application.routes.draw do
   resource :posts, only: [:show], constraints: {id: Regexp.new(slugs.join('|'))}
 
   resources :users, only: [:index, :show]
+
+  mount ActionCable.server = '/cable'
 end
