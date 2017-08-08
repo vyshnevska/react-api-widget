@@ -21,4 +21,5 @@
 //= require components
 //= require bootstrap
 //= require cable
+//= require turbolinks
 //= require_tree .

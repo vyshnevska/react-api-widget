@@ -9,6 +9,7 @@ gem 'rails', '5.0.0'
 # more: https://github.com/rails/rails/issues/29521
 gem 'pg', '0.20'
 
+gem 'puma', '~> 3.0'
 gem 'redis', '~> 3.3', '>=3.3.3'
 
 # authentication, authorization, admin
@@ -38,6 +39,7 @@ gem 'bootstrap-sass', '~>3.3.6'
 gem 'sass-rails', '~> 5.0'
 
 # frontend/javascript
+gem 'turbolinks', '~> 5'
 gem 'jquery-rails'
 gem 'react-rails'
 
