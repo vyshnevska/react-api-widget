@@ -42,5 +42,5 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show]
 
-  mount ActionCable.server = '/cable'
+  mount ActionCable.server => '/cable'
 end
