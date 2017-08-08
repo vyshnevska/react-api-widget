@@ -1,32 +1,34 @@
-.page-header.clearfix
-  .pull-left
-    h1= @post.body.truncate(15)
-  .pull-right
-    .btn-group
-      - if current_user #&& current_user.owner_of?(@post)
+.row
+  .col-md-8.col-md-offset-2
+    .page-header.clearfix
+      .pull-left
+        h1= @post.body.truncate(15)
+      .pull-right
         .btn-group
-          = link_to 'Edit', edit_post_path(@post), class: 'btn btn-default'
-          = link_to "Delete", post_path, method: :delete, data: {confirm: "Are you sure?" }, class: 'btn btn-default'
-          = link_to 'Back', posts_path, class: 'btn btn-default'
+          - if current_user #&& current_user.owner_of?(@post)
+            .btn-group
+              = link_to 'Edit', edit_post_path(@post), class: 'btn btn-default'
+              = link_to "Delete", post_path, method: :delete, data: {confirm: "Are you sure?" }, class: 'btn btn-default'
+              = link_to 'Back', posts_path, class: 'btn btn-default'
 
 
-= react_component 'Post', @post_for_react
+    = react_component 'Post', @post_for_react
 
-- if (_image_urls = image_urls(@post)).any?
-  .slider-container
-    - _image_urls.each do |image|
-      = image_tag image, class: 'slide'
-  .navigation
-    button class="button arrow-left" data-slide_index='-1'&#10094;
-    button class="button arrow-right"data-slide_index='1'&#10095;
+    - if (_image_urls = image_urls(@post)).any?
+      .slider-container
+        - _image_urls.each do |image|
+          = image_tag image, class: 'slide'
+      .navigation
+        button class="button arrow-left" data-slide_index='-1'&#10094;
+        button class="button arrow-right"data-slide_index='1'&#10095;
 
-.clearfix
+    .clearfix
 
-.row
-  = render 'shared/tags', taggable: @post
-.row
-  = render 'comments/comment_form'
-hr
-.row
-  #comments data-post-id= @post.id
-    = render @post.comments
+    = render 'shared/tags', taggable: @post
+
+    = render 'comments/comment_form'
+    hr
+    div
+      #comments data-post-id= @post.id
+        = render @post.comments
+    hr
