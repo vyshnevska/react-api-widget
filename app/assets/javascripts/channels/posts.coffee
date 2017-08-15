@@ -1,4 +1,8 @@
 jQuery(document).on 'turbolinks:load', ->
+  # It will automatically mount/unmount components when appropriate
+  # Needs to be called after turbolinks
+  ReactRailsUJS.detectEvents()
+
   comments = $('#comments')
   if comments.length > 0
     App.global_chat = App.cable.subscriptions.create {
