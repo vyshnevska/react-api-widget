@@ -14,4 +14,9 @@ module PostsHelper
   def gravatar_helper(user)
     image_tag "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email)}", width: 60
   end
+
+  def comment_details(comment)
+    time = distance_of_time_in_words(comment.created_at, Time.now)
+    "posted by <b>#{comment.user.username}</b> #{time} ago".html_safe
+  end
 end

@@ -8,10 +8,5 @@
         .col-md-10
           div
             = comment.content
-
           .comment-attribution
-            Comment posted by
-            span.comment-name
-              = comment.user.username
-            = distance_of_time_in_words(comment.created_at, Time.now)
-            | ago
+            = comment_details(comment)
