@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_one  :channel
   has_many :own_messages,  through: :channel, source: :messages
   has_many :subscriptions, dependent: :destroy
-  has_many :messages_feed, through: :subscriptions, source: :user, class_name: 'Message'
+  has_many :messages, foreign_key: :recipient_id
   has_many :comments, dependent: :destroy
 
   has_and_belongs_to_many :friends,
@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
     join_table: :friendships,
     association_foreign_key: :friend_id
 
-  scope :sorted_messages_for, -> (user) { user.messages_feed.not_hidden.order(status: :desc, created_at: :desc) }
+  scope :sorted_messages_for, -> (user) { user.messages.not_hidden.order(status: :desc, created_at: :desc) }
   scope :sorted_messages_by,  -> (user) { user.own_messages.not_hidden.order(status: :desc, created_at: :desc) }
 
   before_create :set_auth_token!
