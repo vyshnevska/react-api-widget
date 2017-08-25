@@ -1,0 +1,33 @@
+$bubble-height: 140px
+$bubble-width: 140px
+
+.messages-feed-wrapper
+  color: $white
+  float: right
+
+  a:hover, a:active
+    text-decoration: none
+
+
+  #messages-feed-bubble
+    .ch-grid
+      margin: 5px 0 0 0
+      padding: 0
+      list-style: none
+      display: block
+      text-align: center
+      width: 100%
+
+    .ch-grid:after,
+    .ch-item:before
+      content: ''
+        display: table
+
+    .ch-grid:after
+      clear: both
+
+    .ch-grid li
+      width: $bubble-width
+      height: $bubble-height
+      display: inline-block
+      margin: 5px

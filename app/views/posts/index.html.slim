@@ -7,4 +7,19 @@
 
   - if current_user
     .col-sm-4
-      = react_component 'Messanger'
+      - if current_user.messages_feed.empty?
+        .messages-feed-wrapper
+          #messages-feed-bubble
+            ul class='ch-grid'
+              li
+                div class='ch-item'
+                  div class='ch-info'
+                    div class='ch-info-front ch-img-1'
+                    div class='ch-info-back'
+                      h3
+                        |Chat
+                      p
+                        = link_to 'click to start now!', [:support_message, current_user], method: :post
+
+      - else
+        = react_component 'Messanger'
