@@ -22,3 +22,6 @@ me.friends   << [matz]
 dhh.friends  << [ezra, matz]
 ezra.friends << [dhh, matz]
 matz.friends << [me, ezra, dhh]
+
+
+Channel.create(type: 'support', name: 'Support', active: true, user: User.last)

@@ -8,7 +8,8 @@ class Channel < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  scope :active,        -> { where(active: true) }
+  scope :active,        -> { where active: true }
+  scope :support,       -> { active.where(type: 'support') }
   scope :by_popularity, -> { order('subscriptions_count desc') }
 
   validates :name, presence: true, uniqueness: true

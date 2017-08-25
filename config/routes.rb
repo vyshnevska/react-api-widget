@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   post "/graphql", to: "graphql#execute"
 
-
   resources :posts
 
   devise_for :users, controllers: { sessions: 'custom_sessions' }
@@ -40,7 +39,11 @@ Rails.application.routes.draw do
   slugs = %w|root|
   resource :posts, only: [:show], constraints: {id: Regexp.new(slugs.join('|'))}
 
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    member do
+      post :support_message
+    end
+  end
 
   mount ActionCable.server => '/cable'
 end

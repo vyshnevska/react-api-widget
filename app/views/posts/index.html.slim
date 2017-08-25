@@ -7,7 +7,7 @@
 
   - if current_user
     .col-sm-4
-      - if current_user.messages_feed.empty?
+      - if User.sorted_messages_for(current_user).empty?
         .messages-feed-wrapper
           #messages-feed-bubble
             ul class='ch-grid'
